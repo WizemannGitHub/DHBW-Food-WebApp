@@ -49,6 +49,7 @@
 )
 
 #v(0.8cm)
+#pagebreak()
 
 // ─── Projektziele ────────────────────────────────────────────────────────────
 #text(weight: "bold", size: 12pt)[3. Projektziele]
@@ -140,6 +141,8 @@
 
 
 // ─── Risiken ─────────────────────────────────────────────────────────────────
+
+#pagebreak()
 #text(weight: "bold", size: 12pt)[7. Risiken]
 #v(0.3cm)
 
@@ -149,12 +152,13 @@
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
   [*Nr.*], [*Risiko*],               [*Wahrscheinlichkeit*], [*Gegenmaßnahme*],
-  [R1],    [],                       [],                     [],
+  [R1],    [Kein API Zugang],                       [30%],                     [Recherchieren, Nachfragen],
   [R2],    [],                       [],                     [],
   [R3],    [],                       [],                     [],
 )
 
-#pagebreak()
+#v(0.8cm)
+
 // ─── Genehmigung ─────────────────────────────────────────────────────────────
 #text(weight: "bold", size: 12pt)[8. Genehmigung]
 #v(0.3cm)
