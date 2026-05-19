@@ -27,9 +27,9 @@
   [Auftraggeber],       [Mikka Jenne],
   [Projektleiter],      [Erik Wizemann],
   [Projektteam],        [Robin von Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
-  [Abteilung / Kurs],   [],
+  [Abteilung / Kurs],   [TINF25B2],
   [Startdatum],         [],
-  [Enddatum (geplant)], [],
+  [Enddatum (geplant)], [08.07.26],
   [Version],            [1.0],
   [Stand],              [#datetime.today().display("[day].[month].[year]")],
 )
@@ -43,7 +43,9 @@
 #table(
   columns: (100%,),
   stroke: 0.5pt,
-  [An der DHBW gibt es derzeit keine Möglichkeit, einen Überblick über die Meinungen der Studenten zum angebotenen Essen zu erhalten. Ein solcher Überblick würde die Essenswahl für Studenten erleichtern. Außerdem könnte dadurch verhindert werden, dass Studenten Geld für Essen ausgeben, das ihnen nicht schmeckt, was das allgemeine Wohlbefinden verbessert.],
+  [An der DHBW gibt es derzeit keine Möglichkeit, einen Überblick über die Meinungen der Studenten zum angebotenen Essen zu erhalten. Ein solcher Überblick würde die Essenswahl für Studenten erleichtern. Außerdem könnte dadurch verhindert werden, dass Studenten Geld für Essen ausgeben, das ihnen nicht schmeckt, was das allgemeine Wohlbefinden verbessert.
+  
+  Zudem bietet es der Kantine die Möglichkeit auf Vorschläge und Feedback der Studierenden einzugehen und es umzusetzen.],
 )
 
 #v(0.8cm)
@@ -59,8 +61,9 @@
 
   [*Nr.*], [*Ziel*],                                             [*Priorität*],
   [1],     [Entwicklung einer webbasierten App zur Bewertung von Speisen an der DHBW],         [Hoch],
-  [2],     [Erweiterung der App um die Funktion "Essen vorschlagen"],                          [Mittel],
-  [3],     [Erweiterung der App um die Funktion "Erfassung von Nährwerten"],                   [Gering],
+  [2],     [Erweiterung der App um die Funktion "Feedback geben"],                          [Hoch],
+  [3],     [Erweiterung der App um die Funktion "Essen vorschlagen"],                          [Mittel],
+  [4],     [Erweiterung der App um die Funktion "Erfassung von Nährwerten"],                   [Gering],
 )
 
 #pagebreak()
@@ -84,6 +87,7 @@
     *Technische Infrastruktur:*
     - Backend entwickeln
     - Webanwendung hosten
+    - Datenbank hosten
 
     *Erweiterungsfunktionen:*
     - Vorschlagen von neuen Essensgerichten
