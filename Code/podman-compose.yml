@@ -1,26 +1,9 @@
-# ============================================================
-# DHBW Food App – podman-compose.yml
-# Startet alle drei Container (Frontend, Backend, Datenbank)
-# als kommunizierendes Netzwerk.
-#
-# Voraussetzung: podman & podman-compose installiert
-#   macOS:   brew install podman podman-compose
-#   Linux:   pip3 install podman-compose  (oder Distro-Paket)
-#
-# Starten:  podman-compose up --build
-# Stoppen:  podman-compose down
-# Reset DB: podman-compose down -v
-# Logs:     podman-compose logs -f
-# ============================================================
-
-# Kein 'version'-Feld – veraltet, wird von modernem Compose ignoriert
-
 services:
 
-  # ── Datenbank ────────────────────────────────────────────
   datenbank:
     build:
       context: ./datenbank
+      dockerfile: Containerfile
     container_name: dhbw_food_db
     restart: unless-stopped
     environment:
@@ -37,10 +20,10 @@ services:
       timeout: 5s
       retries: 5
 
-  # ── Backend ──────────────────────────────────────────────
   backend:
     build:
       context: ./backend
+      dockerfile: Containerfile
     container_name: dhbw_food_backend
     restart: unless-stopped
     environment:
@@ -59,15 +42,13 @@ services:
       datenbank:
         condition: service_healthy
 
-  # ── Frontend ─────────────────────────────────────────────
   frontend:
     build:
       context: ./frontend
+      dockerfile: Containerfile
     container_name: dhbw_food_frontend
     restart: unless-stopped
     environment:
-      # Diese URL wird vom Entrypoint-Script in js/env.js geschrieben.
-      # Im Browser muss die URL vom Host aus erreichbar sein → localhost:3000
       DHBW_API_URL: "http://localhost:3000/api"
     ports:
       - "8080:80"
@@ -76,7 +57,6 @@ services:
     depends_on:
       - backend
 
-# ── Volumes & Netzwerk ────────────────────────────────────
 volumes:
   db_data:
     name: dhbw_food_db_data

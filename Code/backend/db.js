@@ -1,8 +1,3 @@
-/**
- * db.js – PostgreSQL-Verbindungspool
- * Konfiguration über Umgebungsvariablen (Docker-friendly)
- */
-
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -13,8 +8,6 @@ const pool = new Pool({
   password: process.env.PGPASSWORD || 'dhbw_secret',
 });
 
-pool.on('error', (err) => {
-  console.error('[DB] Unerwarteter Pool-Fehler:', err.message);
-});
+pool.on('error', err => console.error('[DB]', err.message));
 
 module.exports = pool;
