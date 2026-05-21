@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DHBW Food App</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header class="header">
+    <div class="header__inner">
+      <div class="header__brand">
+        <span class="header__logo">🍽</span>
+        <span class="header__title">DHBW <strong>Food</strong> App</span>
+      </div>
+      <nav class="nav">
+        <button class="nav__btn active" data-page="bewertung">Bewertung</button>
+        <button class="nav__btn" data-page="ranking">Rankings</button>
+        <button class="nav__btn" data-page="vorschlaege">Vorschläge</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- ═══════════════════════════════════════════
+         SEITE 1: BEWERTUNG AKTUELLER GERICHTE
+    ═══════════════════════════════════════════ -->
+    <section id="page-bewertung" class="page page--active">
+
+      <div class="page__hero">
+        <h1>Heutige Gerichte bewerten</h1>
+        <p>Teile deine Meinung über das Mensaessen und hilf uns, es besser zu machen.</p>
+      </div>
+
+      <!-- Ladeanimation -->
+      <div id="bewertung-loading" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Gerichte werden geladen…</p>
+      </div>
+
+      <!-- Fehlermeldung -->
+      <div id="bewertung-error" class="alert alert--error hidden">
+        <span>⚠</span> Gerichte konnten nicht geladen werden. Backend erreichbar?
+      </div>
+
+      <!-- Gerichtekarten -->
+      <div id="dishes-container" class="dishes-grid hidden"></div>
+
+      <!-- Bewertungs-Modal -->
+      <div id="rating-modal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal__backdrop"></div>
+        <div class="modal__box">
+          <button class="modal__close" id="modal-close" aria-label="Schließen">✕</button>
+          <h2 class="modal__title" id="modal-dish-name">Gericht bewerten</h2>
+          <p class="modal__sub" id="modal-dish-category"></p>
+
+          <div class="rating-section">
+            <label class="rating-label">Gesamteindruck</label>
+            <div class="star-row" data-field="gesamt">
+              <button class="star" data-val="1">★</button>
+              <button class="star" data-val="2">★</button>
+              <button class="star" data-val="3">★</button>
+              <button class="star" data-val="4">★</button>
+              <button class="star" data-val="5">★</button>
+            </div>
+          </div>
+
+          <div class="rating-section">
+            <label class="rating-label">Geschmack</label>
+            <div class="star-row" data-field="geschmack">
+              <button class="star" data-val="1">★</button>
+              <button class="star" data-val="2">★</button>
+              <button class="star" data-val="3">★</button>
+              <button class="star" data-val="4">★</button>
+              <button class="star" data-val="5">★</button>
+            </div>
+          </div>
+
+          <div class="rating-section">
+            <label class="rating-label">Portionsgröße</label>
+            <div class="star-row" data-field="portion">
+              <button class="star" data-val="1">★</button>
+              <button class="star" data-val="2">★</button>
+              <button class="star" data-val="3">★</button>
+              <button class="star" data-val="4">★</button>
+              <button class="star" data-val="5">★</button>
+            </div>
+          </div>
+
+          <div class="rating-section">
+            <label class="rating-label">Kommentar (optional)</label>
+            <textarea id="modal-comment" class="textarea" rows="3"
+              placeholder="Dein Feedback…"></textarea>
+          </div>
+
+          <button class="btn btn--primary btn--full" id="submit-rating">Bewertung abschicken</button>
+          <div id="rating-feedback" class="alert alert--success hidden">
+            Danke für dein Feedback! ✓
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SEITE 2: RANKINGS & STATISTIKEN
+    ═══════════════════════════════════════════ -->
+    <section id="page-ranking" class="page">
+
+      <div class="page__hero">
+        <h1>Rankings &amp; Statistiken</h1>
+        <p>Die beliebtesten Gerichte und Trends aus der DHBW Mensa auf einen Blick.</p>
+      </div>
+
+      <!-- Filter-Leiste -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="top">Top-Gerichte</button>
+        <button class="filter-btn" data-filter="trend">Trending</button>
+        <button class="filter-btn" data-filter="flop">Verbesserungsbedarf</button>
+      </div>
+
+      <div id="ranking-loading" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Rankings werden geladen…</p>
+      </div>
+
+      <div id="ranking-error" class="alert alert--error hidden">
+        <span>⚠</span> Rankings konnten nicht geladen werden.
+      </div>
+
+      <!-- Top-Liste -->
+      <div id="ranking-list" class="ranking-list hidden"></div>
+
+      <!-- Statistik-Karten -->
+      <div id="stats-grid" class="stats-grid hidden">
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-total-ratings">–</div>
+          <div class="stat-card__label">Bewertungen gesamt</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-avg-score">–</div>
+          <div class="stat-card__label">Durchschnittsbewertung</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-dishes-count">–</div>
+          <div class="stat-card__label">Bewertete Gerichte</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__value" id="stat-proposals">–</div>
+          <div class="stat-card__label">Eingereichte Vorschläge</div>
+        </div>
+      </div>
+
+      <!-- Verteilungs-Chart (rein CSS/JS, kein Canvas-Framework) -->
+      <div id="distribution-section" class="chart-section hidden">
+        <h2 class="section-title">Bewertungsverteilung</h2>
+        <div id="rating-distribution" class="bar-chart"></div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SEITE 3: ESSENSVORSCHLÄGE
+    ═══════════════════════════════════════════ -->
+    <section id="page-vorschlaege" class="page">
+
+      <div class="page__hero">
+        <h1>Essensvorschläge einreichen</h1>
+        <p>Hast du eine Idee für ein neues Gericht? Teile sie mit uns!</p>
+      </div>
+
+      <!-- Formular -->
+      <div class="card form-card">
+        <h2 class="card__title">Neuen Vorschlag einreichen</h2>
+        <form id="proposal-form" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="prop-name">Gerichtsname *</label>
+            <input type="text" id="prop-name" class="input" placeholder="z. B. Currywurst mit Pommes" required />
+            <span class="form-error" id="err-name"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="prop-category">Kategorie *</label>
+            <select id="prop-category" class="input" required>
+              <option value="">– bitte wählen –</option>
+              <option value="fleisch">Fleisch</option>
+              <option value="vegetarisch">Vegetarisch</option>
+              <option value="vegan">Vegan</option>
+              <option value="pasta">Pasta</option>
+              <option value="salat">Salat</option>
+              <option value="suppe">Suppe</option>
+              <option value="dessert">Dessert</option>
+            </select>
+            <span class="form-error" id="err-category"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="prop-description">Beschreibung</label>
+            <textarea id="prop-description" class="textarea" rows="3"
+              placeholder="Was macht das Gericht besonders?"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="prop-reason">Warum sollte dieses Gericht auf den Speiseplan?</label>
+            <textarea id="prop-reason" class="textarea" rows="2"
+              placeholder="Begründung…"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--full">Vorschlag einreichen ✓</button>
+          <div id="proposal-feedback" class="alert alert--success hidden">
+            Dein Vorschlag wurde erfolgreich eingereicht! Danke. ✓
+          </div>
+          <div id="proposal-error" class="alert alert--error hidden">
+            Fehler beim Einreichen. Bitte versuche es erneut.
+          </div>
+        </form>
+      </div>
+
+      <!-- Bisherige Vorschläge -->
+      <div class="section-header">
+        <h2 class="section-title">Bisherige Vorschläge</h2>
+        <span class="badge" id="proposals-count">0</span>
+      </div>
+
+      <div id="proposals-loading" class="loading-spinner">
+        <div class="spinner"></div>
+      </div>
+
+      <div id="proposals-error" class="alert alert--error hidden">
+        <span>⚠</span> Vorschläge konnten nicht geladen werden.
+      </div>
+
+      <div id="proposals-list" class="proposals-grid hidden"></div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>DHBW Food App · <span id="footer-year"></span> · Dein Feedback macht die Mensa besser 🍴</p>
+  </footer>
+
+  <script src="js/env.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/bewertung.js"></script>
+  <script src="js/ranking.js"></script>
+  <script src="js/vorschlaege.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

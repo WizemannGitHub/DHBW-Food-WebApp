@@ -1,0 +1,87 @@
+# ============================================================
+# DHBW Food App – podman-compose.yml
+# Startet alle drei Container (Frontend, Backend, Datenbank)
+# als kommunizierendes Netzwerk.
+#
+# Voraussetzung: podman & podman-compose installiert
+#   macOS:   brew install podman podman-compose
+#   Linux:   pip3 install podman-compose  (oder Distro-Paket)
+#
+# Starten:  podman-compose up --build
+# Stoppen:  podman-compose down
+# Reset DB: podman-compose down -v
+# Logs:     podman-compose logs -f
+# ============================================================
+
+# Kein 'version'-Feld – veraltet, wird von modernem Compose ignoriert
+
+services:
+
+  # ── Datenbank ────────────────────────────────────────────
+  datenbank:
+    build:
+      context: ./datenbank
+    container_name: dhbw_food_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       dhbw_food
+      POSTGRES_USER:     dhbw
+      POSTGRES_PASSWORD: dhbw_secret
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - dhbw_net
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "dhbw", "-d", "dhbw_food"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Backend ──────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+    container_name: dhbw_food_backend
+    restart: unless-stopped
+    environment:
+      PORT:        3000
+      PGHOST:      datenbank
+      PGPORT:      5432
+      PGDATABASE:  dhbw_food
+      PGUSER:      dhbw
+      PGPASSWORD:  dhbw_secret
+      CORS_ORIGIN: "http://localhost:8080"
+    ports:
+      - "3000:3000"
+    networks:
+      - dhbw_net
+    depends_on:
+      datenbank:
+        condition: service_healthy
+
+  # ── Frontend ─────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+    container_name: dhbw_food_frontend
+    restart: unless-stopped
+    environment:
+      # Diese URL wird vom Entrypoint-Script in js/env.js geschrieben.
+      # Im Browser muss die URL vom Host aus erreichbar sein → localhost:3000
+      DHBW_API_URL: "http://localhost:3000/api"
+    ports:
+      - "8080:80"
+    networks:
+      - dhbw_net
+    depends_on:
+      - backend
+
+# ── Volumes & Netzwerk ────────────────────────────────────
+volumes:
+  db_data:
+    name: dhbw_food_db_data
+
+networks:
+  dhbw_net:
+    name: dhbw_food_network
+    driver: bridge
