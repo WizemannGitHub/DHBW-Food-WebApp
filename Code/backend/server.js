@@ -139,6 +139,22 @@ app.post('/api/proposals', async (req, res) => {
   }
 });
 
+// Proxy für externe Mensa-API (nötig weil die API kein CORS für localhost erlaubt)
+app.get('/api/mensa-plan/:date', async (req, res) => {
+  const { date } = req.params;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    return res.status(400).json({ error: 'Datumsformat ungültig. Erwartet: YYYY-MM-DD' });
+  }
+  try {
+    const response = await fetch(`https://mensa-api.fnka.de/plans/${date}`);
+    if (!response.ok) return res.status(response.status).json({ error: 'Mensa-API nicht erreichbar.' });
+    res.json(await response.json());
+  } catch (err) {
+    console.error('Mensa-Proxy Fehler:', err);
+    res.status(502).json({ error: 'Mensa-API nicht erreichbar.' });
+  }
+});
+
 app.use((_req, res) => res.status(404).json({ error: 'Endpunkt nicht gefunden.' }));
 
 app.listen(PORT, () => console.log(`[Backend] läuft auf Port ${PORT}`));

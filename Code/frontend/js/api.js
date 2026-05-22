@@ -1,5 +1,61 @@
 const API_BASE = window.DHBW_API_URL || 'http://localhost:3000/api';
 
+function todayStr() {
+  const d = new Date();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}-${m}-${day}`;
+}
+
+// Holt den Tagesplan von der Mensa-API (über unseren Backend-Proxy)
+// Gibt ein Array von Kantinen zurück: [{ id, name, meals: [...] }]
+const mensaApi = {
+  async getDishes() {
+    const res = await fetch(`${API_BASE}/mensa-plan/${todayStr()}`);
+    if (!res.ok) throw new Error(`Mensa-Proxy HTTP ${res.status}`);
+    const json = await res.json();
+
+    if (!json.success || !Array.isArray(json.data)) return [];
+
+    const canteens = [];
+    let id = 1;
+
+    for (const entry of json.data) {
+      const meals = [];
+      for (const line of entry.lines) {
+        for (const meal of line.meals) {
+          if (!meal.price) continue; // Infotexte ohne Preis überspringen
+          meals.push({
+            id:        `mensa-${id++}`,
+            name:      meal.name,
+            kategorie: toKategorie(meal.classifiers),
+            preis:     parsePreis(meal.price),
+          });
+        }
+      }
+      if (meals.length > 0) {
+        canteens.push({ id: entry.canteen.id, name: entry.canteen.name, meals });
+      }
+    }
+    return canteens;
+  },
+};
+
+function toKategorie(classifiers) {
+  if (!classifiers || !classifiers.length) return 'fleisch';
+  const c = classifiers.map(x => x.toUpperCase());
+  if (c.includes('VG'))  return 'vegan';
+  if (c.includes('VEG')) return 'vegetarisch';
+  return 'fleisch';
+}
+
+function parsePreis(str) {
+  if (!str) return null;
+  const n = parseFloat(str.replace(',', '.').replace(/[^\d.]/g, ''));
+  return isNaN(n) ? null : n;
+}
+
+// REST-API für Bewertungen, Rankings, Stats und Vorschläge
 const api = {
   async getDishes() {
     const res = await fetch(`${API_BASE}/dishes`);
@@ -17,7 +73,6 @@ const api = {
     return res.json();
   },
 
-  // filter: 'top' | 'trend' | 'flop'
   async getRankings(filter = 'top') {
     const res = await fetch(`${API_BASE}/rankings?filter=${filter}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);

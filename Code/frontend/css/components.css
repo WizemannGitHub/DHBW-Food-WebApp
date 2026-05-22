@@ -130,11 +130,37 @@
   min-height: 1rem;
 }
 
-/* ── Dish Grid ─────────────────────────────────────────────── */
-.dishes-grid {
+/* ── Kantinenfilter ────────────────────────────────────────── */
+.canteen-filter {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+/* ── Kantinen-Abschnitt ────────────────────────────────────── */
+.canteen-section {
+  margin-bottom: var(--space-2xl);
+}
+
+.canteen-section__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--color-primary-bg);
+}
+
+.canteen-section__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-lg);
+}
+
+/* ── Dish Grid ─────────────────────────────────────────────── */
+.dishes-grid {
+  width: 100%;
 }
 
 .dish-card {
@@ -606,6 +632,7 @@
 
 /* ── Responsive ────────────────────────────────────────────── */
 @media (max-width: 680px) {
+  .canteen-section__grid { grid-template-columns: 1fr; }
   .dishes-grid { grid-template-columns: 1fr; }
   .proposals-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }

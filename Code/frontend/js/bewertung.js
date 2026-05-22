@@ -1,80 +1,122 @@
 (function bewertungModule() {
 
-  let activeDishId = null;
+  let allCanteens = [];
+  let selectedIds = new Set(); // leere Menge = alle anzeigen
 
   const ratings = { gesamt: 0, geschmack: 0, portion: 0 };
-
-  const loading     = document.getElementById('bewertung-loading');
-  const error       = document.getElementById('bewertung-error');
-  const container   = document.getElementById('dishes-container');
-  const modal       = document.getElementById('rating-modal');
-  const modalClose  = document.getElementById('modal-close');
-  const modalName   = document.getElementById('modal-dish-name');
-  const modalCat    = document.getElementById('modal-dish-category');
-  const submitBtn   = document.getElementById('submit-rating');
-  const feedback    = document.getElementById('rating-feedback');
-  const commentArea = document.getElementById('modal-comment');
+  let activeDishId = null;
 
   const EMOJI = {
     fleisch: '🥩', vegetarisch: '🥗', vegan: '🌱',
     pasta: '🍝', salat: '🥙', suppe: '🍲', dessert: '🍰', default: '🍽',
   };
 
+  // DOM-Elemente
+  const loading     = document.getElementById('bewertung-loading');
+  const errorEl     = document.getElementById('bewertung-error');
+  const container   = document.getElementById('dishes-container');
+  const filterBar   = document.getElementById('canteen-filter');
+  const modal       = document.getElementById('rating-modal');
+  const modalName   = document.getElementById('modal-dish-name');
+  const modalCat    = document.getElementById('modal-dish-category');
+  const submitBtn   = document.getElementById('submit-rating');
+  const feedback    = document.getElementById('rating-feedback');
+  const commentArea = document.getElementById('modal-comment');
+
+  // ── Laden ──────────────────────────────────────────────────
+
   async function loadDishes() {
     loading.classList.remove('hidden');
-    error.classList.add('hidden');
+    errorEl.classList.add('hidden');
     container.classList.add('hidden');
+    filterBar.classList.add('hidden');
     try {
-      renderDishes(await api.getDishes());
+      allCanteens = await mensaApi.getDishes();
+      renderFilterBar();
+      renderDishes();
     } catch (err) {
-      console.error(err);
+      console.error('Mensa-API Fehler:', err);
       loading.classList.add('hidden');
-      error.classList.remove('hidden');
+      errorEl.classList.remove('hidden');
     }
   }
 
-  function renderDishes(dishes) {
+  // ── Kantinenfilter ─────────────────────────────────────────
+
+  function renderFilterBar() {
+    if (allCanteens.length === 0) return;
+
+    filterBar.innerHTML = allCanteens.map(c =>
+      `<button class="filter-btn filter-btn--canteen" data-canteen="${escHtml(c.id)}">${escHtml(c.name)}</button>`
+    ).join('');
+
+    filterBar.querySelectorAll('.filter-btn--canteen').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.canteen;
+        if (selectedIds.has(id)) {
+          selectedIds.delete(id);
+          btn.classList.remove('active');
+        } else {
+          selectedIds.add(id);
+          btn.classList.add('active');
+        }
+        renderDishes();
+      });
+    });
+
+    filterBar.classList.remove('hidden');
+  }
+
+  // ── Gerichte anzeigen ──────────────────────────────────────
+
+  function renderDishes() {
     loading.classList.add('hidden');
 
-    if (!dishes || dishes.length === 0) {
-      container.innerHTML = `<div class="empty-state"><div class="empty-state__icon">🍽</div><div class="empty-state__text">Heute sind keine Gerichte verfügbar.</div></div>`;
+    // Nichts ausgewählt = alle Kantinen zeigen
+    const visible = selectedIds.size === 0
+      ? allCanteens
+      : allCanteens.filter(c => selectedIds.has(c.id));
+
+    if (visible.length === 0) {
+      container.innerHTML = `<div class="empty-state"><div class="empty-state__icon">🍽</div><div class="empty-state__text">Heute keine Gerichte verfügbar.</div></div>`;
       container.classList.remove('hidden');
       return;
     }
 
-    container.innerHTML = dishes.map(dish => {
-      const emoji    = EMOJI[dish.kategorie] || EMOJI.default;
-      const stars    = renderStars(dish.avg_rating || 0);
-      const count    = dish.rating_count || 0;
-      const priceStr = dish.preis ? `${parseFloat(dish.preis).toFixed(2)} €` : '';
-      return `
-        <div class="dish-card" data-id="${dish.id}" data-name="${escHtml(dish.name)}" data-category="${escHtml(dish.kategorie || '')}">
-          <div class="dish-card__thumb">${emoji}</div>
-          <div class="dish-card__body">
-            <div class="dish-card__category">${escHtml(dish.kategorie || 'Gericht')}</div>
-            <div class="dish-card__name">${escHtml(dish.name)}</div>
-            <div class="dish-card__meta">
-              <span class="dish-card__stars">${stars}</span>
-              <span class="dish-card__count">${count} Bewertung${count !== 1 ? 'en' : ''}</span>
-            </div>
-            ${priceStr ? `<div class="dish-card__price">${priceStr}</div>` : ''}
-            <button class="btn btn--primary btn--full">Jetzt bewerten</button>
-          </div>
-        </div>`;
-    }).join('');
+    container.innerHTML = visible.map(canteen => `
+      <div class="canteen-section">
+        <h3 class="canteen-section__title">${escHtml(canteen.name)}</h3>
+        <div class="canteen-section__grid">
+          ${canteen.meals.map(dish => dishCardHtml(dish)).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('.dish-card').forEach(card => {
+      card.addEventListener('click', () =>
+        openModal(card.dataset.id, card.dataset.name, card.dataset.category)
+      );
+    });
 
     container.classList.remove('hidden');
-    container.querySelectorAll('.dish-card').forEach(card => {
-      card.addEventListener('click', () => openModal(card.dataset.id, card.dataset.name, card.dataset.category));
-    });
   }
 
-  function renderStars(avg) {
-    const full  = Math.floor(avg);
-    const half  = avg - full >= 0.5 ? 1 : 0;
-    const empty = 5 - full - half;
-    return '★'.repeat(full) + (half ? '½' : '') + '☆'.repeat(empty);
+  function dishCardHtml(dish) {
+    const emoji = EMOJI[dish.kategorie] || EMOJI.default;
+    const preis = dish.preis ? `${parseFloat(dish.preis).toFixed(2)} €` : '';
+    return `
+      <div class="dish-card" data-id="${dish.id}" data-name="${escHtml(dish.name)}" data-category="${escHtml(dish.kategorie || '')}">
+        <div class="dish-card__thumb">${emoji}</div>
+        <div class="dish-card__body">
+          <div class="dish-card__category">${escHtml(dish.kategorie || 'Gericht')}</div>
+          <div class="dish-card__name">${escHtml(dish.name)}</div>
+          ${preis ? `<div class="dish-card__price">${preis}</div>` : ''}
+          <button class="btn btn--primary btn--full">Jetzt bewerten</button>
+        </div>
+      </div>`;
   }
+
+  // ── Bewertungs-Modal ───────────────────────────────────────
 
   function openModal(dishId, dishName, category) {
     activeDishId = dishId;
@@ -99,8 +141,12 @@
       const field = row.dataset.field;
       const stars = row.querySelectorAll('.star');
       stars.forEach(star => {
-        star.addEventListener('mouseenter', () => stars.forEach(s => s.classList.toggle('active', +s.dataset.val <= +star.dataset.val)));
-        star.addEventListener('mouseleave', () => stars.forEach(s => s.classList.toggle('active', +s.dataset.val <= ratings[field])));
+        star.addEventListener('mouseenter', () =>
+          stars.forEach(s => s.classList.toggle('active', +s.dataset.val <= +star.dataset.val))
+        );
+        star.addEventListener('mouseleave', () =>
+          stars.forEach(s => s.classList.toggle('active', +s.dataset.val <= ratings[field]))
+        );
         star.addEventListener('click', () => {
           ratings[field] = +star.dataset.val;
           stars.forEach(s => s.classList.toggle('active', +s.dataset.val <= ratings[field]));
@@ -141,7 +187,9 @@
     }
   }
 
-  modalClose.addEventListener('click', closeModal);
+  // ── Event Listener ─────────────────────────────────────────
+
+  document.getElementById('modal-close').addEventListener('click', closeModal);
   modal.querySelector('.modal__backdrop').addEventListener('click', closeModal);
   submitBtn.addEventListener('click', submitRating);
   document.addEventListener('keydown', e => {

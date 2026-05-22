@@ -1,48 +1,33 @@
 (function rankingModule() {
 
   const loading     = document.getElementById('ranking-loading');
-  const error       = document.getElementById('ranking-error');
+  const errorEl     = document.getElementById('ranking-error');
   const list        = document.getElementById('ranking-list');
   const statsGrid   = document.getElementById('stats-grid');
   const distSection = document.getElementById('distribution-section');
   const distChart   = document.getElementById('rating-distribution');
-  const filterBtns  = document.querySelectorAll('.filter-btn');
+  const filterBtns  = document.querySelectorAll('.filter-btn[data-filter]');
 
-  const statTotal     = document.getElementById('stat-total-ratings');
-  const statAvg       = document.getElementById('stat-avg-score');
-  const statDishes    = document.getElementById('stat-dishes-count');
-  const statProposals = document.getElementById('stat-proposals');
+  const EMOJI = {
+    fleisch: '🥩', vegetarisch: '🥗', vegan: '🌱',
+    pasta: '🍝', salat: '🥙', suppe: '🍲', dessert: '🍰', default: '🍽',
+  };
 
   let currentFilter = 'top';
+
+  // ── Rankings laden ─────────────────────────────────────────
 
   async function loadRankings(filter = 'top') {
     currentFilter = filter;
     loading.classList.remove('hidden');
-    error.classList.add('hidden');
+    errorEl.classList.add('hidden');
     list.classList.add('hidden');
     try {
       renderRankings(await api.getRankings(filter));
     } catch (err) {
       console.error(err);
       loading.classList.add('hidden');
-      error.classList.remove('hidden');
-    }
-  }
-
-  async function loadStats() {
-    try {
-      const stats = await api.getStats();
-      statTotal.textContent     = stats.total_ratings ?? '–';
-      statAvg.textContent       = stats.avg_score ? parseFloat(stats.avg_score).toFixed(1) : '–';
-      statDishes.textContent    = stats.rated_dishes ?? '–';
-      statProposals.textContent = stats.total_proposals ?? '–';
-      statsGrid.classList.remove('hidden');
-      if (stats.distribution) {
-        renderDistribution(stats.distribution);
-        distSection.classList.remove('hidden');
-      }
-    } catch (err) {
-      console.error(err);
+      errorEl.classList.remove('hidden');
     }
   }
 
@@ -55,20 +40,16 @@
       return;
     }
 
-    const MEDAL      = ['🥇', '🥈', '🥉'];
-    const RANK_CLASS = ['ranking-item--gold', 'ranking-item--silver', 'ranking-item--bronze'];
-    const EMOJI      = {
-      fleisch: '🥩', vegetarisch: '🥗', vegan: '🌱',
-      pasta: '🍝', salat: '🥙', suppe: '🍲', dessert: '🍰', default: '🍽',
-    };
+    const medals      = ['🥇', '🥈', '🥉'];
+    const medalColors = ['ranking-item--gold', 'ranking-item--silver', 'ranking-item--bronze'];
 
     list.innerHTML = items.map((item, idx) => {
       const score = parseFloat(item.avg_rating || 0).toFixed(1);
       const count = item.rating_count || 0;
-      const stars = '★'.repeat(Math.max(0, Math.round(parseFloat(score)))) + '☆'.repeat(Math.max(0, 5 - Math.round(parseFloat(score))));
+      const stars = '★'.repeat(Math.round(score)) + '☆'.repeat(5 - Math.round(score));
       return `
-        <div class="ranking-item ${idx < 3 ? RANK_CLASS[idx] : ''}">
-          <div class="ranking-item__pos">${idx < 3 ? MEDAL[idx] : `#${idx + 1}`}</div>
+        <div class="ranking-item ${medalColors[idx] || ''}">
+          <div class="ranking-item__pos">${medals[idx] || `#${idx + 1}`}</div>
           <div class="ranking-item__emoji">${EMOJI[item.kategorie] || EMOJI.default}</div>
           <div class="ranking-item__info">
             <div class="ranking-item__name">${escHtml(item.name)}</div>
@@ -85,18 +66,39 @@
     list.classList.remove('hidden');
   }
 
+  // ── Statistiken laden ──────────────────────────────────────
+
+  async function loadStats() {
+    try {
+      const stats = await api.getStats();
+      document.getElementById('stat-total-ratings').textContent = stats.total_ratings ?? '–';
+      document.getElementById('stat-avg-score').textContent     = stats.avg_score ? parseFloat(stats.avg_score).toFixed(1) : '–';
+      document.getElementById('stat-dishes-count').textContent  = stats.rated_dishes ?? '–';
+      document.getElementById('stat-proposals').textContent     = stats.total_proposals ?? '–';
+      statsGrid.classList.remove('hidden');
+      if (stats.distribution) {
+        renderDistribution(stats.distribution);
+        distSection.classList.remove('hidden');
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   function renderDistribution(distribution) {
     const max = Math.max(1, ...Object.values(distribution));
-    distChart.innerHTML = ['5','4','3','2','1'].map(star => {
+    distChart.innerHTML = ['5', '4', '3', '2', '1'].map(star => {
       const count = distribution[star] || 0;
       return `
         <div class="bar-chart__row">
           <div class="bar-chart__label">${star} ★</div>
-          <div class="bar-chart__track"><div class="bar-chart__fill" style="width:${Math.round((count/max)*100)}%"></div></div>
+          <div class="bar-chart__track"><div class="bar-chart__fill" style="width:${Math.round((count / max) * 100)}%"></div></div>
           <div class="bar-chart__count">${count}</div>
         </div>`;
     }).join('');
   }
+
+  // ── Event Listener ─────────────────────────────────────────
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {

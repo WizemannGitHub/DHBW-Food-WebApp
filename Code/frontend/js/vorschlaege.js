@@ -1,18 +1,18 @@
 (function vorschlaegeModule() {
 
-  const form           = document.getElementById('proposal-form');
-  const propName       = document.getElementById('prop-name');
-  const propCategory   = document.getElementById('prop-category');
-  const propDesc       = document.getElementById('prop-description');
-  const propReason     = document.getElementById('prop-reason');
-  const submitFeedback = document.getElementById('proposal-feedback');
-  const submitError    = document.getElementById('proposal-error');
-  const loading        = document.getElementById('proposals-loading');
-  const errorEl        = document.getElementById('proposals-error');
-  const listEl         = document.getElementById('proposals-list');
-  const countBadge     = document.getElementById('proposals-count');
-  const errName        = document.getElementById('err-name');
-  const errCategory    = document.getElementById('err-category');
+  const form        = document.getElementById('proposal-form');
+  const nameInput   = document.getElementById('prop-name');
+  const catInput    = document.getElementById('prop-category');
+  const descInput   = document.getElementById('prop-description');
+  const reasonInput = document.getElementById('prop-reason');
+  const successMsg  = document.getElementById('proposal-feedback');
+  const errorMsg    = document.getElementById('proposal-error');
+  const loading     = document.getElementById('proposals-loading');
+  const errorEl     = document.getElementById('proposals-error');
+  const listEl      = document.getElementById('proposals-list');
+  const countBadge  = document.getElementById('proposals-count');
+
+  // ── Vorschläge laden ───────────────────────────────────────
 
   async function loadProposals() {
     loading.classList.remove('hidden');
@@ -39,7 +39,9 @@
     }
 
     listEl.innerHTML = proposals.map(p => {
-      const date = p.erstellt_am ? new Date(p.erstellt_am).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '';
+      const date = p.erstellt_am
+        ? new Date(p.erstellt_am).toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
+        : '';
       return `
         <div class="proposal-card">
           <div class="proposal-card__header">
@@ -55,44 +57,43 @@
     listEl.classList.remove('hidden');
   }
 
-  function validate() {
-    errName.textContent = errCategory.textContent = '';
-    let valid = true;
-    if (!propName.value.trim()) {
-      errName.textContent = 'Bitte einen Gerichtsnamen eingeben.';
-      propName.focus();
-      valid = false;
-    }
-    if (!propCategory.value) {
-      errCategory.textContent = 'Bitte eine Kategorie auswählen.';
-      if (valid) propCategory.focus();
-      valid = false;
-    }
-    return valid;
-  }
+  // ── Formular absenden ──────────────────────────────────────
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    submitFeedback.classList.add('hidden');
-    submitError.classList.add('hidden');
-    if (!validate()) return;
+    successMsg.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+
+    // Validierung
+    document.getElementById('err-name').textContent     = '';
+    document.getElementById('err-category').textContent = '';
+    if (!nameInput.value.trim()) {
+      document.getElementById('err-name').textContent = 'Bitte einen Gerichtsnamen eingeben.';
+      nameInput.focus();
+      return;
+    }
+    if (!catInput.value) {
+      document.getElementById('err-category').textContent = 'Bitte eine Kategorie auswählen.';
+      catInput.focus();
+      return;
+    }
 
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Wird eingereicht…';
     try {
       await api.postProposal({
-        name:         propName.value.trim(),
-        kategorie:    propCategory.value,
-        beschreibung: propDesc.value.trim() || null,
-        begruendung:  propReason.value.trim() || null,
+        name:         nameInput.value.trim(),
+        kategorie:    catInput.value,
+        beschreibung: descInput.value.trim() || null,
+        begruendung:  reasonInput.value.trim() || null,
       });
-      submitFeedback.classList.remove('hidden');
+      successMsg.classList.remove('hidden');
       form.reset();
       loadProposals();
     } catch (err) {
       console.error(err);
-      submitError.classList.remove('hidden');
+      errorMsg.classList.remove('hidden');
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = 'Vorschlag einreichen ✓';
