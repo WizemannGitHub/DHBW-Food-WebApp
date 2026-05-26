@@ -26,7 +26,7 @@
   [Projektnummer],      [01101110],
   [Auftraggeber],       [Mikka Jenne],
   [Projektleiter],      [Erik Wizemann],
-  [Projektteam],        [Robin von Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
+  [Projektteam],        [Robin van Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
   [Abteilung / Kurs],   [],
   [Startdatum],         [],
   [Enddatum (geplant)], [],
