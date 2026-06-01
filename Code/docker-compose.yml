@@ -1,0 +1,67 @@
+services:
+
+  datenbank:
+    build:
+      context: ./datenbank
+      dockerfile: Containerfile
+    container_name: dhbw_food_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       dhbw_food
+      POSTGRES_USER:     dhbw
+      POSTGRES_PASSWORD: dhbw_secret
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - dhbw_net
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "dhbw", "-d", "dhbw_food"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Containerfile
+    container_name: dhbw_food_backend
+    restart: unless-stopped
+    environment:
+      PORT:        3000
+      PGHOST:      datenbank
+      PGPORT:      5432
+      PGDATABASE:  dhbw_food
+      PGUSER:      dhbw
+      PGPASSWORD:  dhbw_secret
+      CORS_ORIGIN: "http://localhost:8080"
+    ports:
+      - "3000:3000"
+    networks:
+      - dhbw_net
+    depends_on:
+      datenbank:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Containerfile
+    container_name: dhbw_food_frontend
+    restart: unless-stopped
+    environment:
+      DHBW_API_URL: "http://localhost:3000/api"
+    ports:
+      - "8080:80"
+    networks:
+      - dhbw_net
+    depends_on:
+      - backend
+
+volumes:
+  db_data:
+    name: dhbw_food_db_data
+
+networks:
+  dhbw_net:
+    name: dhbw_food_network
+    driver: bridge
