@@ -31,6 +31,7 @@ Eine Webanwendung für Feedback zur DHBW-Mensa. Studierende können Gerichte bew
 
 podman machine start
 podman-compose up --build
+(podman-compose -f docker-compose.yml up --build)
 ```
 
 | Dienst   | URL                        |
