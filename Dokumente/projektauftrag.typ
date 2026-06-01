@@ -169,7 +169,7 @@
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else { white },
 
   [*Rolle*],          [*Name*], [*Unterschrift & Datum*],
-  [Auftraggeber],     [],       [],
+  [Auftraggeber],     [Mika Jenne, Dr. Arno Mielke],       [],
   [Projektleiter],    [],       [],
   [Betreuer / Dozent],[],       [],
 )
