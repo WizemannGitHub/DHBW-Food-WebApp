@@ -12,7 +12,7 @@
 // ── Data ───────────────────────────────────────────────────────────────────
 // Edit these arrays to fill in your plan.
 #let milestones = (
-  (label: "Start",  date: "xx.xx.xxxx"),
+  (label: "Start",  date: "13.05.2026"),
   (label: "Anforderunganalyse",    date: "xx.xx.xxxx"),
   (label: "Protoype",   date: "xx.xx.xxxx"),
   (label: "Implementierung",    date: "xx.xx.xxxx"),

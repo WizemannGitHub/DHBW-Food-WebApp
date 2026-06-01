@@ -28,7 +28,7 @@
   [Projektleiter],      [Erik Wizemann],
   [Projektteam],        [Robin van Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
   [Abteilung / Kurs],   [],
-  [Startdatum],         [],
+  [Startdatum],         [13.05.2026],
   [Enddatum (geplant)], [],
   [Version],            [1.0],
   [Stand],              [#datetime.today().display("[day].[month].[year]")],
@@ -161,7 +161,7 @@
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else { white },
 
   [*Rolle*],          [*Name*], [*Unterschrift & Datum*],
-  [Auftraggeber],     [],       [],
+  [Auftraggeber],     [Mika Jenne, Dr. Arno Mielke],       [],
   [Projektleiter],    [],       [],
   [Betreuer / Dozent],[],       [],
 )
