@@ -23,7 +23,8 @@
     packages: (
       (id: "1.1", name: "Projektplanung"),
       (id: "1.2", name: "Projektsteuerung"),
-      (id: "1.3", name: "Projektabschluss"),
+      (id: "1.3", name: "Technische Dokumentation"),
+      (id: "1.4", name: "Projektabschluss"),
     ),
   ),
   (
@@ -33,39 +34,38 @@
     packages: (
       (id: "2.1", name: "Ist-Analyse"),
       (id: "2.2", name: "Anforderungen erheben"),
-      (id: "2.3", name: "Anforderungen dokumentieren"),
+      (id: "2.3", name: "Risikoanalyse"),
     ),
   ),
   (
     id: "3",
-    name: "Design & Prototyp",
-    color: rgb("#375623"),
+    name: "Implementierung",
+    color: rgb("#7030a0"),
     packages: (
-      (id: "3.1", name: "UI/UX Design"),
-      (id: "3.2", name: "Datenbankdesign"),
-      (id: "3.3", name: "Prototyp erstellen"),
+      (id: "3.1", name: "Frontend"),
+      (id: "3.2", name: "Backend"),
+      (id: "3.3", name: "Datenbank"),
     ),
   ),
   (
     id: "4",
-    name: "Implementierung",
-    color: rgb("#7030a0"),
+    name: "Design",
+    color: rgb("#375623"),
     packages: (
-      (id: "4.1", name: "Frontend"),
-      (id: "4.2", name: "Backend"),
-      (id: "4.3", name: "Datenbank"),
-      (id: "4.4", name: "Integration"),
+      (id: "4.1", name: "UI/UX Design"),
+      (id: "4.2", name: "Systemarchitektur"),
+      (id: "4.3", name: "Integration"),
     ),
   ),
   (
     id: "5",
-    name: "Test & QA",
+    name: "Test & Deployment",
     color: rgb("#833c00"),
     packages: (
       (id: "5.1", name: "Testplanung"),
-      (id: "5.2", name: "Unit Tests"),
-      (id: "5.3", name: "Integrationstests"),
-      (id: "5.4", name: "Abnahmetest"),
+      (id: "5.2", name: "Funktionstests"),
+      (id: "5.3", name: "Abnahmetest"),
+      (id: "5.4", name: "Deployment & Go-Live"),
     ),
   ),
 )
@@ -76,13 +76,13 @@
 
 #let root-w = 7cm
 #let root-h = 0.9cm
-#let phase-w = 5cm
+#let phase-w = 4.5cm
 #let phase-h = 0.85cm
-#let pkg-w = 5cm
-#let pkg-h = 0.75cm
+#let pkg-w = 4.5cm
+#let pkg-h = 0.8cm
 #let col-gap = 0.8cm    // Abstand zwischen den Phasenspalten
 #let row-gap = 0.25cm   // Abstand zwischen Paketen innerhalb einer Phase
-#let v-conn = 0.3cm    // Länge vertikaler Verbindungslinien
+#let v-conn = 0.4cm    // Länge vertikaler Verbindungslinien
 #let lc = rgb("#555555")  // Linienfarbe
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -176,7 +176,7 @@
   // Footer
   #grid(
     columns: (33%, 34%, 33%),
-    text(size: 8pt)[*Projektleiter:* #project.leader],
+    align(left, text(size: 8pt)[*Projektleiter:* #project.leader]),
     align(center, text(size: 8pt)[*Auftraggeber:* #project.client]),
     align(right, text(size: 8pt)[*Startdatum:* #project.startdate]),
   )
