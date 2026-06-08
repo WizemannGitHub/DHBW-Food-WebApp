@@ -152,8 +152,7 @@ ws.column_dimensions["B"].width = 26
 ws.column_dimensions["C"].width = 7
 ws.column_dimensions["D"].width = 10
 for i, day in enumerate(all_days):
-    # Wochenende-Spalten schmaler
-    ws.column_dimensions[get_column_letter(COL_FIRST + i)].width = 1.8 if day.weekday() >= 5 else 3.0
+    ws.column_dimensions[get_column_letter(COL_FIRST + i)].width = 3.0
 
 last_col = COL_FIRST + len(all_days) - 1
 
@@ -164,6 +163,21 @@ def fill(hex_color: str) -> PatternFill:
 def thin_border() -> Border:
     s = Side(style="thin", color="BBBBBB")
     return Border(left=s, right=s, top=s, bottom=s)
+
+def set_range_border(ws, r1, r2, c1, c2, color="BBBBBB"):
+    """Setzt Außenkanten einer Merge-Range korrekt auf allen Rand-Zellen."""
+    thin = Side(style="thin", color=color)
+    no   = Side(style=None)
+    for r in range(r1, r2 + 1):
+        for c in range(c1, c2 + 1):
+            ws.cell(row=r, column=c).border = Border(
+                left   = thin if c == c1 else no,
+                right  = thin if c == c2 else no,
+                top    = thin if r == r1 else no,
+                bottom = thin if r == r2 else no,
+            )
+
+C_COL_HDR = "3B6DAD"  # mittleres Blau für Spaltenbeschriftungen
 
 def align_center() -> Alignment:
     return Alignment(horizontal="center", vertical="center", wrap_text=True)
@@ -177,29 +191,42 @@ def hfont(size=9) -> Font:
 def nfont(bold=False, size=9) -> Font:
     return Font(bold=bold, size=size)
 
-# ── Info-Header (Zeilen 1–3): Titel, Projektleiter, Startdatum ───────────────
+# ── Info-Header (Zeilen 1–2): Titel + Projekt-Infos ─────────────────────────
 ROW_INFO1 = 1
 ROW_INFO2 = 2
-ROW_INFO3 = 3
-ROW_MONTH = 4
-ROW_DATE  = 5
-ROW_DOW   = 6
-ROW_TASKS = 7
+ROW_MONTH = 3
+ROW_DATE  = 4
+ROW_DOW   = 5
+ROW_TASKS = 6
 
-info_rows = [
-    (ROW_INFO1, f"Projekt: {PROJECT_TITLE}",            13, 22),
-    (ROW_INFO2, f"Projektleiter: {PROJECT_LEADER}",     10, 18),
-    (ROW_INFO3, f"Startdatum: {PROJECT_START:%d.%m.%Y}", 9, 16),
+# Zeile 1: Projekttitel – volle Breite
+ws.row_dimensions[ROW_INFO1].height = 28
+ws.merge_cells(start_row=ROW_INFO1, end_row=ROW_INFO1, start_column=COL_ID, end_column=last_col)
+c = ws.cell(row=ROW_INFO1, column=COL_ID, value=f"  {PROJECT_TITLE}")
+c.fill = fill(C_HEADER)
+c.font = Font(bold=True, color="FFFFFF", size=15)
+c.alignment = Alignment(horizontal="left", vertical="center")
+c.border = thin_border()
+set_range_border(ws, ROW_INFO1, ROW_INFO1, COL_ID, last_col)
+
+# Zeile 2: drei gleichbreite Segmente (Projektleiter | Auftraggeber | Zeitraum)
+ws.row_dimensions[ROW_INFO2].height = 18
+seg_size = (last_col - COL_ID + 1) // 3
+seg_starts = [COL_ID, COL_ID + seg_size, COL_ID + 2 * seg_size]
+seg_ends   = [seg_starts[1] - 1, seg_starts[2] - 1, last_col]
+seg_labels = [
+    (f" Projektleiter", PROJECT_LEADER),
+    (f" Auftraggeber",  PROJECT_CLIENT),
+    (f" Zeitraum",      f"{PROJECT_START:%d.%m.%Y} – {PROJECT_END:%d.%m.%Y}"),
 ]
-
-for rn, text, font_size, row_h in info_rows:
-    ws.row_dimensions[rn].height = row_h
-    ws.merge_cells(start_row=rn, end_row=rn, start_column=COL_ID, end_column=last_col)
-    c = ws.cell(row=rn, column=COL_ID, value=text)
-    c.fill = fill(C_HEADER)
-    c.font = Font(bold=True, color="FFFFFF", size=font_size)
-    c.alignment = align_left()
-    c.border = thin_border()
+C_INFO = "254C82"  # etwas helleres Blau für Zeile 2
+for (label, value), c1, c2 in zip(seg_labels, seg_starts, seg_ends):
+    ws.merge_cells(start_row=ROW_INFO2, end_row=ROW_INFO2, start_column=c1, end_column=c2)
+    c = ws.cell(row=ROW_INFO2, column=c1, value=f"{label}:  {value}")
+    c.fill = fill(C_INFO)
+    c.font = Font(color="FFFFFF", size=9)
+    c.alignment = Alignment(horizontal="left", vertical="center")
+    set_range_border(ws, ROW_INFO2, ROW_INFO2, c1, c2)
 
 # ── Spaltenköpfe: Info-Spalten über 3 Kopfzeilen mergen ─────────────────────
 for c in range(COL_ID, COL_FIRST):
@@ -208,10 +235,10 @@ for c in range(COL_ID, COL_FIRST):
 for col_idx, lbl in {COL_ID: "ID", COL_NAME: "Vorgang / Arbeitspaket",
                      COL_DUR: "Dauer", COL_PRED: "Vorgänger"}.items():
     cell = ws.cell(row=ROW_MONTH, column=col_idx, value=lbl)
-    cell.fill = fill(C_HEADER)
-    cell.font = hfont()
+    cell.fill = fill(C_COL_HDR)
+    cell.font = Font(bold=True, color="FFFFFF", size=8)
     cell.alignment = align_center()
-    cell.border = thin_border()
+    set_range_border(ws, ROW_MONTH, ROW_DOW, col_idx, col_idx)
 
 # ── Monats-Gruppen ────────────────────────────────────────────────────────────
 cur_m, m_start = None, None
@@ -230,7 +257,7 @@ for lbl, c1, c2 in month_groups:
     cell.fill = fill(C_HEADER)
     cell.font = hfont()
     cell.alignment = align_center()
-    cell.border = thin_border()
+    set_range_border(ws, ROW_MONTH, ROW_MONTH, c1, c2)
 
 # ── Datum- und Wochentag-Zeilen ───────────────────────────────────────────────
 ms_set = {ms_date for ms_date, _ in MILESTONES}
@@ -263,9 +290,9 @@ for i, day in enumerate(all_days):
     cw.alignment = align_center()
     cw.border = thin_border()
 
-ws.row_dimensions[ROW_MONTH].height = 18
-ws.row_dimensions[ROW_DATE].height  = 14
-ws.row_dimensions[ROW_DOW].height   = 12
+ws.row_dimensions[ROW_MONTH].height = 14
+ws.row_dimensions[ROW_DATE].height  = 13
+ws.row_dimensions[ROW_DOW].height   = 11
 
 # ── Aufgaben-Zeilen ───────────────────────────────────────────────────────────
 def lighten(hex_color: str, amount: int = 110) -> str:
