@@ -10,6 +10,11 @@ const PORT = process.env.PORT || 3000;
 app.use(cors({ origin: process.env.CORS_ORIGIN || '*' }));
 app.use(express.json());
 
+// Fehlende Constraints/Indizes beim Start anlegen (idempotent)
+pool.query(`
+  CREATE UNIQUE INDEX IF NOT EXISTS idx_gerichte_name_datum ON gerichte(name, verfuegbar_am)
+`).catch(err => console.error('Migration fehlgeschlagen:', err.message));
+
 app.get('/health', (_req, res) => res.json({ status: 'ok' }));
 
 app.get('/api/dishes', async (_req, res) => {
@@ -135,6 +140,39 @@ app.post('/api/proposals', async (req, res) => {
     res.status(201).json({ success: true, id: result.rows[0].id });
   } catch (err) {
     console.error(err);
+    res.status(500).json({ error: 'Datenbankfehler.' });
+  }
+});
+
+// Upsert von Mensa-Gerichten in die gerichte-Tabelle, gibt { name -> db_id } zurück
+app.post('/api/mensa-dishes/sync', async (req, res) => {
+  const dishes = req.body;
+  if (!Array.isArray(dishes) || dishes.length === 0)
+    return res.status(400).json({ error: 'Erwartet ein Array von Gerichten.' });
+
+  const today = new Date().toISOString().slice(0, 10);
+  const result = {};
+
+  try {
+    for (const dish of dishes) {
+      const { name, kategorie, preis } = dish;
+      if (!name || !kategorie) continue;
+
+      const upsert = await pool.query(`
+        INSERT INTO gerichte (name, kategorie, preis, verfuegbar_am, aktiv)
+        VALUES ($1, $2, $3, $4, TRUE)
+        ON CONFLICT (name, verfuegbar_am) DO UPDATE
+          SET kategorie = EXCLUDED.kategorie,
+              preis     = EXCLUDED.preis,
+              aktiv     = TRUE
+        RETURNING id
+      `, [name, kategorie, preis || null, today]);
+
+      result[name] = upsert.rows[0].id;
+    }
+    res.json(result);
+  } catch (err) {
+    console.error('mensa-dishes/sync Fehler:', err);
     res.status(500).json({ error: 'Datenbankfehler.' });
   }
 });

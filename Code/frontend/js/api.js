@@ -18,25 +18,46 @@ const mensaApi = {
     if (!json.success || !Array.isArray(json.data)) return [];
 
     const canteens = [];
-    let id = 1;
+    const allMeals = [];
 
     for (const entry of json.data) {
       const meals = [];
       for (const line of entry.lines) {
         for (const meal of line.meals) {
           if (!meal.price) continue; // Infotexte ohne Preis überspringen
-          meals.push({
-            id:        `mensa-${id++}`,
+          const parsed = {
             name:      meal.name,
             kategorie: toKategorie(meal.classifiers),
             preis:     parsePreis(meal.price),
-          });
+          };
+          meals.push(parsed);
+          allMeals.push(parsed);
         }
       }
       if (meals.length > 0) {
         canteens.push({ id: entry.canteen.id, name: entry.canteen.name, meals });
       }
     }
+
+    // Gerichte in DB speichern und echte IDs holen
+    try {
+      const syncRes = await fetch(`${API_BASE}/mensa-dishes/sync`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(allMeals),
+      });
+      if (syncRes.ok) {
+        const nameToId = await syncRes.json();
+        for (const canteen of canteens) {
+          for (const meal of canteen.meals) {
+            meal.id = nameToId[meal.name] ?? meal.name;
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('Sync mit DB fehlgeschlagen, Bewertungen nicht möglich:', e);
+    }
+
     return canteens;
   },
 };

@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS vorschlaege (
 );
 
 -- ── Indizes ───────────────────────────────────────────────────
+CREATE UNIQUE INDEX IF NOT EXISTS idx_gerichte_name_datum ON gerichte(name, verfuegbar_am);
 CREATE INDEX IF NOT EXISTS idx_bewertungen_gericht_id  ON bewertungen(gericht_id);
 CREATE INDEX IF NOT EXISTS idx_bewertungen_erstellt_am ON bewertungen(erstellt_am);
 CREATE INDEX IF NOT EXISTS idx_gerichte_aktiv          ON gerichte(aktiv, verfuegbar_am);
