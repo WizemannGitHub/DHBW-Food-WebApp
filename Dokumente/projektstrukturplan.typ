@@ -23,8 +23,7 @@
     packages: (
       (id: "1.1", name: "Projektplanung"),
       (id: "1.2", name: "Projektsteuerung"),
-      (id: "1.3", name: "Technische Dokumentation"),
-      (id: "1.4", name: "Projektabschluss"),
+      (id: "1.3", name: "Projektabschluss"),
     ),
   ),
   (
@@ -39,33 +38,32 @@
   ),
   (
     id: "3",
-    name: "Implementierung",
-    color: rgb("#7030a0"),
+    name: "Design",
+    color: rgb("#375623"),
     packages: (
-      (id: "3.1", name: "Frontend"),
-      (id: "3.2", name: "Backend"),
-      (id: "3.3", name: "Datenbank"),
+      (id: "3.1", name: "UI/UX Design"),
+      (id: "3.2", name: "Systemarchitektur"),
     ),
   ),
   (
     id: "4",
-    name: "Design",
-    color: rgb("#375623"),
+    name: "Implementierung",
+    color: rgb("#7030a0"),
     packages: (
-      (id: "4.1", name: "UI/UX Design"),
-      (id: "4.2", name: "Systemarchitektur"),
-      (id: "4.3", name: "Integration"),
+      (id: "4.1", name: "Frontend"),
+      (id: "4.2", name: "Backend"),
+      (id: "4.3", name: "Datenbank"),
     ),
   ),
   (
     id: "5",
-    name: "Test & Deployment",
+    name: "Testing & Deployment",
     color: rgb("#833c00"),
     packages: (
-      (id: "5.1", name: "Testplanung"),
-      (id: "5.2", name: "Funktionstests"),
-      (id: "5.3", name: "Abnahmetest"),
-      (id: "5.4", name: "Deployment & Go-Live"),
+      (id: "5.1", name: "Testing & QA"),
+      (id: "5.2", name: "Deployment"),
+      (id: "5.3", name: "Abgabe & Präsentation"),
+
     ),
   ),
 )
