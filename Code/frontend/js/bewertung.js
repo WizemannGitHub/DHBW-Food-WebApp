@@ -1,17 +1,49 @@
 (function bewertungModule() {
 
   let allCanteens = [];
-  let selectedIds = new Set(); // leere Menge = alle anzeigen
+  let selectedIds = new Set();
 
   const ratings = { gesamt: 0, geschmack: 0, portion: 0 };
   let activeDishId = null;
 
-  const EMOJI = {
-    fleisch: '🥩', vegetarisch: '🥗', vegan: '🌱',
-    pasta: '🍝', salat: '🥙', suppe: '🍲', dessert: '🍰', default: '🍽',
-  };
+  // ── Datums-State ────────────────────────────────────────────
+  let currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
 
-  // DOM-Elemente
+  const WOCHENTAGE = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  const MONATE     = ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'];
+
+  function isWeekend(date) {
+    const d = date.getDay();
+    return d === 0 || d === 6;
+  }
+
+  function isToday(date) {
+    const t = new Date();
+    return date.getFullYear() === t.getFullYear()
+        && date.getMonth()    === t.getMonth()
+        && date.getDate()     === t.getDate();
+  }
+
+  function dateStr(date) {
+    const m   = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${date.getFullYear()}-${m}-${day}`;
+  }
+
+  function prevWeekday(date) {
+    const d = new Date(date);
+    do { d.setDate(d.getDate() - 1); } while (isWeekend(d));
+    return d;
+  }
+
+  function nextWeekday(date) {
+    const d = new Date(date);
+    do { d.setDate(d.getDate() + 1); } while (isWeekend(d));
+    return d;
+  }
+
+  // ── DOM-Elemente ────────────────────────────────────────────
   const loading     = document.getElementById('bewertung-loading');
   const errorEl     = document.getElementById('bewertung-error');
   const container   = document.getElementById('dishes-container');
@@ -22,6 +54,29 @@
   const submitBtn   = document.getElementById('submit-rating');
   const feedback    = document.getElementById('rating-feedback');
   const commentArea = document.getElementById('modal-comment');
+  const dateLabel   = document.getElementById('date-label');
+  const btnPrev     = document.getElementById('date-prev');
+  const btnNext     = document.getElementById('date-next');
+
+  function updateDateNav() {
+    const today = isToday(currentDate);
+    dateLabel.textContent = today
+      ? `Heute, ${currentDate.getDate()}. ${MONATE[currentDate.getMonth()]}`
+      : `${WOCHENTAGE[currentDate.getDay()]}, ${currentDate.getDate()}. ${MONATE[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+
+    const todayMidnight = new Date();
+    todayMidnight.setHours(0, 0, 0, 0);
+    const maxDate = new Date(todayMidnight);
+    for (let i = 0; i < 5; i++) maxDate.setDate(maxDate.getDate() + 1);
+    btnNext.disabled = nextWeekday(currentDate) > maxDate;
+    btnPrev.disabled = false;
+  }
+
+  function isFuture(date) {
+    const todayMidnight = new Date();
+    todayMidnight.setHours(0, 0, 0, 0);
+    return date > todayMidnight;
+  }
 
   // ── Laden ──────────────────────────────────────────────────
 
@@ -30,8 +85,19 @@
     errorEl.classList.add('hidden');
     container.classList.add('hidden');
     filterBar.classList.add('hidden');
+    selectedIds.clear();
+
+    updateDateNav();
+
+    if (isWeekend(currentDate)) {
+      loading.classList.add('hidden');
+      container.innerHTML = `<div class="empty-state"><div class="empty-state__icon">🏖️</div><div class="empty-state__text">Am Wochenende hat die Mensa geschlossen – bis Montag!</div></div>`;
+      container.classList.remove('hidden');
+      return;
+    }
+
     try {
-      allCanteens = await mensaApi.getDishes();
+      allCanteens = await mensaApi.getDishes(dateStr(currentDate));
       renderFilterBar();
       renderDishes();
     } catch (err) {
@@ -72,13 +138,12 @@
   function renderDishes() {
     loading.classList.add('hidden');
 
-    // Nichts ausgewählt = alle Kantinen zeigen
     const visible = selectedIds.size === 0
       ? allCanteens
       : allCanteens.filter(c => selectedIds.has(c.id));
 
     if (visible.length === 0) {
-      container.innerHTML = `<div class="empty-state"><div class="empty-state__icon">🍽</div><div class="empty-state__text">Heute keine Gerichte verfügbar.</div></div>`;
+      container.innerHTML = `<div class="empty-state"><div class="empty-state__icon">🍽</div><div class="empty-state__text">Keine Gerichte verfügbar.</div></div>`;
       container.classList.remove('hidden');
       return;
     }
@@ -92,7 +157,7 @@
       </div>
     `).join('');
 
-    container.querySelectorAll('.dish-card').forEach(card => {
+    container.querySelectorAll('.dish-card:not(.dish-card--preview)').forEach(card => {
       card.addEventListener('click', () =>
         openModal(card.dataset.id, card.dataset.name, card.dataset.category)
       );
@@ -102,16 +167,17 @@
   }
 
   function dishCardHtml(dish) {
-    const emoji = EMOJI[dish.kategorie] || EMOJI.default;
+    const emoji = KATEGORIE_EMOJI[dish.kategorie] || KATEGORIE_EMOJI.default;
     const preis = dish.preis ? `${parseFloat(dish.preis).toFixed(2)} €` : '';
+    const canRate = !isFuture(currentDate);
     return `
-      <div class="dish-card" data-id="${dish.id}" data-name="${escHtml(dish.name)}" data-category="${escHtml(dish.kategorie || '')}">
+      <div class="dish-card${canRate ? '' : ' dish-card--preview'}" ${canRate ? `data-id="${dish.id}" data-name="${escHtml(dish.name)}" data-category="${escHtml(dish.kategorie || '')}"` : ''}>
         <div class="dish-card__thumb">${emoji}</div>
         <div class="dish-card__body">
           <div class="dish-card__category">${escHtml(dish.kategorie || 'Gericht')}</div>
           <div class="dish-card__name">${escHtml(dish.name)}</div>
           ${preis ? `<div class="dish-card__price">${preis}</div>` : ''}
-          <button class="btn btn--primary btn--full">Jetzt bewerten</button>
+          ${canRate ? `<button class="btn btn--primary btn--full">Jetzt bewerten</button>` : ''}
         </div>
       </div>`;
   }
@@ -194,6 +260,15 @@
   submitBtn.addEventListener('click', submitRating);
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+  });
+
+  btnPrev.addEventListener('click', () => {
+    currentDate = prevWeekday(currentDate);
+    loadDishes();
+  });
+  btnNext.addEventListener('click', () => {
+    currentDate = nextWeekday(currentDate);
+    loadDishes();
   });
 
   initStarRows();

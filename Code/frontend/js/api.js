@@ -1,17 +1,8 @@
 const API_BASE = window.DHBW_API_URL || 'http://localhost:3000/api';
 
-function todayStr() {
-  const d = new Date();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${d.getFullYear()}-${m}-${day}`;
-}
-
-// Holt den Tagesplan von der Mensa-API (über unseren Backend-Proxy)
-// Gibt ein Array von Kantinen zurück: [{ id, name, meals: [...] }]
 const mensaApi = {
-  async getDishes() {
-    const res = await fetch(`${API_BASE}/mensa-plan/${todayStr()}`);
+  async getDishes(date) {
+    const res = await fetch(`${API_BASE}/mensa-plan/${date}`);
     if (!res.ok) throw new Error(`Mensa-Proxy HTTP ${res.status}`);
     const json = await res.json();
 
@@ -24,7 +15,7 @@ const mensaApi = {
       const meals = [];
       for (const line of entry.lines) {
         for (const meal of line.meals) {
-          if (!meal.price) continue; // Infotexte ohne Preis überspringen
+          if (!meal.price) continue;
           const parsed = {
             name:      meal.name,
             kategorie: toKategorie(meal.classifiers),
@@ -39,7 +30,6 @@ const mensaApi = {
       }
     }
 
-    // Gerichte in DB speichern und echte IDs holen
     try {
       const syncRes = await fetch(`${API_BASE}/mensa-dishes/sync`, {
         method: 'POST',
@@ -76,14 +66,7 @@ function parsePreis(str) {
   return isNaN(n) ? null : n;
 }
 
-// REST-API für Bewertungen, Rankings, Stats und Vorschläge
 const api = {
-  async getDishes() {
-    const res = await fetch(`${API_BASE}/dishes`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res.json();
-  },
-
   async postRating(dishId, payload) {
     const res = await fetch(`${API_BASE}/ratings`, {
       method: 'POST',

@@ -8,10 +8,7 @@
   const distChart   = document.getElementById('rating-distribution');
   const filterBtns  = document.querySelectorAll('.filter-btn[data-filter]');
 
-  const EMOJI = {
-    fleisch: '🥩', vegetarisch: '🥗', vegan: '🌱',
-    pasta: '🍝', salat: '🥙', suppe: '🍲', dessert: '🍰', default: '🍽',
-  };
+  const EMOJI = KATEGORIE_EMOJI;
 
   let currentFilter = 'top';
 
