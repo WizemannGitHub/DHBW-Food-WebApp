@@ -1,18 +1,18 @@
 #set document(title: "Management Status Report")
-#set page(margin: (x: 1.5cm, y: 1.5cm), paper: "a4", flipped: true)
-#set text(font: "Arial", size: 9pt)
+#set page(margin: (x: 0.8cm, y: 0.8cm), paper: "a4", flipped: true)
+#set text(font: "Arial", size: 7.5pt)
 
 // ─── Ampel-Farben ────────────────────────────────────────────────────────────
-#let rot    = rgb("#cc0000")
-#let gelb   = rgb("#e6b800")
-#let gruen  = rgb("#00aa00")
+#let rot = rgb("#cc0000")
+#let gelb = rgb("#e6b800")
+#let gruen = rgb("#00aa00")
 
 #let ampel(farbe) = circle(radius: 6pt, fill: farbe, stroke: none)
 
 // Ampel-Symbol (rot/gelb/gruen gestapelt, aktive Farbe ausgefüllt)
 #let ampel-gesamt(status) = {
-  let r = if status == "rot"   { rot   } else { rgb("#eeaaaa") }
-  let g = if status == "gelb"  { gelb  } else { rgb("#eee8aa") }
+  let r = if status == "rot" { rot } else { rgb("#eeaaaa") }
+  let g = if status == "gelb" { gelb } else { rgb("#eee8aa") }
   let b = if status == "gruen" { gruen } else { rgb("#aaddaa") }
   stack(
     dir: ttb,
@@ -27,71 +27,83 @@
 #let dot(farbe) = circle(radius: 5pt, fill: farbe, stroke: none)
 
 // ─── KOPF ────────────────────────────────────────────────────────────────────
-#text(size: 16pt, weight: "bold")[Management Status Report]
-#v(0.4cm)
+#text(size: 15pt, weight: "bold")[Management Status Report]
+#v(0.2cm)
 
 #grid(
-  columns: (1fr, 1fr, 1fr),
-  [*Projektname:* #text(fill: rgb("#0070c0"))[DHBW Food Web App]],
+  columns: (1fr, 1fr, 1fr, 1fr),
+  [*Projektname: *#text(fill: rgb("#0070c0"))[DHBW Food Web App]],
   [*Projektmanager\*in:* #text(fill: rgb("#0070c0"))[Erik Wizemann]],
+  [*Auftraggeber:* #text(fill: rgb("#0070c0"))[Dr. Arno Mielke]],
   [*Datum:* #text(fill: rgb("#0070c0"))[#datetime.today().display("[day].[month].[year]")]],
 )
 
-#v(0.3cm)
+#v(0.15cm)
 
 // ─── ZUSAMMENFASSUNG ─────────────────────────────────────────────────────────
 #grid(
   columns: (1fr, auto),
-  gutter: 0.5cm,
+  gutter: 0.3cm,
   [
-    #rect(stroke: 0.5pt, inset: 8pt, width: 100%)[
+    #rect(stroke: 0.5pt, inset: 5pt, width: 100%)[
       *Zusammenfassung*
-      #v(0.2cm)
+      #v(0.1cm)
       #list(
         marker: sym.checkmark,
-        [#text(fill: rgb("#0070c0"))[...]],
-        [#text(fill: rgb("#0070c0"))[...]],
-        [#text(fill: rgb("#0070c0"))[...]],
-        [#text(fill: rgb("#0070c0"))[...]],
+        [Projektplanung und Dokumentation (Auftrag, PSP, Ablaufplan, Risikoanalyse) abgeschlossen],
+        [Kernfunktionen der Web-App (Bewertung, Ranking, Backend, Datenbank) implementiert und im (noch) lokalen Betrieb],
+        [Technische Dokumentation weitesgehend fertiggestellt — Abgabe 29.06.2026 in Reichweite],
       )
     ]
   ],
   [
-    // Gesamt-Ampel — passe "rot" / "gelb" / "gruen" an
     #ampel-gesamt("gelb")
   ],
 )
 
-#v(0.3cm)
+#v(0.15cm)
 
 // ─── STATUS + RISIKEN ────────────────────────────────────────────────────────
 #grid(
   columns: (1fr, 1fr),
-  gutter: 0.4cm,
+  gutter: 0.25cm,
 
   // ── Status-Box ──
-  rect(stroke: 0.5pt, inset: 0pt)[
+  rect(stroke: 0.5pt, inset: 0pt, width: 100%)[
     #rect(fill: none, stroke: none, inset: 4pt)[*Status*]
     #table(
       columns: (auto, 1fr, auto),
       stroke: 0.5pt,
       fill: (col, row) => if row == 0 { rgb("#1f5c99") } else { white },
-      inset: 5pt,
+      inset: 3pt,
 
-      text(fill: white, weight: "bold")[Bereich],
-      text(fill: white, weight: "bold")[Status],
-      [],
+      text(fill: white, weight: "bold")[Bereich], text(fill: white, weight: "bold")[Status], [],
 
-      [1. Scope],        [Zeitplan wird gut eingehalten. Keine wesentlichen Verzögerungen],      dot(gruen),
-      [2. Umsetzung],    [#text(fill: rgb("#0070c0"))[...]],        dot(gelb),
-      [3. Kosten / Termine], [#text(fill: rgb("#0070c0"))[...]],    dot(gelb),
-      [4. Team],         [#text(fill: rgb("#0070c0"))[...]],        dot(rot),
-      [5. Stakeholder],  [#text(fill: rgb("#0070c0"))[...]],        dot(gruen),
+      [1. Scope],
+      [#text(fill: rgb("#0070c0"))[Zeitplan wird gut eingehalten. Keine wesentlichen Verzögerungen]],
+      dot(gruen),
+
+      [2. Umsetzung],
+      [#text(
+        fill: rgb("#0070c0"),
+      )[Implementierung und Umsetzung der Ideen ist weitesgehend problemlos verlaufen. Kleine Features noch nicht fertiggestellt]],
+      dot(gelb),
+
+      [3. Kosten / Termine], [#text(fill: rgb("#0070c0"))[Keine wirklichen Kosten angefallen]], dot(gruen),
+      [4. Team],
+      [#text(
+        fill: rgb("#0070c0"),
+      )[Teamarbeit lief ohne Probleme. Regelmäßige Kommunikation und Absprechung des Fortschritt]],
+      dot(gruen),
+
+      [5. Stakeholder],
+      [#text(fill: rgb("#0070c0"))[Endnutzer (Studierende) noch nicht eingebunden. Noch kein Test-Feedback vorhanden]],
+      dot(gelb),
     )
   ],
 
   // ── Risiken-Box ──
-  rect(stroke: 0.5pt, inset: 0pt)[
+  rect(stroke: 0.5pt, inset: 0pt, width: 100%)[
     #rect(fill: none, stroke: none, inset: 4pt)[*Risiken und Hindernisse*]
     #table(
       columns: (1fr, 1fr, auto, auto, auto),
@@ -105,23 +117,19 @@
       text(fill: white, weight: "bold")[Bis wann],
       [],
 
-      [#text(fill: rgb("#0070c0"))[...]],
-      [#text(fill: rgb("#0070c0"))[...]],
-      [#text(fill: rgb("#0070c0"))[...]],
-      [#text(fill: rgb("#0070c0"))[...]],
-      dot(rot),
-
-      [#text(fill: rgb("#0070c0"))[...]],
-      [#text(fill: rgb("#0070c0"))[...]],
-      [#text(fill: rgb("#0070c0"))[...]],
-      [#text(fill: rgb("#0070c0"))[...]],
+      [#text(fill: rgb("#f00"))[Risiko: Deployment der Web-App läuft nicht wie geplant]],
+      [#text(fill: rgb("#0070c0"))[Gründliche Überprüfung des Code und entsprechend zeitlich einplanen]],
+      [#text(fill: rgb("#0070c0"))[Erik Wizemann]],
+      [#text(fill: rgb("#0070c0"))[03.08.2026]],
       dot(gelb),
 
-      [...],
-      [...],
-      [...],
-      [...],
-      [],
+      [#text(
+        fill: rgb("#f00"),
+      )[Konflikt: Abgabefrist der PM-Dokumente bis zum 29.06.2026, Abgabefrist des Webengineering Projektes erst bis 03.08.2026]],
+      [#text(fill: rgb("#0070c0"))[Versuch das Webengineering Projekt ebenfalls bis zum 29.06. fertigzustellen]],
+      [#text(fill: rgb("#0070c0"))[Alle]],
+      [#text(fill: rgb("#0070c0"))[29.06.2026]],
+      dot(gelb),
     )
   ],
 )
@@ -131,39 +139,40 @@
 // ─── DETAILS ─────────────────────────────────────────────────────────────────
 #rect(stroke: 0.5pt, inset: 0pt, width: 100%)[
   #rect(fill: none, stroke: none, inset: 4pt)[*Details*]
-  #grid(
+  #table(
     columns: (1fr, 1fr, 1fr),
     gutter: 0pt,
 
     // Erreichte Ergebnisse
-    rect(stroke: (right: 0.5pt), inset: 8pt)[
+    rect(stroke: none, inset: 3pt)[
       *Erreichte Ergebnisse*
       #v(0.2cm)
       #list(
         marker: sym.checkmark,
-        text(fill: rgb("#0070c0"))[...],
-        text(fill: rgb("#0070c0"))[...],
-        text(fill: rgb("#0070c0"))[...],
-        text(fill: rgb("#0070c0"))[...],
-        text(fill: rgb("#0070c0"))[...],
+        [Projektmanagement-Dokumente größtenteils fertiggestellt (Projektauftrag, Risikoanalyse, PSP, Ablaufplan/Gantt)],
+        [Backend mit REST-API entwickelt und in Betrieb],
+        [Frontend (Bewertung, Ranking, Tagesansicht) implementiert],
+        [Bewertungslogik eingeschränkt - nur Gerichte von heute/Vergangenheit bewertbar, Wochenende ausgeblendet],
+        [Technische Dokumentation fertiggestellt],
       )
     ],
 
     // Nächste Schritte
-    rect(stroke: (right: 0.5pt), inset: 8pt)[
+    rect(stroke: none, inset: 8pt)[
       *Nächste Schritte*
       #v(0.2cm)
       #list(
         marker: sym.arrow.r,
-        text(fill: rgb("#0070c0"))[...],
-        text(fill: rgb("#0070c0"))[...],
-        text(fill: rgb("#0070c0"))[...],
-        text(fill: rgb("#0070c0"))[...],
+        [Meilensteinplan vervollständigen — fehlende Daten nachtragen (bis 22.06.)],
+        [Hosting/Deployment der App abschließen],
+        [Alle PM-Dokumente final zusammenstellen und auf Konsistenz prüfen (bis 24.06.)],
+        [Abgabe in Moodle bis 29.06.2026],
+        [Präsentation vorbereiten und Redeaufteilung festlegen (bis 06.07.)],
       )
     ],
 
     // Meilensteine
-    rect(inset: 8pt)[
+    rect(stroke: none, inset: 8pt)[
       *Meilensteine*
       #v(0.2cm)
       #table(
@@ -173,11 +182,12 @@
 
         // Format: Datum | Bezeichnung (Farbe zeigt Status)
         // gruen = erreicht, gelb = in Verzug, rot = kritisch, schwarz = geplant
-        [#text(fill: gruen)[01.01.26]], [#text(fill: gruen)[Projektstart]],
-        [#text(fill: gruen)[26.03.26]], [#text(fill: gruen)[#text(fill: rgb("#0070c0"))[...]]],
-        [#text(fill: gelb)[23.04.26]],  [#text(fill: gelb)[#text(fill: rgb("#0070c0"))[...]]],
-        [#text(fill: rot)[02.07.26]],   [#text(fill: rot)[#text(fill: rgb("#0070c0"))[...]]],
-        [08.07.26],                      [Projektabschluss],
+        [#text(fill: gruen)[13.05.26]], [#text(fill: gruen)[Projektstart]],
+        [#text(fill: gruen)[25.05.26]], [#text(fill: gruen)[Anforderungsanalyse abgeschlossen]],
+        [#text(fill: gruen)[01.06.26]], [#text(fill: gruen)[Design / Systemarchitektur abgeschlossen]],
+        [#text(fill: gelb)[22.06.26]], [#text(fill: gelb)[Implementierung abgeschlossen]],
+        [29.06.26], [Abgabe in Moodle],
+        [08.07.26], [Präsentation],
       )
     ],
   )
@@ -192,8 +202,11 @@
     columns: (auto, auto, auto, auto, auto, auto),
     gutter: 4pt,
     align: horizon,
-    dot(gruen), [Im Plan],
-    dot(gelb),  [kritisch innerhalb des Projektes lösbar],
-    dot(rot),   [Kritisch nicht innerhalb des Projektes lösbar],
+    dot(gruen),
+    [Im Plan],
+    dot(gelb),
+    [kritisch innerhalb des Projektes lösbar],
+    dot(rot),
+    [Kritisch nicht innerhalb des Projektes lösbar],
   )
 ]
