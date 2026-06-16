@@ -57,7 +57,7 @@
     ]
   ],
   [
-    #ampel-gesamt("gelb")
+    #ampel-gesamt("gruen")
   ],
 )
 
