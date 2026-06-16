@@ -38,7 +38,7 @@
   [
     Fehlende vertragliche Absicherung
   ],
-  [10%], [5], [], [Abschluss eines Vertrags mit dem API-Anbieter zur Festlegung der Nutzungsbedingungen; Entwicklung eines Fallback-Mechanismus für strukturelle Änderungen], [Unbekannt], [Entwicklungsteam],
+  [10% (3)], [35 AS (5)], [15], [Abschluss eines Vertrags mit dem API-Anbieter zur Festlegung der Nutzungsbedingungen; Entwicklung eines Fallback-Mechanismus für strukturelle Änderungen (siehe Vertragvorschalg)], [AS], [Entwicklungsteam],
 
   // Zeile 2
   [
@@ -47,7 +47,7 @@
   [
     Technische Störungen, Wartungsarbeiten oder Insolvenz des Anbieters
   ],
-  [10%], [4], [], [Wahl eines zuverlässigen Anbieters], [Zeit + ggf. Mehrkosten], [Entwicklungsteam],
+  [1% (2)], [25 AS (4)], [8], [Wahl eines zuverlässigen Anbieters], [AS + ggf. Mehrkosten], [Entwicklungsteam],
 
   // Zeile 3
   [
@@ -55,7 +55,7 @@
   ],
   [
     Nutzerfrust über das Essensangebot der Mensa
-  ], [20%], [3], [], [Überwachung von Kommentaren und Sperrung von Accounts; Implementierung einer Meldefunktion für unangemessene Inhalte], [Zeit], [Nutzer / Moderatoren],
+  ], [25% (5)], [10 AS (3)], [15], [Überwachung von Kommentaren und Sperrung von Accounts; Implementierung einer Meldefunktion für unangemessene Inhalte], [AS], [Nutzer / Moderatoren],
 
   // Zeile 4
   [
@@ -63,5 +63,8 @@
   ],
   [
     Rückgang der Besucherzahlen veranlasst die Mensaleitung zu Einwänden gegen die App
-  ], [5%], [2], [], [Frühzeitige Absprache mit der Mensa über Ziele und Funktionsweise der App], [Zeit], [DHBW Mensa],
+  ], [5% (3)], [8 AS (3)], [9], [Frühzeitige Absprache mit der Mensa über Ziele und Funktionsweise der App], [AS], [DHBW Mensa],
 )
+
+#v(0.4cm)
+#text(size: 8pt)[*Legende:* AS = Arbeitsstunden]

@@ -14,11 +14,11 @@
 #v(1cm)
 
 #let schadenshoehen = (
-  (5, [> 100.000 €]),
-  (4, [< 100.000 €]),
-  (3, [< 10.000 €]),
-  (2, [< 1.000 €]),
-  (1, [< 100 €]),
+  (5, [> 30 Stunden]),
+  (4, [< 30 Stunden ]),
+  (3, [< 15 Stunden ]),
+  (2, [< 5 Stunden]),
+  (1, [< 1 Stunde]),
 )
 
 #align(center)[
@@ -30,11 +30,11 @@
 
   // Header-Zeile
   [], [],
-  table.cell(fill: rgb("#eeeeee"))[*< 0,01 %*],
   table.cell(fill: rgb("#eeeeee"))[*< 0,1 %*],
   table.cell(fill: rgb("#eeeeee"))[*< 1 %*],
   table.cell(fill: rgb("#eeeeee"))[*< 10 %*],
-  table.cell(fill: rgb("#eeeeee"))[*> 10 %*],
+  table.cell(fill: rgb("#eeeeee"))[*< 20 %*],
+  table.cell(fill: rgb("#eeeeee"))[*> 20 %*],
 
   // Matrix-Zeilen
   ..schadenshoehen.map(((s, wert)) => (
