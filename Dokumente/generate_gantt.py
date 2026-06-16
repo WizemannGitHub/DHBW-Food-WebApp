@@ -1,12 +1,14 @@
 """Erstellt einen Gantt-Ablaufplan als Excel-Datei mit tagesgenauen Balken.
 
-Terminstruktur (konsistent mit ablaufplan.typ):
-  Start:         13.05.2026  (KW20, Mi)
-  M1 Anford.:    29.05.2026  (KW22, Fr)
-  M2 Design:     05.06.2026  (KW23, Fr)
-  M3 Impl.:      19.06.2026  (KW25, Fr)
-  M4 Abgabe:     29.06.2026  (KW27, Mo) ← hartes Deadline
-  M5 Präsent.:   08.07.2026  (KW28, Mi)
+Terminstruktur (konsistent mit ablaufplan.typ, KW 20–31):
+  Start:           12.05.2026  (KW20, Di)  ← M0
+  M1 Anforderungen 20.05.2026  (KW21, Mi)
+  M2 Prototyp:     02.06.2026  (KW23, Di)
+  M3 PM-Abgabe:    24.06.2026  (KW26, Mi)
+  M4 Präsentation: 08.07.2026  (KW28, Mi)
+  M5 Webanwendung: 15.07.2026  (KW29, Mi)
+  M6 Abnahme:      28.07.2026  (KW31, Di)
+  M7 Tech. Abgabe: 03.08.2026  (KW32, Mo) ← Projektende
 """
 
 from datetime import date, timedelta
@@ -17,7 +19,7 @@ from openpyxl.utils import get_column_letter
 # ── Projektdaten ─────────────────────────────────────────────────────────────
 PROJECT_TITLE  = "DHBW Food Web App"
 PROJECT_LEADER = "Erik Wizemann"
-PROJECT_CLIENT = "Mikka Jenne"
+PROJECT_CLIENT = "Mikka Jenne · Dr. Arno Mielke"
 
 # ── Farben (hex, kein #) ─────────────────────────────────────────────────────
 C_HEADER = "1A3A5C"
@@ -42,91 +44,91 @@ KW = {
     26: date(2026, 6, 22),
     27: date(2026, 6, 29),
     28: date(2026, 7,  6),
+    29: date(2026, 7, 13),
+    30: date(2026, 7, 20),
+    31: date(2026, 7, 27),
 }
 
 def kw_mon(n: int) -> date: return KW[n]
 def kw_fri(n: int) -> date: return KW[n] + timedelta(4)
 
-PROJECT_START  = date(2026, 5, 13)   # Mi KW20
-ABGABE         = date(2026, 6, 29)   # Mo KW27
-PRAESENTATION  = date(2026, 7,  8)   # Mi KW28
-PROJECT_END    = kw_fri(28)          # Fr 10.07
+PROJECT_START  = date(2026, 5, 12)   # Di KW20
+PROJECT_END    = date(2026, 8,  3)   # Mo KW32 — M7 Tech. Abgabe
+ABGABE_PM      = date(2026, 6, 24)   # Mi KW26 — M3
+PRAESENTATION  = date(2026, 7,  8)   # Mi KW28 — M4
+TECH_ABGABE    = date(2026, 8,  3)   # Mo KW32 — M7
 
 # ── Aufgaben-Termine (konsistent mit ablaufplan.typ KW-Spalten) ──────────────
 # 1 · Projektmanagement
 s11, e11 = PROJECT_START,  kw_fri(20)
-s12, e12 = PROJECT_START,  ABGABE
-s13, e13 = kw_mon(25),     kw_fri(27)
-s14, e14 = ABGABE,         PROJECT_END
+s12, e12 = PROJECT_START,  PROJECT_END
+s13, e13 = kw_mon(31),     PROJECT_END
 
 # 2 · Anforderungsanalyse
 s21, e21 = PROJECT_START,  kw_fri(21)
-s22, e22 = kw_mon(21),     kw_fri(22)
-s23, e23 = kw_mon(21),     kw_fri(22)
+s22, e22 = kw_mon(21),     kw_fri(21)
+s23, e23 = kw_mon(21),     kw_fri(21)
 
-# 3 · Implementierung
-s31, e31 = kw_mon(23),     kw_fri(25)
-s32, e32 = kw_mon(23),     kw_fri(25)
-s33, e33 = kw_mon(23),     kw_fri(24)
+# 3 · Design
+s31, e31 = kw_mon(21),     kw_fri(23)
+s32, e32 = kw_mon(21),     kw_fri(22)
 
-# 4 · Design
-s41, e41 = kw_mon(22),     kw_fri(23)
-s42, e42 = kw_mon(22),     kw_fri(23)
-s43, e43 = kw_mon(26),     kw_fri(27)
+# 4 · Implementierung
+s41, e41 = kw_mon(23),     kw_fri(26)
+s42, e42 = kw_mon(24),     kw_fri(27)
+s43, e43 = kw_mon(28),     kw_fri(28)
 
-# 5 · Test & Deployment
-s51, e51 = kw_mon(24),     kw_fri(25)
-s52, e52 = kw_mon(25),     kw_fri(26)
-s53, e53 = kw_mon(26),     kw_fri(26)
-s54, e54 = ABGABE,         ABGABE
+# 5 · Testing & Deployment
+s51, e51 = kw_mon(29),     kw_fri(30)
+s52, e52 = kw_mon(30),     PROJECT_END
+s53, e53 = kw_mon(30),     PROJECT_END
 
 # ── Meilensteine ─────────────────────────────────────────────────────────────
 MILESTONES = [
-    (PROJECT_START, "M0 Start"),
-    (kw_fri(22),    "M1 Anforderungen"),
-    (kw_fri(23),    "M2 Design"),
-    (kw_fri(25),    "M3 Implementierung"),
-    (ABGABE,        "M4 Abgabe"),
-    (PRAESENTATION, "M5 Präsentation"),
+    (date(2026, 5, 12), "M0 Start"),
+    (date(2026, 5, 24), "M1 Anforderungen"),
+    (date(2026, 6,  7), "M2 Prototyp"),
+    (date(2026, 6, 24), "M3 PM-Abgabe"),
+    (date(2026, 7,  8), "M4 Präsentation"),
+    (date(2026, 7, 15), "M5 Webanwendung"),
+    (date(2026, 7, 28), "M6 Abnahme"),
+    (date(2026, 8,  3), "M7 Tech. Abgabe"),
 ]
 
-# ── Aufgabenliste (Reihenfolge: 1 PM → 2 ANA → 3 IMP → 4 DES → 5 TEST) ─────
+# ── Aufgabenliste (Reihenfolge: 1 PM → 2 ANA → 3 DES → 4 IMP → 5 TEST) ─────
 # (id, name, start, end, farbe_hex, kritisch, ist_phasen_header)
 TASKS = [
     ("",    "1 · Projektmanagement",       None, None, C_PM,   False, True ),
     ("1.1", "Projektplanung",              s11,  e11,  C_PM,   False, False),
     ("1.2", "Projektsteuerung",            s12,  e12,  C_PM,   False, False),
-    ("1.3", "Technische Dokumentation",    s13,  e13,  C_PM,   False, False),
-    ("1.4", "Projektabschluss",            s14,  e14,  C_PM,   False, False),
+    ("1.3", "Projektabschluss",            s13,  e13,  C_PM,   True,  False),
 
     ("",    "2 · Anforderungsanalyse",     None, None, C_ANA,  False, True ),
     ("2.1", "Ist-Analyse",                 s21,  e21,  C_ANA,  True,  False),
     ("2.2", "Anforderungen erheben",       s22,  e22,  C_ANA,  True,  False),
     ("2.3", "Risikoanalyse",               s23,  e23,  C_ANA,  False, False),
 
-    ("",    "3 · Implementierung",         None, None, C_IMP,  False, True ),
-    ("3.1", "Frontend",                    s31,  e31,  C_IMP,  True,  False),
-    ("3.2", "Backend",                     s32,  e32,  C_IMP,  True,  False),
-    ("3.3", "Datenbank",                   s33,  e33,  C_IMP,  True,  False),
+    ("",    "3 · Design",                  None, None, C_DES,  False, True ),
+    ("3.1", "UI/UX Design",                s31,  e31,  C_DES,  False, False),
+    ("3.2", "Systemarchitektur",           s32,  e32,  C_DES,  True,  False),
 
-    ("",    "4 · Design",                  None, None, C_DES,  False, True ),
-    ("4.1", "UI/UX Design",                s41,  e41,  C_DES,  False, False),
-    ("4.2", "Systemarchitektur",           s42,  e42,  C_DES,  True,  False),
-    ("4.3", "Integration",                 s43,  e43,  C_DES,  False, False),
+    ("",    "4 · Implementierung",         None, None, C_IMP,  False, True ),
+    ("4.1", "Frontend",                    s41,  e41,  C_IMP,  True,  False),
+    ("4.2", "Backend",                     s42,  e42,  C_IMP,  True,  False),
+    ("4.3", "Datenbank",                   s43,  e43,  C_IMP,  True,  False),
 
-    ("",    "5 · Test & Deployment",       None, None, C_TEST, False, True ),
-    ("5.1", "Testplanung",                 s51,  e51,  C_TEST, False, False),
-    ("5.2", "Funktionstests",              s52,  e52,  C_TEST, True,  False),
-    ("5.3", "Abnahmetest",                 s53,  e53,  C_TEST, True,  False),
-    ("5.4", "Deployment & Go-Live",        s54,  e54,  C_TEST, True,  False),
+    ("",    "5 · Testing & Deployment",    None, None, C_TEST, False, True ),
+    ("5.1", "Testing & QA",                s51,  e51,  C_TEST, True,  False),
+    ("5.2", "Deployment",                  s52,  e52,  C_TEST, True,  False),
+    ("5.3", "Abgabe & Präsentation",       s53,  e53,  C_TEST, True,  False),
 ]
 
 PRED_MAP = {
-    "1.1": "–",         "1.2": "1.1", "1.3": "3.1/3.2", "1.4": "5.4",
-    "2.1": "1.1",       "2.2": "2.1", "2.3": "2.1",
-    "3.1": "4.1/4.2",   "3.2": "4.2", "3.3": "4.2",
-    "4.1": "2.2",       "4.2": "2.2", "4.3": "3.1/3.2",
-    "5.1": "3.1/3.2",   "5.2": "5.1", "5.3": "5.2",    "5.4": "5.3",
+    "1.1": "–",        "1.2": "1.1",      "1.3": "5.3",
+    "2.1": "1.1",      "2.2": "2.1",      "2.3": "2.1",
+    "3.1": "2.2",      "3.2": "2.1",
+    "4.1": "3.1/3.2",  "4.2": "3.2",      "4.3": "4.1/4.2",
+    "5.1": "4.3",      "5.2": "5.1",      "5.3": "5.1",
 }
 
 # ── Alle Tage inkl. Wochenende im Projektzeitraum ────────────────────────────
@@ -215,9 +217,9 @@ seg_size = (last_col - COL_ID + 1) // 3
 seg_starts = [COL_ID, COL_ID + seg_size, COL_ID + 2 * seg_size]
 seg_ends   = [seg_starts[1] - 1, seg_starts[2] - 1, last_col]
 seg_labels = [
-    (f" Projektleiter", PROJECT_LEADER),
-    (f" Auftraggeber",  PROJECT_CLIENT),
-    (f" Zeitraum",      f"{PROJECT_START:%d.%m.%Y} – {PROJECT_END:%d.%m.%Y}"),
+    (f" Projektleiter", PROJECT_LEADER),
+    (f" Auftraggeber",  PROJECT_CLIENT),
+    (f" Zeitraum",      f"{PROJECT_START:%d.%m.%Y} – {PROJECT_END:%d.%m.%Y}"),
 ]
 C_INFO = "254C82"  # etwas helleres Blau für Zeile 2
 for (label, value), c1, c2 in zip(seg_labels, seg_starts, seg_ends):
@@ -374,8 +376,8 @@ for i, day in enumerate(all_days):
 row += 2
 ws.merge_cells(start_row=row, end_row=row, start_column=COL_ID, end_column=last_col)
 c = ws.cell(row=row, column=COL_ID,
-    value="Kritischer Pfad: 2.1 Ist-Analyse → 2.2 Anforderungen → 4.2 Systemarchitektur "
-          "→ 3.1 Frontend / 3.2 Backend / 3.3 Datenbank → 5.2 Funktionstests → 5.3 Abnahmetest → 5.4 Deployment & Go-Live")
+    value="Kritischer Pfad: 2.1 Ist-Analyse → 2.2 Anforderungen → 3.2 Systemarchitektur "
+          "→ 4.1 Frontend → 4.3 Datenbank → 5.1 Testing & QA → 5.3 Abgabe & Präsentation → 1.3 Projektabschluss")
 c.font = Font(size=8, italic=True)
 c.alignment = align_left()
 
@@ -383,7 +385,8 @@ row += 1
 ws.merge_cells(start_row=row, end_row=row, start_column=COL_ID, end_column=last_col)
 c = ws.cell(row=row, column=COL_ID,
     value="Legende:  ■ Rot = kritischer Pfad   ■ Grün = nicht kritisch   "
-          "◆ Gold = Meilenstein   Abgabe: 29.06.2026   Präsentation: 08.07.2026")
+          f"◆ Gold = Meilenstein   PM-Abgabe: {ABGABE_PM:%d.%m.%Y}   "
+          f"Präsentation: {PRAESENTATION:%d.%m.%Y}   Tech. Abgabe: {TECH_ABGABE:%d.%m.%Y}")
 c.font = Font(size=8)
 c.alignment = align_left()
 
@@ -395,4 +398,4 @@ out = "/Users/I766778/ProjektWebPro/DHBW-Food-WebApp/Dokumente/ablaufplan.xlsx"
 wb.save(out)
 print(f"Gespeichert: {out}")
 print(f"Zeitraum: {PROJECT_START:%d.%m.%Y} – {PROJECT_END:%d.%m.%Y}  ({len(all_days)} Kalendertage)")
-print(f"Abgabe: {ABGABE:%d.%m.%Y}  |  Präsentation: {PRAESENTATION:%d.%m.%Y}")
+print(f"PM-Abgabe: {ABGABE_PM:%d.%m.%Y}  |  Präsentation: {PRAESENTATION:%d.%m.%Y}  |  Tech. Abgabe: {TECH_ABGABE:%d.%m.%Y}")

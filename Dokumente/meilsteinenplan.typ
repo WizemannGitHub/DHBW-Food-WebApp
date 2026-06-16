@@ -1,140 +1,242 @@
+#set document(title: "Phasen- und Meilensteinplan")
 #set page(paper: "a4", flipped: true, margin: (x: 1.5cm, y: 1.5cm))
 #set text(font: "Arial", size: 10pt)
 
-// ── Title ──────────────────────────────────────────────────────────────────
-#align(center)[
-  #text(size: 22pt, weight: "bold")[Phasen und Meilenstein Plan]
-  #v(0pt)
-]
-
-#v(1.2cm)
-
-// ── Data ───────────────────────────────────────────────────────────────────
-// Edit these arrays to fill in your plan.
-#let milestones = (
-  (label: "Start",  date: "13.05.2026"),
-  (label: "Anforderunganalyse",    date: "xx.xx.xxxx"),
-  (label: "Protoype",   date: "xx.xx.xxxx"),
-  (label: "Implementierung",    date: "xx.xx.xxxx"),
-  (label: "Testen",    date: "xx.xx.xxxx"),
-  (label: "Ende",   date: "xx.xx.xxxx"),
-)
-
-#let phases = (
-  (name: "...", personal: "...", budget: "... €"),
-  (name: "...", personal: "...", budget: "..."),
-  (name: "...", personal: "...", budget: "..."),
-  (name: "...", personal: "...", budget: "..."),
-  (name: "...", personal: "...", budget: "..."),
-)
-
-// ── Layout constants ────────────────────────────────────────────────────────
-#let diamond-size  = 14pt
-#let arrow-h       = 28pt
-#let arrow-w       = 3.8cm   // width of each phase arrow
-#let arrow-gap     = 0pt
+// ── Farben ──────────────────────────────────────────────────────────────────
+#let c-header      = rgb("#1a3a5c")
+#let c-header-fill = rgb("#d9e1f2")
+#let c-row-odd     = rgb("#f2f2f2")
 #let arrow-color   = rgb("#2e74b5")
 #let diamond-color = rgb("#c00000")
 
-// ── Helpers ─────────────────────────────────────────────────────────────────
-#let diamond(size: 14pt, fill: diamond-color) = {
-  box(width: size, height: size,
-    rotate(45deg,
-      rect(width: size * 0.72, height: size * 0.72, fill: fill, stroke: none)
-    )
-  )
-}
+// ── Projektdaten ─────────────────────────────────────────────────────────────
+#let project = (
+  name:   "DHBW Food Web App",
+  nr:     "01101110",
+  leader: "Erik Wizemann",
+  client: "Mikka Jenne, Dr. Arno Mielke",
+  kurs:   "TINF25B2",
+  start:  "12.05.2026",
+  end:    "03.08.2026",
+)
 
-// chevron arrow (last one has a flat right edge)
-#let arrow-shape(label: "", last: false) = {
+// ── Meilensteine ─────────────────────────────────────────────────────────────
+#let milestones = (
+  (nr: "M0", label: "Start",                     date: "12.05.2026", done: "12.05.2026", who: "Alle",                     desc: "Kickoff-Meeting, Repository initialisiert, Rollen verteilt, Aufgabenteilung festgelegt"),
+  (nr: "M1", label: "Anforderungs-\nanalyse",    date: "24.05.2026", done: "24.05.2026", who: "Alle",                     desc: "Ist-Analyse abgeschlossen, Anforderungen erhoben, Risikoanalyse erstellt, Technologiestack entschieden"),
+  (nr: "M2", label: "Erster Prototyp",           date: "07.06.2026", done: "07.06.2026", who: "Wizemann, van Nuis",       desc: "UI/UX-Design und Systemarchitektur fertiggestellt, vollständig lauffähiger Prototyp integriert"),
+  (nr: "M3", label: "Abgabe\nProjektmanagement", date: "24.06.2026", done: "–",          who: "Wizemann (PL)",            desc: "Alle PM-Pflichtdokumente (Projektauftrag, PSP, Ablaufplan, Risikoanalyse, Meilensteinplan) fristgerecht abgegeben"),
+  (nr: "M4", label: "Zwischen-\npräsentation",   date: "08.07.2026", done: "–",          who: "Alle",                     desc: "Präsentation des Projektzwischenstands vor Auftraggeber und Betreuer"),
+  (nr: "M5", label: "Lauffähige\nWebanwendung",  date: "15.07.2026", done: "–",          who: "van Nuis, Kugler, Zanfir", desc: "Frontend, Backend, Datenbank und Container vollständig implementiert und getestet"),
+  (nr: "M6", label: "Abnahme\nMensaapp",         date: "28.07.2026", done: "–",          who: "Alle",                     desc: "Funktionale und technische Abnahme der Webanwendung abgeschlossen"),
+  (nr: "M7", label: "Tech.\nAbgabe",             date: "03.08.2026", done: "–",          who: "Alle",                     desc: "Technische Dokumentation und finale Webanwendung abgegeben. Offizieller Projektabschluss"),
+)
+
+// ── Phasen mit zugehörigem Endmeilenstein ────────────────────────────────────
+// Jede Phase endet mit dem Meilenstein am rechten Rand des Pfeils.
+// Layout: [M(i)] --Phase-Pfeil--> [M(i+1)]
+// phases(i) liegt zwischen milestones(i) und milestones(i+1)
+#let phases = (
+  (name: "Anforderungsanalyse",        w: 1, personal: "1,5 FTE",  budget: "entfällt"),
+  (name: "Designkonzept",              w: 1, personal: "0,6 FTE",  budget: "entfällt"),
+  (name: "Implementierung",            w: 3, personal: "1,5 FTE",  budget: "entfällt"),
+  (name: "Testing &\nFehlerbehebung",  w: 1, personal: "0,6 FTE",  budget: "entfällt"),
+  (name: "Projektabschluss\n+ Review", w: 1, personal: "1,5 FTE",  budget: "entfällt"),
+)
+
+// ── Zweite Phasenreihe (frei verschiebbar) ───────────────────────────────────
+// offset = Startposition in arrow-w-Einheiten (0.0 = ganz links, 1.5 = zwischen M1 und M2)
+// span   = Breite des Pfeils in arrow-w-Einheiten (1.0 = eine Phase, 1.5 = anderthalb, usw.)
+// Beispiel: (name: "PM-Abgabe", offset: 2.5, span: 1.5, personal: "Alle", budget: "entfällt")
+#let phases2 = (
+  (name: "Vorbereitung\nPräsentation", offset: 3, span: 1),
+)
+
+// ── Layout-Konstanten ────────────────────────────────────────────────────────
+#let sc           = 1.15
+#let diamond-size = 14pt  * sc
+#let arrow-h      = 28pt  * sc
+#let arrow-w      = 3.3cm * sc
+#let ms-col-w     = 1.8cm * sc
+
+// 8 Spalten: je eine pro Meilenstein; Pfeile füllen den Raum zwischen den Spalten-Grenzen
+#let timeline-cols = (arrow-w, arrow-w, arrow-w, arrow-w, arrow-w, arrow-w, arrow-w, arrow-w)
+
+// ── Hilfsfunktionen ──────────────────────────────────────────────────────────
+#let diamond(size: 14pt, fill: diamond-color) = box(
+  width: size, height: size,
+  rotate(45deg,
+    rect(width: size * 0.72, height: size * 0.72, fill: fill, stroke: none)
+  )
+)
+
+#let arrow-shape(label: "", last: false, w: arrow-w) = {
   let tip = if last { 0pt } else { 10pt }
   box(
-    width: arrow-w + tip,
+    width: w + tip,
     height: arrow-h,
     clip: false,
     {
-      // background polygon via path
       place(top + left,
         polygon(
-          fill: arrow-color,
-          stroke: none,
+          fill: arrow-color, stroke: none,
           (0pt,       0pt),
-          (arrow-w,   0pt),
-          (arrow-w + tip, arrow-h / 2),
-          (arrow-w,   arrow-h),
+          (w,         0pt),
+          (w + tip,   arrow-h / 2),
+          (w,         arrow-h),
           (0pt,       arrow-h),
           (tip,       arrow-h / 2),
         )
       )
-      // centred label
       place(
-        horizon + center,
-        dx: tip / 2,
-        text(fill: white, weight: "bold", size: 9pt)[#label]
+        horizon + center, dx: tip / 2,
+        text(fill: white, weight: "bold", size: 8.5pt * sc)[#label]
       )
     }
   )
 }
 
-// ── Timeline row ────────────────────────────────────────────────────────────
-// We use a fixed-width grid: 6 milestone columns + 5 phase columns.
-// Widths: milestone cols narrow, phase cols = arrow-w + overlap.
+// ── Seite 1: Phasen- und Meilensteinplan ─────────────────────────────────────
 
-#align(center, box(width: 22cm)[
+// ── Titel ─────────────────────────────────────────────────────────────────────
+#align(center)[
+  #text(size: 20pt, weight: "bold")[Phasen- und Meilensteinplan]
+  #v(0.1cm)
+  #text(size: 13pt)[#project.name]
+  #v(0.3cm)
+  #line(length: 100%)
+]
 
-// Top labels (milestone names)
-#grid(
-  columns: (1.5cm, arrow-w, arrow-w, arrow-w, arrow-w, arrow-w, 1.5cm),
-  column-gutter: 0pt,
-  align: (center,) * 7,
-  ..milestones.map(m => text(size: 9pt)[#m.label])
-)
+#v(0.4cm)
 
-#v(2pt)
+// ── Timeline ─────────────────────────────────────────────────────────────────
+#let timeline-w = arrow-w * 8
 
-// Diamond row
-#grid(
-  columns: (1.5cm, arrow-w, arrow-w, arrow-w, arrow-w, arrow-w, 1.5cm),
-  column-gutter: 0pt,
-  align: (center,) * 7,
-  ..milestones.map(m => diamond())
-)
+#align(center, box(width: timeline-w)[
 
-#v(1pt)
-
-// Date row
-#grid(
-  columns: (1.5cm, arrow-w, arrow-w, arrow-w, arrow-w, arrow-w, 1.5cm),
-  column-gutter: 0pt,
-  align: (center,) * 7,
-  ..milestones.map(m => text(size: 8pt)[#m.date])
-)
-
-#v(4pt)
-
-// Phase arrows (offset by half a milestone-column so arrows sit between diamonds)
-#pad(left: 0.75cm,
-  grid(
-    columns: phases.map(_ => arrow-w),
-    column-gutter: 2pt,
-    align: horizon,
-    ..phases.enumerate().map(((i, p)) => arrow-shape(label: p.name, last: i == phases.len() - 1))
+  // Meilenstein-Nummer (rot, fett)
+  #grid(
+    columns: timeline-cols, column-gutter: 0pt, align: (center,) * 8,
+    ..milestones.map(m => text(weight: "bold", size: 8pt * sc, fill: diamond-color)[#m.nr])
   )
-)
+  #v(1pt)
 
-#v(0.8cm)
+  // Meilenstein-Label
+  #grid(
+    columns: timeline-cols, column-gutter: 0pt, align: (center,) * 8,
+    ..milestones.map(m => text(size: 8pt * sc)[#m.label])
+  )
+  #v(3pt)
 
-// ── Personal / Budget rows ───────────────────────────────────────────────────
-#let label-col = 1.8cm
-#let data-col  = arrow-w
+  // Diamanten
+  #grid(
+    columns: timeline-cols, column-gutter: 0pt, align: (center,) * 8,
+    ..milestones.map(_ => diamond())
+  )
+  #v(2pt)
 
-#grid(
-  columns: (label-col, data-col, data-col, data-col, data-col, data-col),
-  column-gutter: 2pt,
-  row-gutter: 4pt,
-  align: (left, center, center, center, center, center),
-  underline[*Personal:*], ..phases.map(p => text[#p.personal]),
-  underline[*Budget:*],   ..phases.map(p => text[#p.budget]),
-)
+  // Datum
+  #grid(
+    columns: timeline-cols, column-gutter: 0pt, align: (center,) * 8,
+    ..milestones.map(m => text(size: 7.5pt * sc, fill: rgb("#444444"))[#m.date])
+  )
+
+  #v(5pt)
+
+  // Phasen-Pfeile Reihe 1 (zwischen den Diamanten, leicht nach rechts versetzt)
+  #pad(left: ms-col-w / 2,
+    grid(
+      columns: phases.map(p => arrow-w * p.w),
+      column-gutter: 2pt,
+      align: horizon,
+      ..phases.map(p =>
+        arrow-shape(label: p.name, last: false, w: arrow-w * p.w)
+      )
+    )
+  )
+
+  // Phasen-Pfeile Reihe 2 (frei verschiebbar per offset/span)
+  #if phases2.len() > 0 [
+    #v(-0.3cm)
+    #pad(left: ms-col-w / 2,
+      box(width: arrow-w * 7, height: arrow-h, {
+        for p in phases2 {
+          let w = arrow-w * p.span
+          place(top + left,
+            dx: arrow-w * p.offset,
+            box(width: w, height: arrow-h, clip: false, {
+              place(top + left,
+                polygon(
+                  fill: arrow-color, stroke: none,
+                  (0pt,       0pt),
+                  (w - 10pt,  0pt),
+                  (w,         arrow-h / 2),
+                  (w - 10pt,  arrow-h),
+                  (0pt,       arrow-h),
+                  (10pt,      arrow-h / 2),
+                )
+              )
+              place(horizon + center,
+                text(fill: white, weight: "bold", size: 8.5pt)[#p.name]
+              )
+            })
+          )
+        }
+      })
+    )
+  ]
+
+  #v(0.5cm)
+
+  // Personal / Budget
+  #grid(
+    columns: (2.1cm * sc, ..phases.map(p => arrow-w * p.w)),
+    column-gutter: 2pt,
+    row-gutter: 5pt,
+    align: (left, ..phases.map(_ => center)),
+    text(weight: "bold", size: 9pt * sc)[Personal:],
+    ..phases.map(p => text(size: 8.5pt * sc)[#p.personal]),
+    text(weight: "bold", size: 9pt * sc)[Budget:],
+    ..phases.map(p => text(size: 8.5pt * sc)[#p.budget]),
+  )
 
 ])
+
+#v(1fr)
+
+// ── Seite 2: Meilenstein-Details ─────────────────────────────────────────────
+#pagebreak()
+
+// ── Titel Seite 2 ─────────────────────────────────────────────────────────────
+#align(center)[
+  #text(size: 20pt, weight: "bold")[Meilenstein-Details]
+  #v(0.1cm)
+  #text(size: 13pt)[#project.name]
+  #v(0.3cm)
+  #line(length: 100%)
+]
+
+#v(0.4cm)
+
+// ── Meilenstein-Detailtabelle ─────────────────────────────────────────────────
+#table(
+  columns: (0.9cm, 3.2cm, 1fr),
+  stroke: 0.5pt,
+  inset: (x: 5pt, y: 4pt),
+  fill: (col, row) =>
+    if row == 0 { c-header }
+    else if calc.odd(row) { c-row-odd }
+    else { white },
+
+  table.cell(text(fill: white, weight: "bold")[Nr.]),
+  table.cell(text(fill: white, weight: "bold")[Meilenstein]),
+  table.cell(text(fill: white, weight: "bold")[Beschreibung]),
+
+  ..milestones.map(m => (
+    [#text(weight: "bold", fill: diamond-color)[#m.nr]],
+    [#m.label],
+    [#text(size: 9pt)[#m.desc]],
+  )).flatten()
+)
+
+#v(1fr)
