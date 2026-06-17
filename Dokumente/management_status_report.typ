@@ -9,17 +9,26 @@
 
 #let ampel(farbe) = circle(radius: 6pt, fill: farbe, stroke: none)
 
-// Ampel-Symbol (rot/gelb/gruen gestapelt, aktive Farbe ausgefüllt)
+// Ampel-Symbol (rot/gelb/gruen gestapelt, aktives Licht mit schwarzem X)
+#let ampel-licht(farbe, aktiv) = {
+  box(width: 12pt, height: 12pt)[
+    #circle(radius: 6pt, fill: farbe, stroke: none)
+    #if aktiv [
+      #place(
+        center + horizon,
+        text(size: 18pt, fill: black, weight: "black")[✕],
+      )
+    ]
+  ]
+}
+
 #let ampel-gesamt(status) = {
-  let r = if status == "rot" { rot } else { rgb("#eeaaaa") }
-  let g = if status == "gelb" { gelb } else { rgb("#eee8aa") }
-  let b = if status == "gruen" { gruen } else { rgb("#aaddaa") }
   stack(
     dir: ttb,
     spacing: 2pt,
-    circle(radius: 6pt, fill: r, stroke: none),
-    circle(radius: 6pt, fill: g, stroke: none),
-    circle(radius: 6pt, fill: b, stroke: none),
+    ampel-licht(rot, status == "rot"),
+    ampel-licht(gelb, status == "gelb"),
+    ampel-licht(gruen, status == "gruen"),
   )
 }
 
@@ -50,9 +59,9 @@
       #v(0.1cm)
       #list(
         marker: sym.checkmark,
-        [Projektplanung und Dokumentation (Auftrag, PSP, Ablaufplan, Risikoanalyse) abgeschlossen],
-        [Kernfunktionen der Web-App (Bewertung, Ranking, Backend, Datenbank) implementiert und im (noch) lokalen Betrieb],
-        [Technische Dokumentation weitesgehend fertiggestellt — Abgabe 29.06.2026 in Reichweite],
+        [Projektplanung und Dokumentation (Auftrag, PSP, Ablaufplan, Risikoanalyse) weitesgehend fertig - Abgabe 29.06.2026 in Reichweite],
+        [...],
+        [(Kernfunktionen der Web-App (Bewertung, Ranking, Backend, Datenbank) implementiert und im lokalen Betrieb)],
       )
     ]
   ],
@@ -106,7 +115,7 @@
   rect(stroke: 0.5pt, inset: 0pt, width: 100%)[
     #rect(fill: none, stroke: none, inset: 4pt)[*Risiken und Hindernisse*]
     #table(
-      columns: (1fr, 1fr, auto, auto, auto),
+      columns: (1fr, 1fr, 1fr, auto, auto),
       stroke: 0.5pt,
       fill: (col, row) => if row == 0 { rgb("#cc0000") } else if calc.odd(row) { rgb("#ffeeee") } else { white },
       inset: 5pt,
@@ -117,19 +126,17 @@
       text(fill: white, weight: "bold")[Bis wann],
       [],
 
-      [#text(fill: rgb("#f00"))[Risiko: Deployment der Web-App läuft nicht wie geplant]],
-      [#text(fill: rgb("#0070c0"))[Gründliche Überprüfung des Code und entsprechend zeitlich einplanen]],
-      [#text(fill: rgb("#0070c0"))[Erik Wizemann]],
-      [#text(fill: rgb("#0070c0"))[03.08.2026]],
-      dot(gelb),
-
-      [#text(
-        fill: rgb("#f00"),
-      )[Konflikt: Abgabefrist der PM-Dokumente bis zum 29.06.2026, Abgabefrist des Webengineering Projektes erst bis 03.08.2026]],
-      [#text(fill: rgb("#0070c0"))[Versuch das Webengineering Projekt ebenfalls bis zum 29.06. fertigzustellen]],
-      [#text(fill: rgb("#0070c0"))[Alle]],
+      [#text(fill: rgb("#f00"))[Problem: Essenseinträge sind in der API schelcht Kategorisiert]],
+      [#text(fill: rgb("#0070c0"))[Keine wirkliche Gegenmaßnahme, Darstellung der Essen wie in der API gegeben]],
+      [#text(fill: rgb("#0070c0"))[Robin van Nuis]],
       [#text(fill: rgb("#0070c0"))[29.06.2026]],
       dot(gelb),
+
+      [#text(fill: rgb("#f00"))[Risiko: Testing der Web-App deckt Probleme im Backend/Frontend auf]],
+      [#text(fill: rgb("#0070c0"))[Gründliche Überprüfung des Code und entsprechend genügend Zeit einplanen]],
+      [#text(fill: rgb("#0070c0"))[Erik Wizemann, Cristian Zanfir]],
+      [#text(fill: rgb("#0070c0"))[03.08.2026]],
+      dot(gruen),
     )
   ],
 )
@@ -137,7 +144,7 @@
 #v(0.3cm)
 
 // ─── DETAILS ─────────────────────────────────────────────────────────────────
-#rect(stroke: 0.5pt, inset: 0pt, width: 100%)[
+#rect(stroke: 1pt, inset: 0pt, width: 100%)[
   #rect(fill: none, stroke: none, inset: 4pt)[*Details*]
   #table(
     columns: (1fr, 1fr, 1fr),
