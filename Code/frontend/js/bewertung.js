@@ -226,6 +226,26 @@
       alert('Bitte mindestens den Gesamteindruck bewerten.');
       return;
     }
+
+    // Nutzungshinweis einmalig anzeigen
+    if (!localStorage.getItem('dhbw_food_tos_accepted')) {
+      const tosModal = document.getElementById('tos-modal');
+      tosModal.classList.remove('hidden');
+      tosModal.style.zIndex = '300';
+
+      document.getElementById('tos-accept').addEventListener('click', function () {
+        localStorage.setItem('dhbw_food_tos_accepted', '1');
+        tosModal.classList.add('hidden');
+        tosModal.style.zIndex = '';
+        doSubmit();
+      }, { once: true });
+      return;
+    }
+
+    doSubmit();
+  }
+
+  async function doSubmit() {
     submitBtn.disabled = true;
     submitBtn.textContent = 'Wird gesendet…';
     try {

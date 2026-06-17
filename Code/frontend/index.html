@@ -61,6 +61,28 @@
       <!-- Gerichtekarten -->
       <div id="dishes-container" class="dishes-grid hidden"></div>
 
+      <!-- Nutzungshinweis-Modal -->
+      <div id="tos-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="tos-title">
+        <div class="modal__backdrop"></div>
+        <div class="modal__box welcome-modal__box">
+          <div class="welcome-modal__icon">📋</div>
+          <h2 class="modal__title" id="tos-title">Hinweis zur Nutzung</h2>
+          <p class="welcome-modal__intro">
+            Bitte achte bei deiner Bewertung auf einen respektvollen Umgangston:
+          </p>
+          <ul class="welcome-modal__rules">
+            <li>Keine beleidigenden oder diskriminierenden Kommentare.</li>
+            <li>Kritisiere das Essen – nicht Personen.</li>
+            <li>Kein Spam oder absichtlich falsche Bewertungen.</li>
+            <li>Sachlich und konstruktiv bleiben.</li>
+          </ul>
+          <p class="welcome-modal__note">
+            Verstöße können zur Löschung von Inhalten führen.
+          </p>
+          <button class="btn btn--primary btn--full" id="tos-accept">Verstanden – Bewertung abschicken</button>
+        </div>
+      </div>
+
       <!-- Bewertungs-Modal -->
       <div id="rating-modal" class="modal hidden" role="dialog" aria-modal="true">
         <div class="modal__backdrop"></div>
