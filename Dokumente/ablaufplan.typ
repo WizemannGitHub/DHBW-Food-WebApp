@@ -106,13 +106,13 @@
 
   // ─── 4 · Implementierung ───────────────────────────────────────────────────
   ph-header("4 · Implementierung", c-imp),
-  [4.1], [Frontend],  [08.06.–26.06.], [3.1, 3.2], ..task-cells(5, 7, crit: true),
-  [4.2], [Backend],   [29.06.–03.07.], [4.1],      ..task-cells(8, 8, crit: true),
-  [4.3], [Datenbank], [06.07.–10.07.], [4.1, 4.2], ..task-cells(9, 9, crit: true),
+  [4.1], [Datenbank], [08.06.–14.06.], [3.2], ..task-cells(5, 5, crit: true),
+  [4.2], [Frontend],  [15.06.–12.07.], [4.1], ..task-cells(6, 9, crit: true),
+  [4.3], [Backend],   [24.06.–12.07.], [4.1],  ..task-cells(6, 9, crit: true),
 
   // ─── 5 · Testing & Deployment ──────────────────────────────────────────────
   ph-header("5 · Testing & Deployment", c-test),
-  [5.1], [Testing & QA],          [13.07.–24.07.], [4.3],      ..task-cells(10, 11, crit: true),
+  [5.1], [Testing & QA],          [13.07.–24.07.], [4.2+4.3],      ..task-cells(10, 11, crit: true),
   [5.2], [Deployment],            [20.07.–31.07.], [5.1],      ..task-cells(11, 12, crit: true),
   [5.3], [Abgabe & Präsentation], [20.07.–03.08.], [5.1],      ..task-cells(11, 12, crit: true),
 
@@ -126,7 +126,7 @@
     text(fill: c-ms, weight: "bold", size: 7pt)[◆ M1 \ Anford.]),
   [],
   table.cell(fill: rgb("#ffeaea"),
-    text(fill: c-ms, weight: "bold", size: 7pt)[◆ M2 \ Prototyp]),
+    text(fill: c-ms, weight: "bold", size: 7pt)[◆ M2 \ Design]),
   [], [],
   table.cell(fill: rgb("#ffeaea"),
     text(fill: c-ms, weight: "bold", size: 7pt)[◆ M3 \ PM-Abg.]),
@@ -134,7 +134,7 @@
   table.cell(fill: rgb("#ffeaea"),
     text(fill: c-ms, weight: "bold", size: 7pt)[◆ M4 \ Präsent.]),
   table.cell(fill: rgb("#ffeaea"),
-    text(fill: c-ms, weight: "bold", size: 7pt)[◆ M5 \ Webanw.]),
+    text(fill: c-ms, weight: "bold", size: 7pt)[◆ M5 \ Fkt.-fertig]),
   [],
   table.cell(fill: rgb("#ffeaea"),
     text(fill: c-ms, weight: "bold", size: 7pt)[◆ M6/M7 \ Abnahme / \ Abgabe]),
@@ -147,6 +147,5 @@
 // ─── Kritischer Pfad ─────────────────────────────────────────────────────────
 #text(size: 7pt)[
   *Kritischer Pfad:*
-  2.1 Ist-Analyse → 2.2 Anforderungen → 3.2 Systemarchitektur
-  → 4.1 Frontend → 4.2 Backend → 4.3 Datenbank → 5.1 Testing & QA → 5.3 Abgabe & Präsentation → 1.3 Projektabschluss
+  2.1 Ist-Analyse → 2.2 Anforderungen → 3.2 Systemarchitektur → 4.1 Datenbank  → 4.2 Frontend + 4.3 Backend → 5.1 Testing & QA → 5.3 Abgabe & Präsentation → 1.3 Projektabschluss
 ]

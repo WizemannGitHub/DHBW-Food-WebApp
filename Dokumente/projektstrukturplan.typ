@@ -49,9 +49,9 @@
     name: "Implementierung",
     color: rgb("#7030a0"),
     packages: (
-      (id: "4.1", name: "Frontend"),
-      (id: "4.2", name: "Backend"),
-      (id: "4.3", name: "Datenbank"),
+      (id: "4.1", name: "Datenbank"),
+      (id: "4.2", name: "Frontend"),
+      (id: "4.3", name: "Backend"),
     ),
   ),
   (

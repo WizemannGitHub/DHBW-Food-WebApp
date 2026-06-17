@@ -108,16 +108,19 @@
 #v(0.3cm)
 
 #table(
-  columns: (10%, 50%, 20%, 20%),
+  columns: (10%, 60%, 30%),
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
-  [*Nr.*], [*Meilenstein*], [*Geplant*], [*Erreicht*],
-  [M1], [Projektmanagement], [29.06.2026], [28.06.2026],
-  [M2], [Anforderungsanalyse], [28.05.2026], [29.05.2026],
-  [M3], [Design], [01.06.2026], [01.06.2026],
-  [M4], [Implementierung], [03.08.2026], [],
-  [M5], [Testing & Deployment], [03.08.2026], [],
+  [*Nr.*], [*Meilenstein*], [*Geplant*],
+  [M0], [Start], [12.05.2026],
+  [M1], [Anforderungsanalyse], [24.05.2026],
+  [M2], [Fertiges Designkonzept], [07.06.2026],
+  [M3], [Abgabe Projektmanagement], [24.06.2026],
+  [M4], [Zwischenpräsentation], [08.07.2026],
+  [M5], [Funktionsfertige Webanwendung], [15.07.2026],
+  [M6], [Abnahme Mensaapp], [28.07.2026],
+  [M7], [Technische Abgabe], [03.08.2026],
 )
 
 #pagebreak()

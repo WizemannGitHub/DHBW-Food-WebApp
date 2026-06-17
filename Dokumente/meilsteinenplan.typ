@@ -24,10 +24,10 @@
 #let milestones = (
   (nr: "M0", label: "Start",                     date: "12.05.2026", done: "12.05.2026", who: "Alle",                     desc: "Kickoff-Meeting, Repository initialisiert, Rollen verteilt, Aufgabenteilung festgelegt"),
   (nr: "M1", label: "Anforderungs-\nanalyse",    date: "24.05.2026", done: "24.05.2026", who: "Alle",                     desc: "Ist-Analyse abgeschlossen, Anforderungen erhoben, Risikoanalyse erstellt, Technologiestack entschieden"),
-  (nr: "M2", label: "Erster Prototyp",           date: "07.06.2026", done: "07.06.2026", who: "Wizemann, van Nuis",       desc: "UI/UX-Design und Systemarchitektur fertiggestellt, vollständig lauffähiger Prototyp integriert"),
+  (nr: "M2", label: "Fertiges\nDesignkonzept",    date: "07.06.2026", done: "07.06.2026", who: "Wizemann, van Nuis",       desc: "UI/UX-Design und Systemarchitektur fertiggestellt, fertiges Designkonzept abgenommen"),
   (nr: "M3", label: "Abgabe\nProjektmanagement", date: "24.06.2026", done: "–",          who: "Wizemann (PL)",            desc: "Alle PM-Pflichtdokumente (Projektauftrag, PSP, Ablaufplan, Risikoanalyse, Meilensteinplan) fristgerecht abgegeben"),
   (nr: "M4", label: "Zwischen-\npräsentation",   date: "08.07.2026", done: "–",          who: "Alle",                     desc: "Präsentation des Projektzwischenstands vor Auftraggeber und Betreuer"),
-  (nr: "M5", label: "Lauffähige\nWebanwendung",  date: "15.07.2026", done: "–",          who: "van Nuis, Kugler, Zanfir", desc: "Frontend, Backend, Datenbank und Container vollständig implementiert und getestet"),
+  (nr: "M5", label: "Funktions-\nfertige Webanw.", date: "15.07.2026", done: "–",          who: "van Nuis, Kugler, Zanfir", desc: "Frontend, Backend, Datenbank und Container vollständig implementiert und getestet"),
   (nr: "M6", label: "Abnahme\nMensaapp",         date: "28.07.2026", done: "–",          who: "Alle",                     desc: "Funktionale und technische Abnahme der Webanwendung abgeschlossen"),
   (nr: "M7", label: "Tech.\nAbgabe",             date: "03.08.2026", done: "–",          who: "Alle",                     desc: "Technische Dokumentation und finale Webanwendung abgegeben. Offizieller Projektabschluss"),
 )
@@ -37,11 +37,11 @@
 // Layout: [M(i)] --Phase-Pfeil--> [M(i+1)]
 // phases(i) liegt zwischen milestones(i) und milestones(i+1)
 #let phases = (
-  (name: "Anforderungsanalyse",        w: 1, personal: "1,5 FTE",  budget: "entfällt"),
-  (name: "Designkonzept",              w: 1, personal: "0,6 FTE",  budget: "entfällt"),
-  (name: "Implementierung",            w: 3, personal: "1,5 FTE",  budget: "entfällt"),
-  (name: "Testing &\nFehlerbehebung",  w: 1, personal: "0,6 FTE",  budget: "entfällt"),
-  (name: "Projektabschluss\n+ Review", w: 1, personal: "1,5 FTE",  budget: "entfällt"),
+  (name: "Anforderungsanalyse",        w: 1, personal: "1,0 FTE"),
+  (name: "Designkonzept",              w: 1, personal: "0,6 FTE"),
+  (name: "Implementierung",            w: 3, personal: "2,0 FTE + 0,4 FTE"),
+  (name: "Testing &\nFehlerbehebung",  w: 1, personal: "0,6 FTE"),
+  (name: "Projektabschluss\n+ Review", w: 1, personal: "1,0 FTE"),
 )
 
 // ── Zweite Phasenreihe (frei verschiebbar) ───────────────────────────────────
@@ -197,7 +197,9 @@
     text(weight: "bold", size: 9pt * sc)[Personal:],
     ..phases.map(p => text(size: 8.5pt * sc)[#p.personal]),
     text(weight: "bold", size: 9pt * sc)[Budget:],
-    ..phases.map(p => text(size: 8.5pt * sc)[#p.budget]),
+    grid.cell(colspan: 5,
+      text(size: 8.5pt * sc)[Kein Sachbudget erforderlich – Studienleistung ohne verfügbares Budget.]
+    ),
   )
 
 ])
