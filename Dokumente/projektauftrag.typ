@@ -21,17 +21,17 @@
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
-  [*Feld*],             [*Inhalt*],
-  [Projektname],        [DHBW Food Web App],
-  [Projektnummer],      [01101110],
-  [Auftraggeber],       [Mikka Jenne],
-  [Projektleiter],      [Erik Wizemann],
-  [Projektteam],        [Robin van Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
-  [Abteilung / Kurs],   [TINF25B2],
-  [Startdatum],         [],
+  [*Feld*], [*Inhalt*],
+  [Projektname], [DHBW Food Web App],
+  [Projektnummer], [01101110],
+  [Auftraggeber], [Mikka Jenne],
+  [Projektleiter], [Erik Wizemann],
+  [Projektteam], [Robin van Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
+  [Abteilung / Kurs], [TINF25B2],
+  [Startdatum], [],
   [Enddatum (geplant)], [08.07.26],
-  [Version],            [1.0],
-  [Stand],              [#datetime.today().display("[day].[month].[year]")],
+  [Version], [1.0],
+  [Stand], [#datetime.today().display("[day].[month].[year]")],
 )
 
 #v(0.8cm)
@@ -44,8 +44,8 @@
   columns: (100%,),
   stroke: 0.5pt,
   [An der DHBW gibt es derzeit keine Möglichkeit, einen Überblick über die Meinungen der Studenten zum angebotenen Essen zu erhalten. Ein solcher Überblick würde die Essenswahl für Studenten erleichtern. Außerdem könnte dadurch verhindert werden, dass Studenten Geld für Essen ausgeben, das ihnen nicht schmeckt, was das allgemeine Wohlbefinden verbessert.
-  
-  Zudem bietet es der Kantine die Möglichkeit auf Vorschläge und Feedback der Studierenden einzugehen und es umzusetzen.],
+
+    Zudem bietet es der Kantine die Möglichkeit auf Vorschläge und Feedback der Studierenden einzugehen und es umzusetzen.],
 )
 
 #v(0.8cm)
@@ -60,14 +60,13 @@
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
-  [*Nr.*], [*Ziel*],                                             [*Priorität*],
-  [1],     [Entwicklung einer webbasierten App zur Bewertung von Speisen an der DHBW],         [Hoch],
-  [2],     [Erweiterung der App um die Funktion "Feedback geben"],                          [Hoch],
-  [3],     [Erweiterung der App um die Funktion "Essen vorschlagen"],                          [Mittel],
-  [4],     [Erweiterung der App um die Funktion "Erfassung von Nährwerten"],                   [Gering],
+  [*Nr.*], [*Ziel*], [*Priorität*],
+  [1], [Entwicklung einer webbasierten App zur Bewertung von Speisen an der DHBW], [Hoch],
+  [2], [Erweiterung der App um die Funktion "Feedback geben"], [Hoch],
+  [3], [Erweiterung der App um die Funktion "Essen vorschlagen"], [Mittel],
+  [4], [Erweiterung der App um die Funktion "Erfassung von Nährwerten"], [Gering],
 )
-
-#pagebreak()
+#v(0.8cm)
 
 // ─── Projektumfang (In-Scope / Out-of-Scope) ─────────────────────────────────
 #text(weight: "bold", size: 12pt)[4. Projektumfang]
@@ -113,15 +112,15 @@
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
-  [*Nr.*], [*Meilenstein*],              [*Geplant*], [*Erreicht*],
-  [M1],    [Anforderungsanalyse],        [],          [],
-  [M2],    [Design / Prototyp],          [],          [],
-  [M3],    [Implementierung abgeschl.],  [],          [],
-  [M4],    [Testing & QA],               [],          [],
-  [M5],    [Projektabschluss],           [],          [],
+  [*Nr.*], [*Meilenstein*], [*Geplant*], [*Erreicht*],
+  [M1], [Projektmanagement], [29.06.2026], [28.06.2026],
+  [M2], [Anforderungsanalyse], [28.05.2026], [29.05.2026],
+  [M3], [Design], [01.06.2026], [01.06.2026],
+  [M4], [Implementierung], [03.08.2026], [],
+  [M5], [Testing & Deployment], [03.08.2026], [],
 )
 
-#v(0.8cm)
+#pagebreak()
 
 // ─── Ressourcen & Budget ──────────────────────────────────────────────────────
 #text(weight: "bold", size: 12pt)[6. Ressourcen & Budget]
@@ -132,35 +131,17 @@
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
-  [*Ressource*],        [*Beschreibung*],                 [*Aufwand / Kosten*],
-  [Personalaufwand],    [5 Personen als Entwickler und Projektmanager],                               [...],
-  [Hardware],           [5 Arbeitslaptops],                               [bereits vorhanden],
-  [Software / Lizenzen],[Firebase],                               [kostenloser Account],
-  [Sonstiges],          [],                               [],
-)
-
-
-// ─── Risiken ─────────────────────────────────────────────────────────────────
-
-#pagebreak()
-#text(weight: "bold", size: 12pt)[7. Risiken]
-#v(0.3cm)
-
-#table(
-  columns: (10%, 40%, 25%, 25%),
-  stroke: 0.5pt,
-  fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
-
-  [*Nr.*], [*Risiko*],               [*Wahrscheinlichkeit*], [*Gegenmaßnahme*],
-  [R1],    [Kein API Zugang],                       [30%],                     [Recherchieren, Nachfragen],
-  [R2],    [],                       [],                     [],
-  [R3],    [],                       [],                     [],
+  [*Ressource*], [*Beschreibung*], [*Aufwand / Kosten*],
+  [Personalaufwand], [5 Personen als Entwickler und Projektmanager], [...],
+  [Hardware], [5 Arbeitslaptops], [bereits vorhanden],
+  [Software / Lizenzen], [Podman], [kostenloser Account],
+  [Sonstiges], [], [],
 )
 
 #v(0.8cm)
 
 // ─── Genehmigung ─────────────────────────────────────────────────────────────
-#text(weight: "bold", size: 12pt)[8. Genehmigung]
+#text(weight: "bold", size: 12pt)[7. Genehmigung]
 #v(0.3cm)
 
 #table(
@@ -168,8 +149,8 @@
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else { white },
 
-  [*Rolle*],          [*Name*], [*Unterschrift & Datum*],
-  [Auftraggeber],     [Mika Jenne, Dr. Arno Mielke],       [],
-  [Projektleiter],    [],       [],
-  [Betreuer / Dozent],[],       [],
+  [*Rolle*], [*Name*], [*Unterschrift & Datum*],
+  [Auftraggeber], [Mika Jenne, Dr. Arno Mielke], [],
+  [Projektleiter], [Erik Wizemann], [],
+  [Betreuer / Dozent], [Mikka Jenne, Dr. Arno Mielke], [],
 )

@@ -23,7 +23,6 @@
     packages: (
       (id: "1.1", name: "Projektplanung"),
       (id: "1.2", name: "Projektsteuerung"),
-      (id: "1.3", name: "Projektabschluss"),
     ),
   ),
   (
@@ -63,7 +62,6 @@
       (id: "5.1", name: "Testing & QA"),
       (id: "5.2", name: "Deployment"),
       (id: "5.3", name: "Abgabe & Präsentation"),
-
     ),
   ),
 )
