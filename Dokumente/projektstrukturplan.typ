@@ -11,7 +11,7 @@
   nr: "01101110",
   leader: "Erik Wizemann",
   client: "Mikka Jenne",
-  startdate: "13.05.2026",
+  startdate: "12.05.2026",
 )
 
 // Jede Phase hat: id, name, color und eine Liste von Arbeitspaketen (id + name).
@@ -23,6 +23,7 @@
     packages: (
       (id: "1.1", name: "Projektplanung"),
       (id: "1.2", name: "Projektsteuerung"),
+      (id: "1.3", name: "Projektabschluss"),
     ),
   ),
   (
@@ -37,7 +38,7 @@
   ),
   (
     id: "3",
-    name: "Design",
+    name: "Designkonzept",
     color: rgb("#375623"),
     packages: (
       (id: "3.1", name: "UI/UX Design"),
@@ -56,7 +57,7 @@
   ),
   (
     id: "5",
-    name: "Testing & Deployment",
+    name: "Testing & Fehlerbehebung",
     color: rgb("#833c00"),
     packages: (
       (id: "5.1", name: "Testing & QA"),
