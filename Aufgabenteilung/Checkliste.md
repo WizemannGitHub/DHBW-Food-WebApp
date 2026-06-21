@@ -36,16 +36,17 @@ Risikomatrix:
 - Fehler: Risiken befinden sich mit 10%  Eintrittswahrscheinlichkeit in Klasse "< 10%" -> vielleicht <= oder so machen.
 
 Projektauftrag:
-- ToDo: Startdatum eintragen
-- Vorschlag: "(geplant) beim Enddatum entfernen
-- Frage: braucht diese Version?
+- ToDo: Startdatum eintragen (Erledigt)
+- Vorschlag: "(geplant) beim Enddatum entfernen (Erledigt)
+- Frage: braucht diese Version? (Nein, erledigt)
 - Vorschlag: Ziele SMART machen 
 - Vorschlag: Sachen wie "Feedback geben" oder "Essen Vorschlagen" als Feature definieren anstatt Erweiterung
 - Vorschlag: bei Technische Infrastruktur mehr als nur Hosting angeben.
-- Vorschlag: Vielleicht bei Ressourcen und Budget bei "Personal aufwand" -> "Aufwand/Kosten" vielleicht ca. abschätzen wie viele Stunden neben Studium investiert
-- Fehler: Bei Punkt 7 "Genehmigungen" Auftraggeber "Mika" falsch geschrieben
-- Vorschlag: Bei Punkt 7 "Genehmigungen" nur Mikka als Auftraggeber und Arno als Steering. Hat Arno selber so vorgeschlagen
+- Vorschlag: Vielleicht bei Ressourcen und Budget bei "Personal aufwand" -> "Aufwand/Kosten" vielleicht ca. abschätzen wie viele Stunden neben Studium investiert (Ressourcen und Budget ausgelagert, denke die Anzahl an Stunden wird im Meilensteinplan mit FTE festgehalten.)
+- Fehler: Bei Punkt 7 "Genehmigungen" Auftraggeber "Mika" falsch geschrieben (Erledigt)
+- Vorschlag: Bei Punkt 7 "Genehmigungen" nur Mikka als Auftraggeber und Arno als Steering. Hat Arno selber so vorgeschlagen (Erledigt)
 - Frage: was machen wir wegen Unterschrift?
+- Frage: Arno Mielke und Mikka Jenne haben 2 Rollen im Projekt, denke das ist nicht so gut oder?
 
 Management-Status-Report:
 - Fehler: Arno als Auftraggeber oben --> stattdessen Mikka  

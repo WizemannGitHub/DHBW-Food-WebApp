@@ -23,15 +23,12 @@
 
   [*Feld*], [*Inhalt*],
   [Projektname], [DHBW Food Web App],
-  [Projektnummer], [01101110],
   [Auftraggeber], [Mikka Jenne],
   [Projektleiter], [Erik Wizemann],
   [Projektteam], [Robin van Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
   [Abteilung / Kurs], [TINF25B2],
-  [Startdatum], [],
-  [Enddatum (geplant)], [08.07.26],
-  [Version], [1.0],
-  [Stand], [#datetime.today().display("[day].[month].[year]")],
+  [Startdatum], [12.05.26],
+  [Enddatum (geplant)], [03.08.26],
 )
 
 #v(0.8cm)
@@ -56,15 +53,15 @@
 #v(0.3cm)
 
 #table(
-  columns: (10%, 70%, 20%),
+  columns: (10%, 90%),
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
-  [*Nr.*], [*Ziel*], [*Priorität*],
-  [1], [Entwicklung einer webbasierten App zur Bewertung von Speisen an der DHBW], [Hoch],
-  [2], [Erweiterung der App um die Funktion "Feedback geben"], [Hoch],
-  [3], [Erweiterung der App um die Funktion "Essen vorschlagen"], [Mittel],
-  [4], [Erweiterung der App um die Funktion "Erfassung von Nährwerten"], [Gering],
+  [*Nr.*], [*Ziel*],
+  [1], [Entwicklung einer webbasierten App zur Bewertung von Speisen an der DHBW],
+  [2], [Erweiterung der App um die Funktion "Feedback geben"],
+  [3], [Erweiterung der App um die Funktion "Essen vorschlagen"],
+  [4], [Integration einer Kantinenplan-Ansicht],
 )
 #v(0.8cm)
 
@@ -125,26 +122,11 @@
 
 #pagebreak()
 
-// ─── Ressourcen & Budget ──────────────────────────────────────────────────────
-#text(weight: "bold", size: 12pt)[6. Ressourcen & Budget]
-#v(0.3cm)
-
-#table(
-  columns: (30%, 40%, 30%),
-  stroke: 0.5pt,
-  fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
-
-  [*Ressource*], [*Beschreibung*], [*Aufwand / Kosten*],
-  [Personalaufwand], [5 Personen als Entwickler und Projektmanager], [...],
-  [Hardware], [5 Arbeitslaptops], [bereits vorhanden],
-  [Software / Lizenzen], [Podman], [kostenloser Account],
-  [Sonstiges], [], [],
-)
 
 #v(0.8cm)
 
 // ─── Genehmigung ─────────────────────────────────────────────────────────────
-#text(weight: "bold", size: 12pt)[7. Genehmigung]
+#text(weight: "bold", size: 12pt)[6. Genehmigung]
 #v(0.3cm)
 
 #table(
@@ -153,7 +135,7 @@
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else { white },
 
   [*Rolle*], [*Name*], [*Unterschrift & Datum*],
-  [Auftraggeber], [Mika Jenne, Dr. Arno Mielke], [],
+  [Auftraggeber], [Mikka Jenne, Dr. Arno Mielke], [],
   [Projektleiter], [Erik Wizemann], [],
   [Betreuer / Dozent], [Mikka Jenne, Dr. Arno Mielke], [],
 )
