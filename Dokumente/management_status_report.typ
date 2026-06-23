@@ -43,7 +43,7 @@
   columns: (1fr, 1fr, 1fr, 1fr),
   [*Projektname: *#text(fill: rgb("#0070c0"))[DHBW Food Web App]],
   [*Projektmanager\*in:* #text(fill: rgb("#0070c0"))[Erik Wizemann]],
-  [*Auftraggeber:* #text(fill: rgb("#0070c0"))[Dr. Arno Mielke]],
+  [*Auftraggeber:* #text(fill: rgb("#0070c0"))[Mikka Jenne]],
   [*Datum:* #text(fill: rgb("#0070c0"))[#datetime.today().display("[day].[month].[year]")]],
 )
 
@@ -98,7 +98,7 @@
       )[Implementierung und Umsetzung der Ideen ist weitesgehend problemlos verlaufen. Kleine Features noch nicht fertiggestellt]],
       dot(gelb),
 
-      [3. Kosten / Termine], [#text(fill: rgb("#0070c0"))[Keine wirklichen Kosten angefallen]], dot(gruen),
+      [3. Kosten / Termine], [#text(fill: rgb("#0070c0"))[Keine Kosten angefallen]], dot(gruen),
       [4. Team],
       [#text(
         fill: rgb("#0070c0"),
@@ -127,13 +127,13 @@
       [],
 
       [#text(fill: rgb("#f00"))[Problem: Essenseinträge sind in der API schelcht Kategorisiert]],
-      [#text(fill: rgb("#0070c0"))[Keine wirkliche Gegenmaßnahme, Darstellung der Essen wie in der API gegeben]],
+      [#text(fill: rgb("#0070c0"))[Anbieter der API wegen möglichen Änderungen kontaktieren, sonst Darstellung der Essen wie in der API gegeben]],
       [#text(fill: rgb("#0070c0"))[Robin van Nuis]],
       [#text(fill: rgb("#0070c0"))[29.06.2026]],
       dot(gelb),
 
       [#text(fill: rgb("#f00"))[Risiko: Testing der Web-App deckt Probleme im Backend/Frontend auf]],
-      [#text(fill: rgb("#0070c0"))[Gründliche Überprüfung des Code und entsprechend genügend Zeit einplanen]],
+      [#text(fill: rgb("#0070c0"))[Einplanung von genügend Zeit zur Fehlerbehebung]],
       [#text(fill: rgb("#0070c0"))[Erik Wizemann, Cristian Zanfir]],
       [#text(fill: rgb("#0070c0"))[03.08.2026]],
       dot(gruen),
@@ -173,7 +173,7 @@
         [Meilensteinplan vervollständigen — fehlende Daten nachtragen (bis 22.06.)],
         [Hosting/Deployment der App abschließen],
         [Alle PM-Dokumente final zusammenstellen und auf Konsistenz prüfen (bis 24.06.)],
-        [Abgabe in Moodle bis 29.06.2026],
+        [Abgabe in Moodle (bis 29.06.)],
         [Präsentation vorbereiten und Redeaufteilung festlegen (bis 06.07.)],
       )
     ],
@@ -189,11 +189,11 @@
 
         // Format: Datum | Bezeichnung (Farbe zeigt Status)
         // gruen = erreicht, gelb = in Verzug, rot = kritisch, schwarz = geplant
-        [#text(fill: gruen)[13.05.26]], [#text(fill: gruen)[Projektstart]],
-        [#text(fill: gruen)[25.05.26]], [#text(fill: gruen)[Anforderungsanalyse abgeschlossen]],
-        [#text(fill: gruen)[01.06.26]], [#text(fill: gruen)[Design / Systemarchitektur abgeschlossen]],
+        [#text(fill: gruen)[12.05.26]], [#text(fill: gruen)[Projektstart]],
+        [#text(fill: gruen)[24.05.26]], [#text(fill: gruen)[Anforderungsanalyse abgeschlossen]],
+        [#text(fill: gruen)[07.06.26]], [#text(fill: gruen)[Design / Systemarchitektur abgeschlossen]],
         [#text(fill: gelb)[22.06.26]], [#text(fill: gelb)[Implementierung abgeschlossen]],
-        [29.06.26], [Abgabe in Moodle],
+        [24.06.26], [Abgabe in Moodle],
         [08.07.26], [Präsentation],
       )
     ],
