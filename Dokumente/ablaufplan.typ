@@ -112,7 +112,7 @@
   [4.3], [Backend],   [15.06.–12.07.], [4.1],  ..task-cells(6, 9, crit: true),
 
   // ─── 5 · Testing & Deployment ──────────────────────────────────────────────
-  ph-header("5 · Testing & Deployment", c-test),
+  ph-header("5 · Testing & Fehlerbehebung", c-test),
   [5.1], [Testing & Fehlerbehebung], [13.07.–24.07.], [4.2 + 4.3],      ..task-cells(10, 11, crit: true),
   [5.2], [Deployment],            [20.07.–31.07.], [5.1],      ..task-cells(11, 12, crit: true),
   [5.3], [Abgabe & Präsentation], [20.07.–03.08.], [5.1],      ..task-cells(11, 13, crit: true),

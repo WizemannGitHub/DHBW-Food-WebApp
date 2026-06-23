@@ -25,11 +25,11 @@
   (nr: "M0", label: "Start",                      date: "12.05.2026", done: "12.05.2026", desc: "Kickoff-Meeting, Repository initialisiert, Rollen verteilt, Aufgabenteilung festgelegt"),
   (nr: "M1", label: "Anforderungs-\nanalyse",     date: "24.05.2026", done: "24.05.2026", desc: "Ist-Analyse abgeschlossen, Anforderungen erhoben, Risikoanalyse erstellt, Technologiestack entschieden"),
   (nr: "M2", label: "Fertiges\nDesignkonzept",    date: "07.06.2026", done: "07.06.2026", desc: "UI/UX-Design und Systemarchitektur fertiggestellt, fertiges Designkonzept abgenommen"),
-  (nr: "M3", label: "Abgabe\nProjektmanagement",  date: "29.06.2026", done: "–",          desc: "Alle PM-Pflichtdokumente (Projektauftrag, PSP, Ablaufplan, Risikoanalyse, Meilensteinplan) fristgerecht abgegeben"),
-  (nr: "M4", label: "Zwischen-\npräsentation",    date: "08.07.2026", done: "–",          desc: "Präsentation des Projektzwischenstands vor Auftraggeber und Betreuer"),
-  (nr: "M5", label: "Funktions-\nfertige Webanw.", date: "15.07.2026", done: "–",          desc: "Frontend, Backend, Datenbank und Container vollständig implementiert und getestet"),
-  (nr: "M6", label: "Abnahme\nMensaapp",          date: "28.07.2026", done: "–",          desc: "Funktionale und technische Abnahme der Webanwendung abgeschlossen"),
-  (nr: "M7", label: "Tech.\nAbgabe",              date: "03.08.2026", done: "–",          desc: "Technische Dokumentation und finale Webanwendung abgegeben. Offizieller Projektabschluss"),
+  (nr: "M3", label: "Abgabe\nProjektmanagement",  date: "29.06.2026", done: "-",          desc: "Alle PM-Pflichtdokumente (Projektauftrag, PSP, Ablaufplan, Risikoanalyse, Meilensteinplan) fristgerecht abgegeben"),
+  (nr: "M4", label: "Zwischen-\npräsentation",    date: "08.07.2026", done: "-",          desc: "Präsentation des Projektzwischenstands vor Auftraggeber und Betreuer"),
+  (nr: "M5", label: "Funktions-\nfertige Webanw.", date: "15.07.2026", done: "-",          desc: "Frontend, Backend, Datenbank und Container vollständig implementiert und getestet"),
+  (nr: "M6", label: "Abnahme\nMensaapp",          date: "28.07.2026", done: "-",          desc: "Funktionale und technische Abnahme der Webanwendung abgeschlossen"),
+  (nr: "M7", label: "Tech.\nAbgabe",              date: "03.08.2026", done: "-",          desc: "Technische Dokumentation und finale Webanwendung abgegeben. Offizieller Projektabschluss"),
 )
 
 // ── Phasen mit zugehörigem Endmeilenstein ────────────────────────────────────
@@ -198,7 +198,7 @@
     ..phases.map(p => text(size: 8.5pt * sc)[#p.personal]),
     text(weight: "bold", size: 9pt * sc)[Budget:],
     grid.cell(colspan: 5,
-      text(size: 8.5pt * sc)[Kein Sachbudget erforderlich – Studienleistung ohne verfügbares Budget.]
+      text(size: 8.5pt * sc)[Kein Sachbudget erforderlich - Studienleistung ohne verfügbares Budget.]
     ),
   )
 
