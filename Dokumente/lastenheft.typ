@@ -105,7 +105,7 @@ der DHBW Karlsruhe, die regelmäßig die Mensa besuchen oder besuchen möchten.
 
   [*Schnittstelle*],       [*Beschreibung*],
   [REST-API (Backend)],    [Node.js/Express — JSON-Schnittstelle für alle Frontend-Anfragen.],
-  [Mensa-API (extern)],    [OpenMensa o. Ä. — Datenquelle für den aktuellen Speiseplan.],
+  [Mensa-API (extern)],    [Github Repo von Karlsruher Studenten — Datenquelle für den aktuellen Speiseplan.],
   [PostgreSQL-Datenbank],  [Speicherung von Gerichten, Bewertungen und Vorschlägen.],
   [Docker/Podman-Netzwerk],[Containerisierte Kommunikation über internes Netzwerk (dhbw_food_network).],
 )
