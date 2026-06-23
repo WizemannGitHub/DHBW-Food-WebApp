@@ -44,7 +44,7 @@
   [*Projektname: *#text(fill: rgb("#0070c0"))[DHBW Food Web App]],
   [*Projektmanager\*in:* #text(fill: rgb("#0070c0"))[Erik Wizemann]],
   [*Auftraggeber:* #text(fill: rgb("#0070c0"))[Mikka Jenne]],
-  [*Datum:* #text(fill: rgb("#0070c0"))[#datetime.today().display("[day].[month].[year]")]],
+  [*Datum:* #text(fill: rgb("#0070c0"))[16.06.2026]],
 )
 
 #v(0.15cm)
@@ -60,8 +60,7 @@
       #list(
         marker: sym.checkmark,
         [Projektplanung und Dokumentation (Auftrag, PSP, Ablaufplan, Risikoanalyse) weitesgehend fertig - Abgabe 29.06.2026 in Reichweite],
-        [...],
-        [(Kernfunktionen der Web-App (Bewertung, Ranking, Backend, Datenbank) implementiert und im lokalen Betrieb)],
+        [Kernfunktionen der Web-App (Bewertung, Ranking, Backend, Datenbank) implementiert und im lokalen Betrieb],
       )
     ]
   ],
@@ -193,7 +192,7 @@
         [#text(fill: gruen)[24.05.26]], [#text(fill: gruen)[Anforderungsanalyse abgeschlossen]],
         [#text(fill: gruen)[07.06.26]], [#text(fill: gruen)[Design / Systemarchitektur abgeschlossen]],
         [#text(fill: gelb)[22.06.26]], [#text(fill: gelb)[Implementierung abgeschlossen]],
-        [24.06.26], [Abgabe in Moodle],
+        [29.06.26], [Abgabe in Moodle],
         [08.07.26], [Präsentation],
       )
     ],

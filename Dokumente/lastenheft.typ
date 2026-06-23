@@ -61,7 +61,7 @@ der DHBW Karlsruhe, die regelmäßig die Mensa besuchen oder besuchen möchten.
 
   [*Nr.*], [*Anforderung*],
   [FA-01], [Wenn ein Nutzer die Anwendung öffnet, dann soll das aktuelle Mensaangebot des heutigen Tages angezeigt werden.],
-  [FA-02], [Wenn ein Nutzer ein Gericht auswählt, dann soll er eine Bewertung mit 1–5 Sternen für Gesamteindruck, Geschmack und Portionsgröße abgeben können.],
+  [FA-02], [Wenn ein Nutzer ein Gericht auswählt, dann soll er eine Bewertung mit 1-5 Sternen für Gesamteindruck, Geschmack und Portionsgröße abgeben können.],
   [FA-03], [Wenn ein Nutzer eine Bewertung abgibt, dann kann er optional einen Kommentar hinterlassen.],
   [FA-04], [Wenn ein Nutzer die Rankings-Seite aufruft, dann sollen die Top-Gerichte, Flop-Gerichte sowie Trend-Gerichte der letzten 7 Tage angezeigt werden.],
   [FA-05], [Wenn ein Nutzer Statistiken abruft, dann sollen die Gesamtanzahl der Bewertungen, die Durchschnittsbewertung, die Anzahl der bewerteten Gerichte und die Anzahl der Vorschläge angezeigt werden.],
@@ -107,7 +107,7 @@ der DHBW Karlsruhe, die regelmäßig die Mensa besuchen oder besuchen möchten.
   [REST-API (Backend)],    [Node.js/Express — JSON-Schnittstelle für alle Frontend-Anfragen.],
   [Mensa-API (extern)],    [OpenMensa o. Ä. — Datenquelle für den aktuellen Speiseplan.],
   [PostgreSQL-Datenbank],  [Speicherung von Gerichten, Bewertungen und Vorschlägen.],
-  [Docker/Podman-Netzwerk],[Containerisierte Kommunikation über internes Netzwerk (dhbw_net).],
+  [Docker/Podman-Netzwerk],[Containerisierte Kommunikation über internes Netzwerk (dhbw_food_network).],
 )
 
 #v(0.8cm)
@@ -126,7 +126,7 @@ der DHBW Karlsruhe, die regelmäßig die Mensa besuchen oder besuchen möchten.
   [T-02],  [Vollständigkeit der Funktionen gemäß den funktionalen Anforderungen (FA-01 bis FA-10).],
   [T-03],  [Korrekte Darstellung und Filterung des Mensaplans nach Kantinen und Datum.],
   [T-04],  [Bewertungen werden korrekt gespeichert und in Rankings sowie Statistiken wiedergegeben.],
-  [T-05],  [Technische Dokumentation im Umfang von 2–4 Seiten liegt vor.],
+  [T-05],  [Technische Dokumentation im Umfang von 2-4 Seiten liegt vor.],
   [T-06],  [Einhaltung aller Abgabetermine.],
 )
 
@@ -137,7 +137,7 @@ der DHBW Karlsruhe, die regelmäßig die Mensa besuchen oder besuchen möchten.
 #v(0.3cm)
 
 Technische Dokumentation mit Systemarchitektur, Datenbankmodell, API-Endpunkten
-und Screenshots, wird am 03.08.26 bei Mikka Jenna abgegeben und ist nicht teil des Projektmanagement-Teils.
+und Screenshots, wird am 03.08.26 bei Mikka Jenne abgegeben und ist nicht teil des Projektmanagement-Teils.
 
 #v(0.8cm)
 

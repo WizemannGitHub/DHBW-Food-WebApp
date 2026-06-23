@@ -60,7 +60,7 @@
     name: "Testing & Fehlerbehebung",
     color: rgb("#833c00"),
     packages: (
-      (id: "5.1", name: "Testing & QA"),
+      (id: "5.1", name: "Testing & Fehlerbehebung"),
       (id: "5.2", name: "Deployment"),
       (id: "5.3", name: "Abgabe & Präsentation"),
     ),

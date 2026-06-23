@@ -81,7 +81,6 @@
     *Kernfunktionen:*
     - Übersicht über alle Bewertungen mit Text und Score
     - Eigene Bewertungen schreiben
-    - Einfaches Benutzerkonto anlegen
 
     *Technische Infrastruktur:*
     - Backend entwickeln
@@ -115,7 +114,7 @@
   [M0], [Start], [12.05.2026],
   [M1], [Anforderungsanalyse], [24.05.2026],
   [M2], [Fertiges Designkonzept], [07.06.2026],
-  [M3], [Abgabe Projektmanagement], [24.06.2026],
+  [M3], [Abgabe Projektmanagement], [29.06.2026],
   [M4], [Zwischenpräsentation], [08.07.2026],
   [M5], [Funktionsfertige Webanwendung], [15.07.2026],
   [M6], [Abnahme Mensaapp], [28.07.2026],
