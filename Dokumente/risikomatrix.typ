@@ -14,7 +14,7 @@
 #v(1cm)
 
 #let schadenshoehen = (
-  (5, [> 30 Stunden]),
+  (5, [\u{2265} 30 Stunden]),
   (4, [< 30 Stunden ]),
   (3, [< 15 Stunden ]),
   (2, [< 5 Stunden]),
@@ -22,19 +22,35 @@
 )
 
 #align(center)[
-#table(
+#grid(
+  columns: (1cm, auto),
+  rows: (auto, auto),
+  row-gutter: 0.3cm,
+  align: center + horizon,
+  [],
+  align(center)[*Eintrittswahrscheinlichkeit*],
+  rotate(-90deg)[*Schadensklasse*],
+  table(
   columns: (1cm, 3cm, 2.5cm, 2.5cm, 2.5cm, 2.5cm, 2.5cm),
-  rows: (auto, 1.5cm, 1.5cm, 1.5cm, 1.5cm, 1.5cm, auto, auto),
+  rows: (auto, auto, 1.5cm, 1.5cm, 1.5cm, 1.5cm, 1.5cm),
   align: center + horizon,
   stroke: white + 1pt,
+
+  // Klassen-Zeile (oben)
+  [], [],
+  table.cell(fill: rgb("#eeeeee"))[*1*],
+  table.cell(fill: rgb("#eeeeee"))[*2*],
+  table.cell(fill: rgb("#eeeeee"))[*3*],
+  table.cell(fill: rgb("#eeeeee"))[*4*],
+  table.cell(fill: rgb("#eeeeee"))[*5*],
 
   // Header-Zeile
   [], [],
   table.cell(fill: rgb("#eeeeee"))[*< 0,1 %*],
-  table.cell(fill: rgb("#eeeeee"))[*< 1 %*],
+  table.cell(fill: rgb("#eeeeee"))[*< 2 %*],
   table.cell(fill: rgb("#eeeeee"))[*< 10 %*],
   table.cell(fill: rgb("#eeeeee"))[*< 20 %*],
-  table.cell(fill: rgb("#eeeeee"))[*> 20 %*],
+  table.cell(fill: rgb("#eeeeee"))[*\u{2265} 20 %*],
 
   // Matrix-Zeilen
   ..schadenshoehen.map(((s, wert)) => (
@@ -42,15 +58,7 @@
     table.cell(align: right + horizon, fill: rgb("#eeeeee"))[#wert],
     ..range(1, 6).map(e => table.cell(fill: farbe(e, s))[]),
   )).flatten(),
-
-  // Klassen-Zeile
-  [], [],
-  [*1*], [*2*], [*3*], [*4*], [*5*],
-
-  // Achsenbeschriftung
-  table.cell(colspan: 7)[
-    #align(center)[*Eintrittswahrscheinlichkeit*]
-  ],
+)
 )
 ]
 

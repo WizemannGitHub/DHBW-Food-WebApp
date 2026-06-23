@@ -38,7 +38,7 @@
   [
     Fehlende vertragliche Absicherung
   ],
-  [10% (3)], [35 AS (5)], [15], [Abschluss eines Vertrags mit dem API-Anbieter zur Festlegung der Nutzungsbedingungen; Entwicklung eines Fallback-Mechanismus für strukturelle Änderungen (siehe Vertragvorschalg)], [AS], [Entwicklungsteam],
+  [7% (3)], [35 AS (5)], [15], [Abschluss eines Vertrags mit dem API-Anbieter zur Festlegung der Nutzungsbedingungen; Entwicklung eines Fallback-Mechanismus für strukturelle Änderungen], [AS], [Entwicklungsteam],
 
   // Zeile 2
   [
@@ -47,7 +47,7 @@
   [
     Technische Störungen, Wartungsarbeiten oder Insolvenz des Anbieters
   ],
-  [1% (2)], [25 AS (4)], [8], [Wahl eines zuverlässigen Anbieters], [AS + ggf. Mehrkosten], [Entwicklungsteam],
+  [1% (2)], [25 AS (4)], [8], [Wahl eines zuverlässigen Anbieters, Speichern regelmäßiger BackUps von wichtigen Daten], [AS + ggf. Mehrkosten], [Entwicklungsteam],
 
   // Zeile 3
   [
