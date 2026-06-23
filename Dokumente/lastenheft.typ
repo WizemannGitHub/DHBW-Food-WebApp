@@ -137,8 +137,7 @@ der DHBW Karlsruhe, die regelmäßig die Mensa besuchen oder besuchen möchten.
 #v(0.3cm)
 
 Technische Dokumentation mit Systemarchitektur, Datenbankmodell, API-Endpunkten
-und Screenshots. Abgabe als PDF und Git-Repository-Link über Moodle.
-Dokumentationsumfang: 2–4 DIN-A4-Seiten.
+und Screenshots, wird am 03.08.26 bei Mikka Jenna abgegeben und ist nicht teil des Projektmanagement-Teils.
 
 #v(0.8cm)
 
