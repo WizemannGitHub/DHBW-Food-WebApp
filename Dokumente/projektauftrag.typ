@@ -24,8 +24,10 @@
   [*Feld*], [*Inhalt*],
   [Projektname], [DHBW Food Web App],
   [Auftraggeber], [Mikka Jenne],
+  [Steering], [Dr. Arno Mielke],
   [Projektleiter], [Erik Wizemann],
   [Projektteam], [Robin van Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
+  [Stakeholder], [StuV],
   [Abteilung / Kurs], [TINF25B2],
   [Startdatum], [12.05.26],
   [Enddatum (geplant)], [03.08.26],
@@ -46,7 +48,6 @@
 )
 
 #v(0.8cm)
-#pagebreak()
 
 // ─── Projektziele ────────────────────────────────────────────────────────────
 #text(weight: "bold", size: 12pt)[3. Projektziele]
@@ -64,6 +65,7 @@
   [4], [Integration einer Kantinenplan-Ansicht],
 )
 #v(0.8cm)
+#pagebreak()
 
 // ─── Projektumfang (In-Scope / Out-of-Scope) ─────────────────────────────────
 #text(weight: "bold", size: 12pt)[4. Projektumfang]
@@ -120,8 +122,6 @@
   [M7], [Technische Abgabe], [03.08.2026],
 )
 
-#pagebreak()
-
 
 #v(0.8cm)
 
@@ -135,7 +135,7 @@
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else { white },
 
   [*Rolle*], [*Name*], [*Unterschrift & Datum*],
-  [Auftraggeber], [Mikka Jenne, Dr. Arno Mielke], [],
-  [Projektleiter], [Erik Wizemann], [],
-  [Betreuer / Dozent], [Mikka Jenne, Dr. Arno Mielke], [],
+  [Auftraggeber], [Mikka Jenne, Dr. Arno Mielke], [schriftlich über Email],
+  [Projektleiter], [Erik Wizemann], [Erik Wizemann],
+  [Betreuer / Dozent], [Mikka Jenne, Dr. Arno Mielke], [schriftlich über Email],
 )

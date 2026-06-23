@@ -48,6 +48,8 @@ Projektauftrag:
 - Frage: was machen wir wegen Unterschrift?
 - Frage: Arno Mielke und Mikka Jenne haben 2 Rollen im Projekt, denke das ist nicht so gut oder?
 
+- Frage Projektauftrag: Genehmigung drin lassen, ansonsten nur oben steering anfügen.
+
 Management-Status-Report:
 - Fehler: Arno als Auftraggeber oben --> stattdessen Mikka (Erledigt)
 - Vorschlag: bei "Status" -> "3. Kosten/Termine" das Wort "wirklichen" entfernen (Erledigt)
