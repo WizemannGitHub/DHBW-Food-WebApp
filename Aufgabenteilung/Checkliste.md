@@ -53,8 +53,8 @@ Management-Status-Report:
 - Vorschlag: bei "Status" -> "3. Kosten/Termine" das Wort "wirklichen" entfernen (Erledigt)
 - Frage: könnte man als Gegenmaßnahme des ersten Risikos was in die Richtung schreiben wie "Anbieter der API wegen möglichen Änderungen kontaktieren", weil keine wirkliche Gegenmaßnahme klingt schwammig. (Erledigt)
 - Fehler Risiko zwei "des Code" vielleicht falsch (selber nicht sicher bei Rechtschreibung) --> hab den Satz umformuliert hört sich jetzt besser an (Erledigt)
-- Fehler/ToDos Meilensteine updaten
-- ToDo: Checken ob "Erreichte Ergebnisse" und "Nächste Schritte" noch passen
+- Fehler/ToDos Meilensteine updaten (Erledigt)
+- ToDo: Checken ob "Erreichte Ergebnisse" und "Nächste Schritte" noch passen (Erledigt)
 
 Lastenheft:
 
