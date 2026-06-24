@@ -126,7 +126,9 @@
       [],
 
       [#text(fill: rgb("#f00"))[Problem: Essenseinträge sind in der API schelcht Kategorisiert]],
-      [#text(fill: rgb("#0070c0"))[Anbieter der API wegen möglichen Änderungen kontaktieren, sonst Darstellung der Essen wie in der API gegeben]],
+      [#text(
+        fill: rgb("#0070c0"),
+      )[Anbieter der API wegen möglichen Änderungen kontaktieren, sonst Darstellung der Essen wie in der API gegeben]],
       [#text(fill: rgb("#0070c0"))[Robin van Nuis]],
       [#text(fill: rgb("#0070c0"))[29.06.2026]],
       dot(gelb),
@@ -188,12 +190,14 @@
 
         // Format: Datum | Bezeichnung (Farbe zeigt Status)
         // gruen = erreicht, gelb = in Verzug, rot = kritisch, schwarz = geplant
-        [#text(fill: gruen)[12.05.26]], [#text(fill: gruen)[Projektstart]],
-        [#text(fill: gruen)[24.05.26]], [#text(fill: gruen)[Anforderungsanalyse abgeschlossen]],
-        [#text(fill: gruen)[07.06.26]], [#text(fill: gruen)[Design / Systemarchitektur abgeschlossen]],
-        [#text(fill: gelb)[22.06.26]], [#text(fill: gelb)[Implementierung abgeschlossen]],
-        [29.06.26], [Abgabe in Moodle],
-        [08.07.26], [Präsentation],
+        [#text(fill: gruen)[12.05.26]], [#text(fill: gruen)[M0 - Projektstart]],
+        [#text(fill: gruen)[24.05.26]], [#text(fill: gruen)[M1 - Anforderungsanalyse abgeschlossen]],
+        [#text(fill: gruen)[07.06.26]], [#text(fill: gruen)[M2 - Fertiges Designkonzept abgenommen]],
+        [#text(fill: gelb)[29.06.26]], [#text(fill: gelb)[M3 - Abgabe Projektmanagement]],
+        [08.07.26], [M4 - Zwischenpräsentation],
+        [15.07.26], [M5 - Funktionsfertige Webanwendung],
+        [28.07.26], [M6 - Abnahme Mensaapp],
+        [03.08.26], [M7 - Technische Abgabe / Projektabschluss],
       )
     ],
   )
