@@ -65,3 +65,17 @@ Projektstrukturplan:
 Meilensteinplan:
 
 Ablaufplan:
+
+
+
+Notitzen: 
+
+- einzelne Datums für die Dokumente
+    -> Auftrag ist als erstes, also Datum auch sehr früh machen
+
+- Nicht schlimm wenn sich Informationen vom Auftrag ändern oder gleich bleiben. 
+    -> vielleicht extra bisschen anpassen
+
+- Arbeitspakete ausformulieren (10 - 20)
+
+- Risikoanalyse <-> Managementsreport: auf einen Stand bringen
