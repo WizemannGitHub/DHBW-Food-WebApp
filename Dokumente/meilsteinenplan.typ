@@ -206,39 +206,5 @@
 
 #v(1fr)
 
-// ── Seite 2: Meilenstein-Details ─────────────────────────────────────────────
-#pagebreak()
 
-// ── Titel Seite 2 ─────────────────────────────────────────────────────────────
-#align(center)[
-  #text(size: 20pt, weight: "bold")[Meilenstein-Details]
-  #v(0.1cm)
-  #text(size: 13pt)[#project.name]
-  #v(0.3cm)
-  #line(length: 100%)
-]
 
-#v(0.4cm)
-
-// ── Meilenstein-Detailtabelle ─────────────────────────────────────────────────
-#table(
-  columns: (0.9cm, 3.2cm, 1fr),
-  stroke: 0.5pt,
-  inset: (x: 5pt, y: 4pt),
-  fill: (col, row) =>
-    if row == 0 { c-header }
-    else if calc.odd(row) { c-row-odd }
-    else { white },
-
-  table.cell(text(fill: white, weight: "bold")[Nr.]),
-  table.cell(text(fill: white, weight: "bold")[Meilenstein]),
-  table.cell(text(fill: white, weight: "bold")[Beschreibung]),
-
-  ..milestones.map(m => (
-    [#text(weight: "bold", fill: diamond-color)[#m.nr]],
-    [#m.label],
-    [#text(size: 9pt)[#m.desc]],
-  )).flatten()
-)
-
-#v(1fr)
