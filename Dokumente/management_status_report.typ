@@ -172,7 +172,7 @@
       #list(
         marker: sym.arrow.r,
         [Meilensteinplan vervollständigen — fehlende Daten nachtragen (bis 22.06.)],
-        [Hosting/Deployment der App abschließen],
+        [Zukunftsaussichten der App planen],
         [Alle PM-Dokumente final zusammenstellen und auf Konsistenz prüfen (bis 24.06.)],
         [Abgabe in Moodle (bis 29.06.)],
         [Präsentation vorbereiten und Redeaufteilung festlegen (bis 06.07.)],
