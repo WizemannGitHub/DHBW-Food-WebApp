@@ -101,6 +101,39 @@
 
 #v(0.8cm)
 
+// ─── Risiken                                                          
+  #text(weight: "bold", size: 12pt)[4. Risiken]                                 
+  #v(0.3cm)                                                                     
+                                                                                
+  #table(                                                                       
+    columns: (5%, 35%, 20%, 20%, 30%),                                          
+    stroke: 0.5pt,                                                              
+    fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) {  
+  rgb("#f2f2f2") } else { white },                                              
+                                                                                
+    [*Nr.*], [*Risiko*], [*Wahrsch.*], [*Auswirkung*], [*Maßnahme*],            
+    [R1], [API-Ausfall oder Formatänderung], [Mittel], [Hoch], [Absprache mit DHBW Kantine],                                                         
+    [R2], [Unvollständige oder fehlerhafte Speisedaten], [Mittel], [Mittel],
+  [Backend-Validierung; Fehlermeldung durch Nutzer; Tests],                            
+    [R3], [Geringe Nutzerakzeptanz], [Mittel], [Mittel], [Bewerbung über StuV;
+  einfaches UI],                                                                
+    [R4], [Zeitverzug durch technische Probleme], [Mittel], [Mittel],
+  [Pufferzeiten; frühe Infrastrukturtests],                                     
+  )               
+                                                                                
+  #v(0.8cm)                                                                     
+
+  // ─── Ressourcen & Budget
+#text(weight: "bold", size: 12pt)[5. Ressourcen & Budget]
+#v(0.3cm)
+
+Das Projektteam besteht aus 5 Studierenden, die ohne Vergütung an dem Projekt mitwirken. Jedes Teammitglied bringt seinen eigenen Laptop mit, sodass keine zusätzliche Hardware angeschafft werden muss. Bei der Wahl von Software und Tools wird konsequent auf Open-Source- und kostenfreie Lösungen gesetzt, um unnötige Kosten zu vermeiden. Da das Hosting zunächst ausschließlich lokal erfolgt und kein externer Server benötigt wird, beläuft sich der finanzielle Bedarf des Projekts auf geschätzte *0,00 €*.
+
+Eine detaillierte Aufstellung aller eingesetzten Tools, Software und Ressourcen ist im separaten Dokument *Ressourcen- & Budgetplan* festgehalten.
+
+#v(0.8cm)
+#pagebreak()
+
 // ─── Meilensteine ────────────────────────────────────────────────────────────
 #text(weight: "bold", size: 12pt)[5. Meilensteine]
 #v(0.3cm)
@@ -135,6 +168,6 @@
 
   [*Rolle*], [*Name*], [*Unterschrift & Datum*],
   [Auftraggeber], [Mikka Jenne, Dr. Arno Mielke], [12.05.26, schriftlich über Email],
-  [Projektleiter], [Erik Wizemann], [Erik Wizemann],
+  [Projektleiter], [Erik Wizemann], [12.05.26, schriftlich über Email],
   [Betreuer / Dozent], [Mikka Jenne, Dr. Arno Mielke], [12.05.26, schriftlich über Email],
 )

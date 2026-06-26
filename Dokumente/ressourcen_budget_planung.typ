@@ -22,9 +22,9 @@ Dieses Dokument listet die für die Durchführung des Projekts benötigten Resso
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
   [*Ressource*], [*Beschreibung*], [*Kosten*],
-  [Personal], [5 Teammitglieder (Entwicklung & Projektmanagement)], [Keine (intern)],
+  [Personal], [5 Teammitglieder (Entwicklung & Projektmanagement), je ca. 20 Std./Woche], [Keine (intern)],
   [Hardware], [5x Arbeitslaptops der Teammitglieder], [Bereits vorhanden],
-  [Software & Tools], [Podman, Entwicklungsumgebungen (IDEs)], [0,00 € (Open Source)],
-  [Infrastruktur], [Hosting & Datenbank nur lokal], [0,00 €],
+  [Software & Tools], [Podman, IDEs (VS Code, IntelliJ), Git/GitHub], [0,00 € (Open Source)],
+  [Infrastruktur], [Hosting & Datenbank nur lokal (kein externer Server notwendig, da Hochschulprojekt)], [0,00 €],
   [*Gesamtbudget*], [*Finanzieller Mittelbedarf*], [*0,00 €*],
 )
