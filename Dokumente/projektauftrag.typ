@@ -114,10 +114,8 @@
     [*Nr.*], [*Risiko*], [*Wahrsch.*], [*Auswirkung*], [*Maßnahme*],            
     [R1], [API-Ausfall oder Formatänderung], [Mittel], [Hoch], [Absprache mit DHBW Kantine],                                                         
     [R2], [Unvollständige oder fehlerhafte Speisedaten], [Mittel], [Mittel],
-  [Backend-Validierung; Fehlermeldung durch Nutzer; Tests],                            
-    [R3], [Geringe Nutzerakzeptanz], [Mittel], [Mittel], [Bewerbung über StuV;
-  einfaches UI],                                                                
-    [R4], [Zeitverzug durch technische Probleme], [Mittel], [Mittel],
+  [Backend-Validierung; Fehlermeldung durch Nutzer; Tests],                                                                                       
+    [R3], [Zeitverzug durch technische Probleme], [Mittel], [Mittel],
   [Pufferzeiten; frühe Infrastrukturtests],                                     
   )               
                                                                                 

@@ -125,7 +125,7 @@
       text(fill: white, weight: "bold")[Bis wann],
       [],
 
-      [#text(fill: rgb("#f00"))[Problem: Essenseinträge sind in der API schelcht Kategorisiert]],
+      [#text(fill: rgb("#f00"))[Problem: Essenseinträge sind in der API schlecht Kategorisiert]],
       [#text(
         fill: rgb("#0070c0"),
       )[Anbieter der API wegen möglichen Änderungen kontaktieren, sonst Darstellung der Essen wie in der API gegeben]],
