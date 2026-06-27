@@ -101,8 +101,30 @@
 
 #v(0.8cm)
 
+// ─── Annahmen & Zusagen ──────────────────────────────────────────────────────
+#text(weight: "bold", size: 12pt)[5. Annahmen & Zusagen]
+#v(0.3cm)
+
+#table(
+  columns: (50%, 50%),
+  stroke: 0.5pt,
+  fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#ffffff") } else { white },
+
+  [*Annahmen*], [*Zusagen*],
+  [
+    - Es existiert eine kostenlose und öffentlich zugängliche Mensa-API.
+    - Die DHBW stellt keine eigene Serverinfrastruktur zur Verfügung, weshalb ausschließlich lokal gehostet wird.
+  ],
+  [
+    - Projektgenehmigung durch Mikka Jenne und Dr. Arno Mielke (12.05.26, per E-Mail).
+    - Alle Teammitglieder sind über die gesamte Projektlaufzeit verfügbar.
+  ],
+)
+
+#v(0.8cm)
+
 // ─── Risiken                                                          
-  #text(weight: "bold", size: 12pt)[5. Risiken]                                 
+  #text(weight: "bold", size: 12pt)[6. Risiken]                                 
   #v(0.3cm)                                                                     
                                                                                 
   #table(                                                                       
@@ -121,8 +143,9 @@
                                                                                 
   #v(0.8cm)                                                                     
 
+#pagebreak()
   // ─── Ressourcen & Budget
-#text(weight: "bold", size: 12pt)[6. Ressourcen & Budget]
+#text(weight: "bold", size: 12pt)[7. Ressourcen & Budget]
 #v(0.3cm)
 
 Das Projektteam besteht aus 5 Studierenden, die ohne Vergütung an dem Projekt mitwirken. Jedes Teammitglied bringt seinen eigenen Laptop mit, sodass keine zusätzliche Hardware angeschafft werden muss. Bei der Wahl von Software und Tools wird konsequent auf Open-Source- und kostenfreie Lösungen gesetzt, um unnötige Kosten zu vermeiden. Da das Hosting zunächst ausschließlich lokal erfolgt und kein externer Server benötigt wird, beläuft sich der finanzielle Bedarf des Projekts auf geschätzte *0,00 €*.
@@ -130,10 +153,9 @@ Das Projektteam besteht aus 5 Studierenden, die ohne Vergütung an dem Projekt m
 Eine detaillierte Aufstellung aller eingesetzten Tools, Software und Ressourcen ist im separaten Dokument *Ressourcen- & Budgetplan* festgehalten.
 
 #v(0.8cm)
-#pagebreak()
 
 // ─── Meilensteine ────────────────────────────────────────────────────────────
-#text(weight: "bold", size: 12pt)[7. Meilensteine]
+#text(weight: "bold", size: 12pt)[8. Meilensteine]
 #v(0.3cm)
 
 #table(
@@ -156,7 +178,7 @@ Eine detaillierte Aufstellung aller eingesetzten Tools, Software und Ressourcen 
 #v(0.8cm)
 
 // ─── Genehmigung ─────────────────────────────────────────────────────────────
-#text(weight: "bold", size: 12pt)[8. Genehmigung]
+#text(weight: "bold", size: 12pt)[9. Genehmigung]
 #v(0.3cm)
 
 #table(
@@ -165,7 +187,7 @@ Eine detaillierte Aufstellung aller eingesetzten Tools, Software und Ressourcen 
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else { white },
 
   [*Rolle*], [*Name*], [*Unterschrift & Datum*],
-  [Auftraggeber], [Mikka Jenne, Dr. Arno Mielke], [12.05.26, schriftlich über Email],
-  [Projektleiter], [Erik Wizemann], [12.05.26, schriftlich über Email],
-  [Betreuer / Dozent], [Mikka Jenne, Dr. Arno Mielke], [12.05.26, schriftlich über Email],
+  [Auftraggeber], [Mikka Jenne, Dr. Arno Mielke], [12.05.26, schriftlich über E-Mail],
+  [Projektleiter], [Erik Wizemann], [12.05.26, schriftlich über E-Mail],
+  [Betreuer / Dozent], [Mikka Jenne, Dr. Arno Mielke], [12.05.26, schriftlich über E-Mail],
 )
