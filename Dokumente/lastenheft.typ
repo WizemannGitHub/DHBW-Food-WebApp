@@ -32,7 +32,7 @@ handlungsrelevantes Feedback bereitzustellen.
 #text(weight: "bold", size: 12pt)[2. Ziel]
 #v(0.3cm)
 
-Bis zum 08.07.2026 soll eine funktionierende Webanwendung vorliegen.
+Bis zum 15.07.2026 soll eine funktionierende Webanwendung vorliegen.
 Studierende sollen Mensagerichte bewerten und Feedback hinterlassen können.
 Die App soll intuitiv, browserbasiert und optisch ansprechend gestaltet sein.
 Die Anwendung soll Transparenz über die Qualität des Mensaessens schaffen und
