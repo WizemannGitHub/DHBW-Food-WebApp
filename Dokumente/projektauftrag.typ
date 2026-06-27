@@ -102,7 +102,7 @@
 #v(0.8cm)
 
 // ─── Risiken                                                          
-  #text(weight: "bold", size: 12pt)[4. Risiken]                                 
+  #text(weight: "bold", size: 12pt)[5. Risiken]                                 
   #v(0.3cm)                                                                     
                                                                                 
   #table(                                                                       
@@ -124,7 +124,7 @@
   #v(0.8cm)                                                                     
 
   // ─── Ressourcen & Budget
-#text(weight: "bold", size: 12pt)[5. Ressourcen & Budget]
+#text(weight: "bold", size: 12pt)[6. Ressourcen & Budget]
 #v(0.3cm)
 
 Das Projektteam besteht aus 5 Studierenden, die ohne Vergütung an dem Projekt mitwirken. Jedes Teammitglied bringt seinen eigenen Laptop mit, sodass keine zusätzliche Hardware angeschafft werden muss. Bei der Wahl von Software und Tools wird konsequent auf Open-Source- und kostenfreie Lösungen gesetzt, um unnötige Kosten zu vermeiden. Da das Hosting zunächst ausschließlich lokal erfolgt und kein externer Server benötigt wird, beläuft sich der finanzielle Bedarf des Projekts auf geschätzte *0,00 €*.
@@ -135,7 +135,7 @@ Eine detaillierte Aufstellung aller eingesetzten Tools, Software und Ressourcen 
 #pagebreak()
 
 // ─── Meilensteine ────────────────────────────────────────────────────────────
-#text(weight: "bold", size: 12pt)[5. Meilensteine]
+#text(weight: "bold", size: 12pt)[7. Meilensteine]
 #v(0.3cm)
 
 #table(
@@ -158,7 +158,7 @@ Eine detaillierte Aufstellung aller eingesetzten Tools, Software und Ressourcen 
 #v(0.8cm)
 
 // ─── Genehmigung ─────────────────────────────────────────────────────────────
-#text(weight: "bold", size: 12pt)[6. Genehmigung]
+#text(weight: "bold", size: 12pt)[8. Genehmigung]
 #v(0.3cm)
 
 #table(
