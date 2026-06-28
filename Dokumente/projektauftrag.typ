@@ -26,7 +26,7 @@
   [Auftraggeber], [Mikka Jenne],
   [Steering], [Dr. Arno Mielke],
   [Projektleiter], [Erik Wizemann],
-  [Projektteam], [Robin van Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan],
+  [Projektteam], [Robin van Nuis, Jan Kugler, Cristian Zanfir, Ben Szepan, Erik Wizemann],
   [Stakeholder], [StuV, Dr. Arno Mielke, Studierendenwerk Karlsruhe],
   [Abteilung / Kurs], [TINF25B2],
   [Startdatum], [12.05.26],

@@ -1,9 +1,9 @@
-#set document(title: "Beispiel Arbeitspaket: Ablaufdiagramm Funktion Essen Bewerten")
+#set document(title: "Ablaufkonzept: Ablaufdiagramm der Funktion Essen Bewerten")
 #set page(margin: (x: 2.5cm, y: 1.5cm))
 #set text(font: "Arial", size: 11pt)
 
 #align(center)[
-  #text(size: 18pt, weight: "bold")[Beispiel Arbeitspaket: Ablaufdiagramm \ Funktion Essen Bewerten]
+  #text(size: 18pt, weight: "bold")[Ablaufkonzept: Ablaufdiagramm \ der Funktion \"Essen Bewerten\"]
   #v(0.2cm)
   #text(size: 13pt)[DHBW Food Web App]
   #v(0.3cm)

@@ -57,7 +57,7 @@
   ),
   (
     id: "5",
-    name: "Testing & Fehlerbehebung",
+    name: "Fertigstellung",
     color: rgb("#833c00"),
     packages: (
       (id: "5.1", name: "Testing & Fehlerbehebung"),

@@ -40,7 +40,7 @@
   (name: "Anforderungsanalyse",        w: 1, personal: "1,0 FTE"),
   (name: "Designkonzept",              w: 1, personal: "0,6 FTE"),
   (name: "Implementierung",            w: 3, personal: "2,0 FTE + 0,4 FTE"),
-  (name: "Testing &\nFehlerbehebung",  w: 1, personal: "0,6 FTE"),
+  (name: "Testing &\nFertigstellung",    w: 1, personal: "0,6 FTE"),
   (name: "Projektabschluss\n+ Review", w: 1, personal: "1,0 FTE"),
 )
 

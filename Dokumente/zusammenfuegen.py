@@ -6,8 +6,11 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 writer = fitz.open()
 
 # Deine PDF-Dateien hier eintragen
-dateien = [                                                                                                          
-         # 1. Projektinitiierung                                                                                          
+dateien = [
+         # 0. Titelblatt
+          "titelblatt.pdf",
+
+         # 1. Projektinitiierung
           "projektauftrag.pdf",                                                                                            
           "lastenheft.pdf",                                                                                                
         
@@ -20,13 +23,13 @@ dateien = [
           # 3. Risikoanalyse                                                                                               
           "risikoanalyse.pdf",                                                                                             
           "risikomatrix.pdf",                                                                                              
-                                                                                                                           
-          # 4. Projektumsetzung / Design                                                                                   
+
+          # 4. Projektcontrolling                                                                                          
+          "management_status_report.pdf",     
+
+          # 5. Projektumsetzung / Design                                                                                   
           "Mockup.pdf",                                                                                                    
-          "ablaufdiagramm_bewertung.pdf",                                                                                                                                                                  
-                                                                                                                           
-          # 5. Projektcontrolling                                                                                          
-          "management_status_report.pdf",                                                                                  
+          "ablaufdiagramm_bewertung.pdf",                                                                                                                                                                                                                                                    
       ]           
 for pdf in dateien:
     writer.insert_pdf(fitz.open(os.path.join(script_dir, pdf)))
