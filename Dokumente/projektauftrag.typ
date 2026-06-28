@@ -30,7 +30,7 @@
   [Stakeholder], [StuV, Dr. Arno Mielke, Studierendenwerk Karlsruhe],
   [Abteilung / Kurs], [TINF25B2],
   [Startdatum], [12.05.26],
-  [Enddatum (geplant)], [03.08.26],
+  [Enddatum], [03.08.26],
 )
 
 #v(0.8cm)
@@ -187,7 +187,7 @@ Eine detaillierte Aufstellung aller eingesetzten Tools, Software und Ressourcen 
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else { white },
 
   [*Rolle*], [*Name*], [*Unterschrift & Datum*],
-  [Auftraggeber], [Mikka Jenne, Dr. Arno Mielke], [12.05.26, schriftlich über E-Mail],
-  [Projektleiter], [Erik Wizemann], [12.05.26, schriftlich über E-Mail],
-  [Betreuer / Dozent], [Mikka Jenne, Dr. Arno Mielke], [12.05.26, schriftlich über E-Mail],
+  [Auftraggeber], [Mikka Jenne], [12.05.26, schriftlich über E-Mail],
+  [Steering], [Dr. Arno Mielke], [12.05.26, schriftlich über E-Mail],
+  [Projektleiter], [Erik Wizemann], [12.05.26, schriftlich über E-Mail]
 )
