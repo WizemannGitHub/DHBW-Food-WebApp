@@ -66,7 +66,7 @@
         [Jan Kugler:], [*\5\3\5\7\2\0\1*],
         [Cristian Zanfir:], [*\_\_\_\_\_\_\_*],
         [Ben Szepan:], [*\_\_\_\_\_\_\_*],
-        [Erik Wizemann:], [*\_\_\_\_\_\_\_*],
+        [Erik Wizemann:], [*\9\4\3\4\6\2\0*],
       )
     ],
     [*Kurs*], [TINF25B2],
