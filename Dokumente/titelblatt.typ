@@ -62,7 +62,7 @@
         columns: (4cm, auto),
         align: (left, left),
         row-gutter: 8pt,
-        [Robin van Nuis:], [*\_\_\_\_\_\_\_*],
+        [Robin van Nuis:], [*\8\7\7\1\2\9\3*],
         [Jan Kugler:], [*\5\3\5\7\2\0\1*],
         [Cristian Zanfir:], [*\_\_\_\_\_\_\_*],
         [Ben Szepan:], [*\_\_\_\_\_\_\_*],
