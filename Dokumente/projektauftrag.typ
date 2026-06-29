@@ -39,9 +39,8 @@
 #text(weight: "bold", size: 12pt)[2. Ausgangssituation & Problemstellung]
 #v(0.3cm)
 
-#table(
-  columns: (100%,),
-  stroke: 0.5pt,
+#block(
+  stroke: none,
   [An der DHBW gibt es derzeit keine Möglichkeit, einen Überblick über die Meinungen der Studenten zum angebotenen Essen zu erhalten. Ein solcher Überblick würde die Essenswahl für Studenten erleichtern. Außerdem könnte dadurch verhindert werden, dass Studenten Geld für Essen ausgeben, das ihnen nicht schmeckt, was das allgemeine Wohlbefinden verbessert.
 
     Zudem bietet es der Kantine die Möglichkeit auf Vorschläge und Feedback der Studierenden einzugehen und es umzusetzen.],

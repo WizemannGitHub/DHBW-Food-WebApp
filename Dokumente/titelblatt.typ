@@ -3,15 +3,9 @@
 
 #v(0.5cm)
 
-#grid(
-  columns: (1fr, 1fr),
-  align(left)[
-    #image("Bilder/ProjektLogo.png", width: 7cm)
-  ],
-  align(right)[
-    #image("Bilder/DHBW-Logo.png", width: 4cm)
-  ]
-)
+#align(right)[
+  #image("Bilder/DHBW-Logo.png", width: 4cm)
+]
 
 #v(1.5cm)
 
@@ -64,7 +58,7 @@
         row-gutter: 8pt,
         [Robin van Nuis:], [*\8\7\7\1\2\9\3*],
         [Jan Kugler:], [*\5\3\5\7\2\0\1*],
-        [Cristian Zanfir:], [*\_\_\_\_\_\_\_*],
+        [Cristian Zanfir:], [*\6\0\0\4\9\8\1*],
         [Ben Szepan:], [*\_\_\_\_\_\_\_*],
         [Erik Wizemann:], [*\9\4\3\4\6\2\0*],
       )
