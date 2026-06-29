@@ -55,7 +55,7 @@ der DHBW Karlsruhe, die regelmäßig die Mensa besuchen oder besuchen möchten.
 #v(0.3cm)
 
 #table(
-  columns: (10%, 92%),
+  columns: (10%, 90%),
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
@@ -79,7 +79,7 @@ der DHBW Karlsruhe, die regelmäßig die Mensa besuchen oder besuchen möchten.
 #v(0.3cm)
 
 #table(
-  columns: (10%, 92%),
+  columns: (10%, 90%),
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 
@@ -146,7 +146,7 @@ und Screenshots, wird am 03.08.26 bei Mikka Jenne abgegeben und ist nicht Teil d
 #v(0.3cm)
 
 #table(
-  columns: (10%, 92%),
+  columns: (10%, 90%),
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) { rgb("#f2f2f2") } else { white },
 

@@ -127,7 +127,7 @@
   #v(0.3cm)                                                                     
                                                                                 
   #table(                                                                       
-    columns: (5%, 35%, 20%, 20%, 30%),                                          
+    columns: (5%, 30%, 17.5%, 17.5%, 30%),                                          
     stroke: 0.5pt,                                                              
     fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else if calc.odd(row) {  
   rgb("#f2f2f2") } else { white },                                              
@@ -181,7 +181,7 @@ Eine detaillierte Aufstellung aller eingesetzten Tools, Software und Ressourcen 
 #v(0.3cm)
 
 #table(
-  columns: (33%, 33%, 34%),
+  columns: (33.3%, 33.3%, 33.3%),
   stroke: 0.5pt,
   fill: (col, row) => if row == 0 { rgb("#d9e1f2") } else { white },
 
