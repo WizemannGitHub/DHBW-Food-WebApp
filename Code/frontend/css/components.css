@@ -2,6 +2,103 @@
    DHBW FOOD APP – Komponenten-Styles
    ============================================================ */
 
+/* ── Start-Seite ───────────────────────────────────────────── */
+.start-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.start-feature-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+.start-feature-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-hover);
+}
+
+.start-feature-card__icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.start-feature-card__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.start-feature-card__text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.start-note {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.start-feature-card__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  counter-reset: steps;
+  flex: 1;
+}
+
+.start-feature-card__steps li {
+  counter-increment: steps;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.start-feature-card__steps li::before {
+  content: counter(steps);
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.start-note strong {
+  color: var(--color-text);
+}
+
+@media (max-width: 680px) {
+  .start-features { grid-template-columns: 1fr; }
+}
+
 /* ── Buttons ───────────────────────────────────────────────── */
 .btn {
   display: inline-flex;

@@ -17,7 +17,8 @@
         <span class="header__title">DHBW <strong>Food</strong> App</span>
       </div>
       <nav class="nav">
-        <button class="nav__btn active" data-page="bewertung">Bewertung</button>
+        <button class="nav__btn active" data-page="start">Start</button>
+        <button class="nav__btn" data-page="bewertung">Bewertung</button>
         <button class="nav__btn" data-page="ranking">Rankings</button>
         <button class="nav__btn" data-page="vorschlaege">Vorschläge</button>
       </nav>
@@ -26,6 +27,74 @@
 
   <!-- MAIN -->
   <main class="main">
+
+    <!-- ═══════════════════════════════════════════
+         SEITE 0: START / KURZERKLÄRUNG
+    ═══════════════════════════════════════════ -->
+    <section id="page-start" class="page page--active">
+
+      <div class="page__hero">
+        <h1>Willkommen bei der DHBW Food App</h1>
+        <p>Dein digitales Werkzeug rund ums Mensaessen an der DHBW Karlsruhe.</p>
+      </div>
+
+      <div class="start-features">
+
+        <div class="start-feature-card">
+          <div class="start-feature-card__icon">⭐</div>
+          <h2 class="start-feature-card__title">Gerichte bewerten</h2>
+          <p class="start-feature-card__text">
+            Sieh dir die täglichen Gerichte aller Karlsruher DHBW-Kantinen an
+            und gib dein Feedback nach Gesamteindruck, Geschmack und Portionsgröße ab.
+          </p>
+          <ol class="start-feature-card__steps">
+            <li>Tag über die Pfeil-Navigation auswählen</li>
+            <li>Kantine filtern (optional)</li>
+            <li>Gericht anklicken → Sterne vergeben → Absenden</li>
+          </ol>
+          <button class="btn btn--primary" data-page="bewertung">Zur Bewertung</button>
+        </div>
+
+        <div class="start-feature-card">
+          <div class="start-feature-card__icon">🏆</div>
+          <h2 class="start-feature-card__title">Rankings &amp; Statistiken</h2>
+          <p class="start-feature-card__text">
+            Entdecke die beliebtesten Gerichte, aktuelle Trends
+            und die Bewertungsverteilung auf einen Blick.
+          </p>
+          <ol class="start-feature-card__steps">
+            <li>Zwischen Top, Trending und Verbesserungsbedarf wechseln</li>
+            <li>Statistiken und Bewertungsverteilung unten einsehen</li>
+          </ol>
+          <button class="btn btn--primary" data-page="ranking">Zu den Rankings</button>
+        </div>
+
+        <div class="start-feature-card">
+          <div class="start-feature-card__icon">💡</div>
+          <h2 class="start-feature-card__title">Gerichte vorschlagen</h2>
+          <p class="start-feature-card__text">
+            Fehlt dir ein Lieblingsessen auf dem Speiseplan?
+            Reiche hier deinen Vorschlag ein.
+          </p>
+          <ol class="start-feature-card__steps">
+            <li>Gerichtsname und Kategorie eingeben</li>
+            <li>Vorschlag einreichen</li>
+            <li>Bisherige Vorschläge anderer Studierender einsehen</li>
+          </ol>
+          <button class="btn btn--primary" data-page="vorschlaege">Zu den Vorschlägen</button>
+        </div>
+
+      </div>
+
+      <div class="start-note card">
+        <p>
+          Die <strong>DHBW Food App</strong> hat das Ziel, das Mensaerlebnis an der DHBW Karlsruhe
+          transparenter und besser zu machen. Es soll ehrliches Feedback der Studierenden fördern und Grundlage für besseres Essen sein. Diese App ist ein studentisches Projekt, das im Rahmen der Vorlesungen
+          <strong>Web Engineering</strong> und <strong>Projektmanagement</strong> an der DHBW Karlsruhe entstanden ist.
+        </p>
+      </div>
+
+    </section>
 
     <!-- ═══════════════════════════════════════════
          SEITE 1: BEWERTUNG AKTUELLER GERICHTE

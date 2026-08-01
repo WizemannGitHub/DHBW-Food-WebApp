@@ -28,9 +28,16 @@
 
   navBtns.forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.page)));
 
+  // Feature-Card-Buttons auf der Startseite
+  document.querySelectorAll('[data-page]').forEach(el => {
+    if (el.tagName === 'BUTTON' && !el.classList.contains('nav__btn')) {
+      el.addEventListener('click', () => showPage(el.dataset.page));
+    }
+  });
+
   document.getElementById('footer-year').textContent = new Date().getFullYear();
 
   const hash = window.location.hash.replace('#', '');
-  showPage(['bewertung', 'ranking', 'vorschlaege'].includes(hash) ? hash : 'bewertung');
+  showPage(['start', 'bewertung', 'ranking', 'vorschlaege'].includes(hash) ? hash : 'start');
 
 })();
