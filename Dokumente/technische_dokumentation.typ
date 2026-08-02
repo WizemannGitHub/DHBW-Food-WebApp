@@ -37,15 +37,19 @@
   #v(1cm)
   #text(size: 28pt, weight: "bold", fill: rgb("#E2001A"))[DHBW Food App]
   #v(0.3cm)
-  #text(size: 16pt)[Technische Dokumentation]
-  #v(0.5cm)
+  #text(size: 18pt, weight: "bold")[Technische Dokumentation]
+  #v(0.2cm)
+  #text(size: 12pt)[Gruppe H]
+  #v(0.1cm)
+  #text(size: 12pt)[Jan Kugler, Cristian Zanfir, Ben Szephan, Robin van Nuis und Erik Wizemann]
+  #v(0.4cm)
   #line(length: 60%, stroke: 1.5pt + rgb("#E2001A"))
-  #v(0.5cm)
+  #v(0.4cm)
   #text(size: 11pt, fill: luma(80))[
     Projektmanagement · 2. Semester · DHBW Karlsruhe \
     #datetime.today().display("[day]. [month repr:long] [year]")
   ]
-  #v(1cm)
+  #v(0.6cm)
 ]
 
 #outline(title: "Inhaltsverzeichnis", indent: 1.5em)
