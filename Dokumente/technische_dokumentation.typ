@@ -106,12 +106,12 @@ Die Anwendung folgt einer klassischen *3-Tier-Architektur* und wird vollständig
 ┌──────────────▼────────────────┐
 │  Backend-Container (Node.js)  │
 │  Express API · Mensa-Proxy    │
-└───────┬───────────────┬───────┘
-        │ TCP :5432     │ HTTPS
-┌───────▼──────┐ ┌──────▼──────┐
-│ DB-Container │ │ Mensa-API   │
-│(PostgreSQL 16)│ │(fnka.de)   │
-└──────────────┘ └────────────┘
+└───────┬─────────────────┬─────┘
+        │ TCP :5432       │ HTTPS
+┌───────▼───────┐  ┌──────▼─────┐
+│ DB-Container  │  │ Mensa-API  │
+│(PostgreSQL 16)│  │(fnka.de)   │
+└───────────────┘  └────────────┘
     ```
   ]
 ]
