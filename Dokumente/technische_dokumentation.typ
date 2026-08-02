@@ -59,7 +59,7 @@
 // ── 1. Projektübersicht ────────────────────────────────────────
 = Projektübersicht
 
-Die *DHBW Food App* ist eine webbasierte Anwendung für Studierende der DHBW Karlsruhe. Sie ermöglicht das Einsehen des tagesaktuellen Mensaplans, das Bewerten von Gerichten sowie das Einreichen von Essensvorschlägen. Ziel ist es, Studierenden eine einfache Möglichkeit zu bieten, Feedback zur Mensa zu geben und so zur Qualitätsverbesserung beizutragen.
+Die DHBW Food App ist eine webbasierte Anwendung für Studierende der DHBW Karlsruhe. Sie ermöglicht das Einsehen des tagesaktuellen Mensaplans, das Bewerten von Gerichten sowie das Einreichen von Essensvorschlägen. Ziel ist es, Studierenden eine einfache Möglichkeit zu bieten, Feedback zur Mensa zu geben und so zur Qualitätsverbesserung beizutragen.
 
 == Funktionsumfang
 
@@ -81,7 +81,7 @@ Die *DHBW Food App* ist eine webbasierte Anwendung für Studierende der DHBW Kar
 
 == Überblick
 
-Die Anwendung folgt einer klassischen *3-Tier-Architektur* und wird vollständig in Containern betrieben.
+Die Anwendung folgt einer klassischen 3-Tier-Architektur und wird vollständig in Containern betrieben.
 
 #align(center)[
   #block(
@@ -134,14 +134,14 @@ Der Datenbankinhalt wird in einem benannten Docker-Volume (`dhbw_food_db_data`) 
 
 == CORS und Proxy
 
-Die externe Mensa-API erlaubt keine direkten Browser-Anfragen (kein CORS-Header für `localhost`). Das Backend fungiert daher als *transparenter Proxy*: Der Endpunkt `GET /api/mensa-plan/:date` leitet die Anfrage serverseitig weiter und gibt das Ergebnis an den Browser zurück. Dadurch wird das CORS-Problem vollständig umgangen.
+Die externe Mensa-API erlaubt keine direkten Browser-Anfragen (kein CORS-Header für `localhost`). Das Backend fungiert daher als transparenter Proxy: Der Endpunkt `GET /api/mensa-plan/:date` leitet die Anfrage serverseitig weiter und gibt das Ergebnis an den Browser zurück. Dadurch wird das CORS-Problem vollständig umgangen.
 
 // ── 3. Backend ─────────────────────────────────────────────────
 = Backend
 
 == Technologie
 
-Das Backend basiert auf *Node.js* mit dem *Express*-Framework. Die Datenbankanbindung erfolgt über den offiziellen `pg`-Treiber mit Connection Pooling (`pg.Pool`).
+Das Backend basiert auf Node.js mit dem Express-Framework. Die Datenbankanbindung erfolgt über den offiziellen `pg`-Treiber mit Connection Pooling (`pg.Pool`).
 
 == REST-API-Endpunkte
 
@@ -176,7 +176,7 @@ Das Schema wird beim ersten Start des Datenbankcontainers über `init.sql` autom
 
 == Technologie und Aufbau
 
-Das Frontend ist eine *Single-Page Application (SPA)* ohne JavaScript-Framework. Es basiert auf Plain HTML, CSS und JavaScript nach dem *IIFE-Modulpattern* (Immediately Invoked Function Expression). Jede Seite der App ist als eigenes Modul gekapselt, das seine öffentliche Schnittstelle über `window.*Module` exponiert.
+Das Frontend ist eine Single-Page Application ohne JavaScript-Framework. Es basiert auf Plain HTML, CSS und JavaScript nach dem IIFE-Modulpattern (Immediately Invoked Function Expression). Jede Seite der App ist als eigenes Modul gekapselt, das seine öffentliche Schnittstelle über `window.*Module` exponiert.
 
 #table(
   columns: (auto, 1fr),
@@ -208,11 +208,11 @@ Die App besteht aus einer einzigen HTML-Datei (`index.html`) mit vier `<section>
   [Impressum],   [`impressum.html`],    [Separate Seite; im Footer verlinkt],
 )
 
-Jede Seite teilt denselben strukturellen Aufbau: ein *Header* mit Logo und Navigationsleiste, ein *Hero-Bereich* mit Seitentitel und Untertitel, der eigentliche *Seiteninhalt* (Cards, Listen, Formulare) sowie ein gemeinsamer *Footer* mit Jahreszahl und Impressum-Link.
+Jede Seite teilt denselben strukturellen Aufbau: ein Header mit Logo und Navigationsleiste, ein Hero-Bereich mit Seitentitel und Untertitel, der eigentliche Seiteninhalt sowie ein gemeinsamer Footer mit Jahreszahl und Impressum-Link.
 
 == Design-System
 
-Das UI folgt einem einheitlichen Design-System mit *DHBW-Rot (\#E2001A)* als Primärfarbe. Alle Abstände, Radien, Schatten und Farben sind als CSS Custom Properties in `:root` definiert. Komponenten-Styles sind in `components.css` ausgelagert, globale Basis-Styles in `style.css`.
+Das UI folgt einem einheitlichen Design-System mit DHBW-Rot (\#E2001A) als Primärfarbe. Alle Abstände, Radien, Schatten und Farben sind als CSS Custom Properties in `:root` definiert. Komponenten-Styles sind in `components.css` ausgelagert, globale Basis-Styles in `style.css`.
 
 == Datums-Navigation
 
@@ -229,6 +229,7 @@ Alle dynamisch eingefügten Nutzer- oder API-Daten werden über `escHtml()` esca
 
 ```bash
 cd DHBW-Food-WebApp/Code
+podman machine start        # nur bei Podman nötig (macOS/Windows)
 podman-compose up --build   # oder: docker compose up --build
 ```
 
