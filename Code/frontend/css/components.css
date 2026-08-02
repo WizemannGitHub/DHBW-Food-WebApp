@@ -588,6 +588,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .05em;
+  overflow-wrap: break-word;
 }
 
 /* ── Bar Chart ─────────────────────────────────────────────── */
