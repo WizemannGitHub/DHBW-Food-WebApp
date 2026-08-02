@@ -72,8 +72,6 @@ Die *DHBW Food App* ist eine webbasierte Anwendung für Studierende der DHBW Kar
   [Vorschläge], [Formular zum Einreichen neuer Gerichtsideen; Übersicht aller bisherigen Vorschläge],
 )
 
-#pagebreak()
-
 // ── 2. Systemarchitektur ───────────────────────────────────────
 = Systemarchitektur
 
@@ -86,30 +84,30 @@ Die Anwendung folgt einer klassischen *3-Tier-Architektur* und wird vollständig
     fill: luma(248),
     stroke: 0.5pt + luma(200),
     radius: 6pt,
-    inset: 16pt,
-    width: 85%
+    inset: 10pt,
+    width: 62%
   )[
-    #set text(size: 10pt, font: "Courier New")
+    #set text(size: 8.5pt, font: "Courier New")
     ```
-    ┌─────────────────────────────────────────────────┐
-    │                  Browser (Client)               │
-    │         Plain HTML · CSS · JavaScript           │
-    └──────────────────────┬──────────────────────────┘
-                           │ HTTP :8080
-    ┌──────────────────────▼──────────────────────────┐
-    │          Frontend-Container (nginx)             │
-    │      Statische Dateien · Reverse Proxy          │
-    └──────────────────────┬──────────────────────────┘
-                           │ HTTP :3000
-    ┌──────────────────────▼──────────────────────────┐
-    │         Backend-Container (Node.js)             │
-    │    Express REST-API · Mensa-Proxy-Endpunkt      │
-    └──────────┬───────────────────────┬──────────────┘
-               │ TCP :5432             │ HTTPS
-    ┌──────────▼──────────┐   ┌────────▼───────────────┐
-    │  DB-Container       │   │  Externe Mensa-API      │
-    │  (PostgreSQL 16)    │   │  (mensa-api.fnka.de)   │
-    └─────────────────────┘   └────────────────────────┘
+┌───────────────────────────────┐
+│        Browser (Client)       │
+│  Plain HTML · CSS · JavaScript│
+└──────────────┬────────────────┘
+               │ HTTP :8080
+┌──────────────▼────────────────┐
+│   Frontend-Container (nginx)  │
+│  Statische Dateien · Rev.Proxy│
+└──────────────┬────────────────┘
+               │ HTTP :3000
+┌──────────────▼────────────────┐
+│  Backend-Container (Node.js)  │
+│  Express API · Mensa-Proxy    │
+└───────┬───────────────┬───────┘
+        │ TCP :5432     │ HTTPS
+┌───────▼──────┐ ┌──────▼──────┐
+│ DB-Container │ │ Mensa-API   │
+│(PostgreSQL 16)│ │(fnka.de)   │
+└──────────────┘ └────────────┘
     ```
   ]
 ]
@@ -133,8 +131,6 @@ Der Datenbankinhalt wird in einem benannten Docker-Volume (`dhbw_food_db_data`) 
 == CORS und Proxy
 
 Die externe Mensa-API erlaubt keine direkten Browser-Anfragen (kein CORS-Header für `localhost`). Das Backend fungiert daher als *transparenter Proxy*: Der Endpunkt `GET /api/mensa-plan/:date` leitet die Anfrage serverseitig weiter und gibt das Ergebnis an den Browser zurück. Dadurch wird das CORS-Problem vollständig umgangen.
-
-#pagebreak()
 
 // ── 3. Backend ─────────────────────────────────────────────────
 = Backend
@@ -171,8 +167,6 @@ Die PostgreSQL-Datenbank besteht aus drei Tabellen:
 
 Das Schema wird beim ersten Start des Datenbankcontainers über `init.sql` automatisch angelegt (idempotent mit `IF NOT EXISTS`). Der Unique-Index auf `gerichte` wird zusätzlich beim Backend-Start idempotent migriert.
 
-#pagebreak()
-
 // ── 4. Frontend ────────────────────────────────────────────────
 = Frontend
 
@@ -185,13 +179,32 @@ Das Frontend ist eine *Single-Page Application (SPA)* ohne JavaScript-Framework.
   stroke: 0.5pt + luma(200),
   fill: (_, row) => if row == 0 { rgb("#fff5f5") } else { white },
   [*Datei*], [*Aufgabe*],
+  [`env.js`],         [Laufzeitkonfiguration (Backend-URL); wird vor allen anderen Skripten geladen],
   [`utils.js`],       [Geteilte Hilfsfunktionen: `escHtml()` (XSS-Schutz), `KATEGORIE_EMOJI`-Mapping],
   [`api.js`],         [Alle HTTP-Aufrufe ans Backend (`mensaApi`, `api`); Mensa-Daten-Parsing und DB-Sync],
-  [`bewertung.js`],   [Tagesmenü-Ansicht, Datums-Navigation, Kantinenfilter, Bewertungs-Modal],
+  [`bewertung.js`],   [Tagesmenü-Ansicht, Datums-Navigation, Kantinenfilter, Nutzungshinweis-Modal, Bewertungs-Modal],
   [`ranking.js`],     [Rankings-Ansicht, Statistik-Karten, Bewertungsverteilung als CSS-Balkendiagramm],
   [`vorschlaege.js`], [Vorschlagsformular mit clientseitiger Validierung, Vorschlags-Übersicht],
   [`app.js`],         [Seitennavigation (Hash-Routing), Lazy-Loading der Module],
 )
+
+== Seitenstruktur und Navigation
+
+Die App besteht aus einer einzigen HTML-Datei (`index.html`) mit vier `<section>`-Bereichen sowie einer separaten `impressum.html`. Die Navigation erfolgt über Hash-Routing in `app.js`: Ein Klick auf einen Navigations-Button setzt den URL-Hash (z. B. `#bewertung`) und blendet die entsprechende Section ein, während alle anderen ausgeblendet werden.
+
+#table(
+  columns: (auto, auto, 1fr),
+  stroke: 0.5pt + luma(200),
+  fill: (_, row) => if row == 0 { rgb("#fff5f5") } else { white },
+  [*Seite*], [*Section-ID*], [*Inhalt*],
+  [Start],       [`#page-start`],       [Willkommensseite mit Feature-Karten und Kurzanleitung für jede Funktion],
+  [Bewertung],   [`#page-bewertung`],   [Datums-Navigator, Kantinenfilter, Gerichtekarten, Bewertungs-Modal],
+  [Rankings],    [`#page-ranking`],     [Top-/Trend-/Flop-Liste, Statistik-Karten, CSS-Balkendiagramm],
+  [Vorschläge],  [`#page-vorschlaege`], [Einreich-Formular, Übersicht bisheriger Vorschläge],
+  [Impressum],   [`impressum.html`],    [Separate Seite; im Footer verlinkt],
+)
+
+Jede Seite teilt denselben strukturellen Aufbau: ein *Header* mit Logo und Navigationsleiste, ein *Hero-Bereich* mit Seitentitel und Untertitel, der eigentliche *Seiteninhalt* (Cards, Listen, Formulare) sowie ein gemeinsamer *Footer* mit Jahreszahl und Impressum-Link.
 
 == Design-System
 
@@ -208,41 +221,11 @@ Alle dynamisch eingefügten Nutzer- oder API-Daten werden über `escHtml()` esca
 // ── 5. Lokale Entwicklung ──────────────────────────────────────
 = Lokale Entwicklung
 
-== Voraussetzungen
-
-- Podman oder Docker mit Compose-Plugin
-- Ports 8080 und 3000 müssen frei sein
-
-== Setup
+*Voraussetzungen:* Podman oder Docker mit Compose-Plugin; Ports 8080 und 3000 müssen frei sein.
 
 ```bash
-# Repository klonen und in das Code-Verzeichnis wechseln
 cd DHBW-Food-WebApp/Code
-
-# Container bauen und starten
-podman-compose up --build
-# oder
-docker compose up --build
+podman-compose up --build   # oder: docker compose up --build
 ```
 
-Die App ist anschließend unter `http://localhost:8080` erreichbar. Das Backend antwortet unter `http://localhost:3000`.
-
-== Wichtige Befehle
-
-#table(
-  columns: (auto, 1fr),
-  stroke: 0.5pt + luma(200),
-  fill: (_, row) => if row == 0 { rgb("#fff5f5") } else { white },
-  [*Befehl*], [*Beschreibung*],
-  [`podman-compose up --build`], [Container (neu) bauen und starten],
-  [`podman-compose down`],       [Container stoppen und entfernen],
-  [`podman ps`],                 [Laufende Container anzeigen],
-  [`podman logs dhbw_food_backend`], [Backend-Logs einsehen],
-  [`podman logs dhbw_food_db`],  [Datenbanklog einsehen],
-)
-
-== Hinweise
-
-- *Wochenenden:* Die Mensa ist samstags und sonntags geschlossen. Die App zeigt an diesen Tagen eine entsprechende Meldung statt Gerichte zu laden.
-- *Mensa-API:* Die externe API (`mensa-api.fnka.de`) ist nur an Werktagen verfügbar. Bei Ausfall wird der Fehler im Frontend angezeigt.
-- *Datenbankpersistenz:* Das Volume `dhbw_food_db_data` bleibt auch nach `podman-compose down` erhalten. Für einen vollständigen Reset: `podman volume rm dhbw_food_db_data`.
+Die App ist anschließend unter `http://localhost:8080` erreichbar, das Backend unter `http://localhost:3000`. Für einen vollständigen Reset der Datenbank: `podman volume rm dhbw_food_db_data`. An Wochenenden ist die Mensa geschlossen – die App zeigt dann eine entsprechende Meldung.
