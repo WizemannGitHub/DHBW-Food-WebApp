@@ -155,7 +155,7 @@ Das Backend basiert auf *Node.js* mit dem *Express*-Framework. Die Datenbankanbi
   [`POST`], [`/api/mensa-dishes/sync`],    [Upsert von Mensa-Gerichten in die DB; gibt `{ name → id }`-Mapping zurück],
   [`GET`],  [`/api/dishes`],              [Alle heute verfügbaren Gerichte inkl. Durchschnittsbewertung],
   [`POST`], [`/api/ratings`],             [Neue Bewertung speichern (`dish_id`, `gesamt` sind Pflichtfelder)],
-  [`GET`],  [`/api/rankings?filter=`],    [Top / Flop / Trend-Ranking (mind. 1 Bewertung erforderlich)],
+  [`GET`],  [`/api/rankings?filter=`],    [Top / Flop / Trend-Ranking (mind. 1 Bewertung erforderlich); beim Trend-Filter zählen nur Bewertungen der letzten 7 Tage],
   [`GET`],  [`/api/stats`],               [Gesamtstatistiken inkl. Bewertungsverteilung],
   [`GET`],  [`/api/proposals`],           [Alle eingereichten Vorschläge, absteigend nach Datum],
   [`POST`], [`/api/proposals`],           [Neuen Vorschlag einreichen (`name`, `kategorie` sind Pflichtfelder)],
